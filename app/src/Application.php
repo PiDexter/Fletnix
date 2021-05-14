@@ -1,11 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\src;
 
 class Application
 {
-    public function __construct()
+
+    public static string $ROOT_DIR;
+
+    public Request $request;
+    public Router $router;
+
+    public function __construct($rootPath)
     {
-        echo "hello world";
+        // Zet de applicatie root pad
+        self::$ROOT_DIR = $rootPath;
+
+        $this->request = new Request();
+        $this->router = new Router($this->request);
     }
+
+    // Resolves elke nieuwe request
+    public function run() {
+        echo $this->router->resolve();
+    }
+
 }
