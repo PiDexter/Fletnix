@@ -14,9 +14,10 @@ class Application
     public Response $response;
     public Router $router;
     public Controller $controller;
+    public Database $db;
 
 
-    public function __construct($rootPath)
+    public function __construct(string $rootPath, array $config)
     {
         // Zet de applicatie root pad
         self::$ROOT_DIR = $rootPath;
@@ -27,6 +28,8 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
+
+        $this->db = new Database($config['db']);
     }
 
     // Resolves elke nieuwe request

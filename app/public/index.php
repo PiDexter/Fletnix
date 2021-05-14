@@ -8,15 +8,17 @@ use app\controllers\HomeController;
 
 require_once __DIR__ . '/../autoload.php';
 
-$app = new Application(dirname(__DIR__));
+$config = [
+    'db' => [
+        'dsn' => '',
+        'user' => '',
+        'password' => ''
+    ]
+];
 
-//$app->router->get('/', function () {
-//    return "hello";
-//});
+$app = new Application(dirname(__DIR__), $config);
+
 $app->router->get('/', [HomeController::class, 'index']);
 $app->router->get('/login', [AuthController::class, 'index']);
-
-
-//$app->router->get('/contact', 'index');
 
 $app->run();
