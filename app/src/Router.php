@@ -7,11 +7,13 @@ namespace app\src;
 class Router
 {
     public Request $request;
+    public Response $response;
     protected array $routes = [];
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = new Request();
+        $this->response = new Response();
     }
 
 
@@ -36,36 +38,48 @@ class Router
         $this->routes['get'][$path] = $callback;
     }
 
+    public function post($path, $callback): void
+    {
+        $this->routes['post'][$path] = $callback;
+    }
+
     public function resolve()
     {
         // Ontvang het pad (string) van de request (voorbeeld pad: /contact)
         $path = $this->request->getPath();
         // Welke methode is gebruikt? (get, post etc)
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
 
         // Bestaat de route met bijhorende method, sla op in callback variabele
         $callback = $this->routes[$method][$path] ?? false;
 
-        // Als callback functie niet bestaat
+        // Als route niet bestaat
         if ($callback === false) {
+            // Zet de status code van de response op 404 (not found)
+            $this->response->setStatusCode(404);
             return "Not found";
         }
 
         // Als de callback geen functie maar string is, return dan een view
         if (is_string($callback)) {
-            return $this->render($callback);
+            return $this->renderView($callback);
+        }
+
+        if (is_array($callback)) {
+            Application::$app->controller = new $callback[0]();
+            $callback[0] = Application::$app->controller;
         }
 
         // Voert methode die bij het pad in de array routes hoort uit
-        return call_user_func($callback);
+        return call_user_func($callback, $this->request);
     }
 
 
-    public function render($view) {
+    public function renderView($view, $params = []) {
 
         // Haal de main layout op
         $layout = $this->layoutContent();
-        $view = $this->renderView($view);
+        $view = $this->renderOnlyView($view, $params);
 
         // Vervang de string "{{content}}" met de inhoud van de view file in de layout
         return str_replace("{{content}}", $view, $layout);
@@ -83,7 +97,10 @@ class Router
         return ob_get_clean();
     }
 
-    protected function renderView($view) {
+    public function renderOnlyView($view, $params) {
+
+        // Zet parameter key als variable naam met als waarde de value
+        extract($params);
 
         // Bewaard alles in een string - ook wel: output buffer - voorkomt directe weergave
         ob_start();
