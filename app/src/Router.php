@@ -12,10 +12,9 @@ class Router
 
     public function __construct(Request $request, Response $response)
     {
-        $this->request = new Request();
-        $this->response = new Response();
+        $this->request = $request;
+        $this->response = $response;
     }
-
 
     /**
      * GET
@@ -38,6 +37,7 @@ class Router
         $this->routes['get'][$path] = $callback;
     }
 
+    // Zelfde als de get methode
     public function post($path, $callback): void
     {
         $this->routes['post'][$path] = $callback;
