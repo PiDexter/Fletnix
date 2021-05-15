@@ -10,9 +10,9 @@ require_once __DIR__ . '/../autoload.php';
 
 $config = [
     'db' => [
-        'dsn' => '',
-        'user' => '',
-        'password' => ''
+        'dsn' => 'mysql:dbname=testdatabase;host=mysql',
+        'user' => 'testuser',
+        'password' => 'secret'
     ]
 ];
 
