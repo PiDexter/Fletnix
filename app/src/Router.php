@@ -76,10 +76,17 @@ class Router
 
 
     public function renderView($view, $params = []) {
-
         // Haal de main layout op
         $layout = $this->layoutContent();
         $view = $this->renderOnlyView($view, $params);
+
+        // Tag in html is gelijk aan de parameter naam
+        // Parameter 'name' met waarde 'peter'
+        // Vervangt in html {{name}} voor de waarde
+        foreach ($params as $key => $value) {
+            $view = str_replace("{{" . $key . "}}", (string) $value, $view);
+        }
+
 
         // Vervang de string "{{content}}" met de inhoud van de view file in de layout
         return str_replace("{{content}}", $view, $layout);
@@ -102,12 +109,12 @@ class Router
         // Zet parameter key als variable naam met als waarde de value
         extract($params);
 
+
         // Bewaard alles in een string - ook wel: output buffer - voorkomt directe weergave
         ob_start();
 
         //  Haal de main layout
         include_once Application::$ROOT_DIR."/views/$view.php";
-
         // Returns de waarde (content in dit geval) die in de buffer zit en leegt vervolgens de output buffer
         return ob_get_clean();
     }

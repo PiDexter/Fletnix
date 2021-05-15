@@ -16,10 +16,14 @@ class Database
         $dsn = $config['dsn'];
         $user = $config['user'];
         $password = $config['password'];
-        $this->pdo = new PDO($dsn, $user, $password);
 
-        // Wanneer er problemen zijn throw een exception
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Creëer een nieuwe database connectie via een nieuwe PDO instantie
+        try {
+            $this->pdo = new PDO($dsn, $user, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+            throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        }
     }
 
 }
