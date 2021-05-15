@@ -15,11 +15,12 @@ services:
       - ./app:/app
   mysql:
     image: mariadb:latest
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-      MYSQL_USER: "${DB_USER}"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_ROOT_PASSWORD: "mySecretPassword"
+      MYSQL_USER: "testuser"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "testdatabase"
     volumes:
       - mysqldata:/var/lib/mysql
     ports:
