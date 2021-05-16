@@ -75,22 +75,38 @@ class Router
     }
 
 
-    public function renderView($view, $params = []) {
+    public function renderView($view, $data = [])
+    {
         // Haal de main layout op
         $layout = $this->layoutContent();
-        $view = $this->renderOnlyView($view, $params);
+//        $view = $this->renderOnlyView($view, $data);
+
+        $view = $this->parseViewTags($view, $data);
 
         // Tag in html is gelijk aan de parameter naam
         // Parameter 'name' met waarde 'peter'
         // Vervangt in html {{name}} voor de waarde
-        foreach ($params as $key => $value) {
-            $view = str_replace("{{" . $key . "}}", (string) $value, $view);
-        }
-
+//        foreach ($data as $key => $value) {
+//            $view = str_replace("{{" . $key . "}}", (string) $value, $view);
+//        }
 
         // Vervang de string "{{content}}" met de inhoud van de view file in de layout
         return str_replace("{{content}}", $view, $layout);
     }
+
+    public function parseViewTags($view, $data = [])
+    {
+
+        $view = $this->renderOnlyView($view, $data);
+
+        foreach ($data as $key => $value) {
+            $view = str_replace("{{" . $key . "}}", (string) $value, $view);
+        }
+
+        return $view;
+    }
+
+
 
     protected function layoutContent() {
 
@@ -104,16 +120,16 @@ class Router
         return ob_get_clean();
     }
 
-    public function renderOnlyView($view, $params) {
+    public function renderOnlyView($view, $data) {
 
         // Zet parameter key als variable naam met als waarde de value
-        extract($params);
+        extract($data);
 
 
-        // Bewaard alles in een string - ook wel: output buffer - voorkomt directe weergave
+        // Bewaar alles in een string - ook wel: output buffer - voorkomt directe weergave
         ob_start();
 
-        //  Haal de main layout
+        //  Haal view op
         include_once Application::$ROOT_DIR."/views/$view.php";
         // Returns de waarde (content in dit geval) die in de buffer zit en leegt vervolgens de output buffer
         return ob_get_clean();
