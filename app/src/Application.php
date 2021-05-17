@@ -16,6 +16,8 @@ class Application
     public Controller $controller;
     public Database $db;
 
+    public View $view;
+
 
     public function __construct(string $rootPath, array $config)
     {
@@ -30,6 +32,7 @@ class Application
         $this->router = new Router($this->request, $this->response);
 
         $this->db = new Database($config['db']);
+        $this->view = new View();
     }
 
     // Resolves elke nieuwe request
