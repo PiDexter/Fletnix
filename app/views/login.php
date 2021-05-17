@@ -2,11 +2,11 @@
 <section id="loginForm">
     <div class="container">
         <h1 class="page-title">Inloggen</h1>
-        <form action="#!" method="post" id="login">
+        <form action="" method="post">
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="email" class="input-textField" id="textField" placeholder="E-mail" required>
+                        <input type="email" class="input-textField" name="textField" placeholder="E-mail" required>
                         <label for="textField" class="input-label">E-mail</label>
                     </div>
                 </div>
@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="password" class="input-textField" id="password" placeholder="Password" required>
+                        <input type="password" class="input-textField" name="password" placeholder="Password" required>
                         <label for="password" class="input-label">Password</label>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="column">
-                    <button type="submit" form="login" class="btn btn-primary fullwidth">Login</button>
+                    <button type="submit" class="btn btn-primary fullwidth">Login</button>
                 </div>
             </div>
         </form>
