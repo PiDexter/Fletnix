@@ -54,7 +54,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
 
         // Als route niet bestaat
-        if ($callback === false) {
+        if (!$callback) {
             // Zet de status code van de response op 404 (not found)
             $this->response->setStatusCode(404);
             return "Not found";
@@ -66,11 +66,12 @@ class Router
         }
 
         if (is_array($callback)) {
+            // Instantieer een specifieke controller instantie
             Application::$app->controller = new $callback[0]();
             $callback[0] = Application::$app->controller;
         }
 
-        // Voert methode die bij het pad in de array routes hoort uit
+        // Voer methode die bij het pad in de array routes hoort uit
         return call_user_func($callback, $this->request);
     }
 
