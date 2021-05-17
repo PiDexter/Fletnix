@@ -6,6 +6,8 @@ namespace app\src;
 
 class View
 {
+
+    // Render view content in een layout file via {{content}}
     public function renderView($view, $data = []): array|bool|string
     {
         // Haal de main layout op
@@ -40,7 +42,6 @@ class View
         }
         return $view;
     }
-
 
     protected function layoutContent(): bool|string
     {
