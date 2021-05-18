@@ -20,10 +20,11 @@ services:
       MYSQL_ROOT_PASSWORD: "mySecretPassword"
       MYSQL_USER: "testuser"
       MYSQL_PASSWORD: "secret"
-      MYSQL_DATABASE: "testdatabase"
+      MYSQL_DATABASE: "fletnix"
     volumes:
-      - mysqldata:/var/lib/mysql
+      - db_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
 volumes:
-  mysqldata: {}
+  db_data: {}
