@@ -10,7 +10,7 @@ require_once __DIR__ . '/../autoload.php';
 
 $config = [
     'db' => [
-        'dsn' => 'mysql:dbname=testdatabase;host=mysql',
+        'dsn' => 'mysql:dbname=fletnix;host=mysql',
         'user' => 'testuser',
         'password' => 'secret'
     ]

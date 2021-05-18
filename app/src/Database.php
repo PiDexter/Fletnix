@@ -5,6 +5,7 @@ namespace app\src;
 
 
 use PDO;
+use PDOException;
 
 class Database
 {
@@ -21,9 +22,11 @@ class Database
         try {
             $this->pdo = new PDO($dsn, $user, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $e) {
-            throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
+
     }
+
 
 }
