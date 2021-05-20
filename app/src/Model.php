@@ -14,7 +14,7 @@ abstract class Model
 
     protected array $fillableColumns = [];
 
-    protected string $where;
+    protected array $where = [];
 
     public function __construct()
     {
@@ -53,14 +53,17 @@ abstract class Model
             $this->getTable(),
             "SET",
             $this->setParams($values),
-            "WHERE",
-            $this->where
         ];
 
+        if (!empty($this->where)) {
+            $sql[] = $this->setWhereClause();
+        }
+
+        var_dump($this->buildQueryStatement($sql));
         $this->query($this->buildQueryStatement($sql), $values);
     }
 
-    public function setParams(array $values): string
+    private function setParams(array $values): string
     {
         $columns = implode(', ', array_keys($values));
         $bindParams = "=:" . implode(', ', array_keys($values));
@@ -69,14 +72,29 @@ abstract class Model
 
     public function where($column, $operator, $value): static
     {
-        $where = [
+        $whereClause = [
             $column,
             $operator,
             $value
         ];
-        $this->where = implode(' ', $where);
+        $this->where[] = implode(' ', $whereClause);
         return $this;
     }
+
+    private function setWhereClause(): string
+    {
+        $whereClauses[] = "WHERE";
+
+        if (count($this->where) === 1) {
+            $whereClauses[] = implode(' ', $this->where);
+        } else if (count($this->where) > 1) {
+            $whereClauses[] = implode(' AND ', $this->where);
+        }
+
+        return implode(' ', $whereClauses);
+    }
+
+
 
     /**
      * @param array $columns
