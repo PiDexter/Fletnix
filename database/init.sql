@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS user
     CONSTRAINT user_pk PRIMARY KEY (user_id)
 );
 
-CREATE TABLE IF NOT EXISTS Movie
+CREATE TABLE IF NOT EXISTS movie
 (
     `movie_id`         int NOT NULL ,
     `title`            varchar(255) NOT NULL ,
@@ -30,69 +30,64 @@ CREATE TABLE IF NOT EXISTS Movie
     `URL`              varchar(255) NULL ,
 
 
-    CONSTRAINT `PK_Movie_1` PRIMARY KEY (`movie_id` ASC),
-    CONSTRAINT `FK_previous_part` FOREIGN KEY (`previous_part`)  REFERENCES Movie(`movie_id`)
+    CONSTRAINT `PK_movie_1` PRIMARY KEY (`movie_id` ASC),
+    CONSTRAINT `FK_previous_part` FOREIGN KEY (`previous_part`)  REFERENCES movie(`movie_id`)
 );
 
-CREATE TABLE IF NOT EXISTS Person
+CREATE TABLE IF NOT EXISTS person
 (
     `person_id` int NOT NULL ,
     `lastname`  varchar(50) NOT NULL ,
     `firstname` varchar(50) NOT NULL ,
     `gender`    char(1) NULL ,
 
-    CONSTRAINT `PK_Person` PRIMARY KEY (`person_id` ASC)
+    CONSTRAINT `PK_person` PRIMARY KEY (`person_id` ASC)
 );
 
-CREATE TABLE IF NOT EXISTS Genre
+CREATE TABLE IF NOT EXISTS genre
 (
     `genre_name`  varchar(50) NOT NULL ,
     `description` varchar(255) NULL
 
 );
 
-CREATE TABLE IF NOT EXISTS Movie_Genre
+CREATE TABLE IF NOT EXISTS movie_genre
 (
     `movie_id`   int NOT NULL ,
     `genre_name` varchar(50) NOT NULL ,
 
 
-    CONSTRAINT `PK_Movie_Genre` PRIMARY KEY (`movie_id` ASC, `genre_name` ASC),
-    CONSTRAINT `FK3_movie_id` FOREIGN KEY (`movie_id`)  REFERENCES Movie(`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `PK_movie_genre` PRIMARY KEY (`movie_id` ASC, `genre_name` ASC),
+    CONSTRAINT `FK3_movie_id` FOREIGN KEY (`movie_id`)  REFERENCES movie(`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Movie_Cast
+CREATE TABLE IF NOT EXISTS movie_cast
 (
     `movie_id`  int NOT NULL ,
     `person_id` int NOT NULL ,
     `role`      varchar(255) NOT NULL ,
 
 
-    CONSTRAINT `PK_Movie_Cast` PRIMARY KEY (`movie_id` ASC, `person_id` ASC, `role` ASC),
-    CONSTRAINT `FK2_movie_id` FOREIGN KEY (`movie_id`)  REFERENCES Movie(`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `FK2_person_id` FOREIGN KEY (`person_id`)  REFERENCES Person(`person_id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `PK_movie_cast` PRIMARY KEY (`movie_id` ASC, `person_id` ASC, `role` ASC),
+    CONSTRAINT `FK2_movie_id` FOREIGN KEY (`movie_id`)  REFERENCES movie(`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `FK2_person_id` FOREIGN KEY (`person_id`)  REFERENCES person(`person_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Movie_Director
+CREATE TABLE IF NOT EXISTS movie_director
 (
     `movie_id`  int NOT NULL ,
     `person_id` int NOT NULL ,
 
 
-    CONSTRAINT `PK_Movie_Directors` PRIMARY KEY (`movie_id` ASC, `person_id` ASC),
-    CONSTRAINT `FK_movie_id` FOREIGN KEY (`movie_id`)  REFERENCES Movie(`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `FK_person_id` FOREIGN KEY (`person_id`)  REFERENCES Person(`person_id`) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS Users
-(
-    `user_id`  int NOT NULL
+    CONSTRAINT `PK_movie_directors` PRIMARY KEY (`movie_id` ASC, `person_id` ASC),
+    CONSTRAINT `FK_movie_id` FOREIGN KEY (`movie_id`)  REFERENCES movie(`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `FK_person_id` FOREIGN KEY (`person_id`)  REFERENCES person(`person_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
 
 
-insert Movie (`movie_id`,`title`,`duration`,`description`,`publication_year`,`cover_image`,`previous_part`,`price`,`URL`)
+insert movie (`movie_id`,`title`,`duration`,`description`,`publication_year`,`cover_image`,`previous_part`,`price`,`URL`)
 select 396,'...en fin, el mar',106,'Description of ...en fin, el mar',2005,NULL,NULL,2.50,NULL UNION ALL
 select 545,'06-05 de film',106,'Description of 06-05 de film',2005,NULL,NULL,2.50,NULL UNION ALL
 select 899,'10th &amp; Wolf',106,'Description of 10th &amp; Wolf',2006,NULL,NULL,2.50,NULL UNION ALL
@@ -179,7 +174,7 @@ select 20015,'Area 51',106,'Description of Area 51',2005,NULL,NULL,2.50,NULL UNI
 select 20492,'Arms and the Man',106,'Description of Arms and the Man',2005,NULL,NULL,2.50,NULL UNION ALL
 select 20929,'Art Con',106,'Description of Art Con',2005,NULL,NULL,2.50,NULL UNION ALL
 select 21156,'Arthur',106,'Description of Arthur',2005,NULL,NULL,2.50,NULL UNION ALL
-select 21187,'Arthur, the Movie',106,'Description of Arthur, the Movie',2006,NULL,NULL,2.50,NULL UNION ALL
+select 21187,'Arthur, the movie',106,'Description of Arthur, the movie',2006,NULL,NULL,2.50,NULL UNION ALL
 select 21392,'Aryan Couple, The',106,'Description of Aryan Couple, The',2005,NULL,NULL,2.50,NULL UNION ALL
 select 22044,'Ask the Dust',106,'Description of Ask the Dust',2005,NULL,NULL,2.50,NULL UNION ALL
 select 22183,'Asphalt Beach',106,'Description of Asphalt Beach',2005,NULL,NULL,2.50,NULL UNION ALL
@@ -223,7 +218,7 @@ select 32243,'Beauty Shop',106,'Description of Beauty Shop',2005,NULL,NULL,2.50,
 select 32355,'Because of Winn-Dixie',106,'Description of Because of Winn-Dixie',2005,NULL,NULL,2.50,NULL UNION ALL
 select 32413,'Becoming Jane',106,'Description of Becoming Jane',2006,NULL,NULL,2.50,NULL UNION ALL
 select 32532,'Beds &amp; Breakfast',106,'Description of Beds &amp; Breakfast',2005,NULL,NULL,2.50,NULL UNION ALL
-select 32583,'Bee Movie',106,'Description of Bee Movie',2005,NULL,NULL,2.50,NULL UNION ALL
+select 32583,'Bee movie',106,'Description of Bee movie',2005,NULL,NULL,2.50,NULL UNION ALL
 select 32585,'Bee Season',106,'Description of Bee Season',2005,NULL,NULL,2.50,NULL UNION ALL
 select 32717,'Before the Devil Knows You''re Dead',106,'Description of Before the Devil Knows You''re Dead',2005,NULL,NULL,2.50,NULL UNION ALL
 select 33173,'Being Cyrus',106,'Description of Being Cyrus',2005,NULL,NULL,2.50,NULL UNION ALL
@@ -621,8 +616,8 @@ select 123283,'Gambit',106,'Description of Gambit',2006,NULL,NULL,2.50,NULL UNIO
 select 123366,'Game 6',106,'Description of Game 6',2005,NULL,NULL,2.50,NULL UNION ALL
 select 124025,'Garage, The',106,'Description of Garage, The',2005,NULL,NULL,2.50,NULL UNION ALL
 select 124118,'Gardener of Eden',106,'Description of Gardener of Eden',2005,NULL,NULL,2.50,NULL UNION ALL
-select 125724,'Genre humain - 2: Le bonheur c''est mieux que la vie, Le',106,'Description of Genre humain - 2: Le bonheur c''est mieux que la vie, Le',2005,NULL,NULL,2.50,NULL UNION ALL
-select 125725,'Genre humain - 3: Les ricochets ou la lgende des sicles, Le',106,'Description of Genre humain - 3: Les ricochets ou la lgende des sicles, Le',2005,NULL,NULL,2.50,NULL UNION ALL
+select 125724,'genre humain - 2: Le bonheur c''est mieux que la vie, Le',106,'Description of genre humain - 2: Le bonheur c''est mieux que la vie, Le',2005,NULL,NULL,2.50,NULL UNION ALL
+select 125725,'genre humain - 3: Les ricochets ou la lgende des sicles, Le',106,'Description of genre humain - 3: Les ricochets ou la lgende des sicles, Le',2005,NULL,NULL,2.50,NULL UNION ALL
 select 126424,'Gespenst von Canterville, Das',106,'Description of Gespenst von Canterville, Das',2005,NULL,NULL,2.50,NULL UNION ALL
 select 126427,'Gespenster',106,'Description of Gespenster',2005,NULL,NULL,2.50,NULL UNION ALL
 select 126557,'Get Smart',106,'Description of Get Smart',2005,NULL,NULL,2.50,NULL UNION ALL
@@ -927,7 +922,7 @@ select 199211,'Mad Max: Fury Road',106,'Description of Mad Max: Fury Road',2005,
 select 199218,'Mad Money',106,'Description of Mad Money',2005,NULL,NULL,2.50,NULL UNION ALL
 select 199255,'Madagascar',106,'Description of Madagascar',2005,NULL,NULL,2.50,NULL UNION ALL
 select 200092,'Magic 7, The',106,'Description of Magic 7, The',2005,NULL,NULL,2.50,NULL UNION ALL
-select 200270,'Magic Roundabout Movie, The',106,'Description of Magic Roundabout Movie, The',2005,NULL,NULL,2.50,NULL UNION ALL
+select 200270,'Magic Roundabout movie, The',106,'Description of Magic Roundabout movie, The',2005,NULL,NULL,2.50,NULL UNION ALL
 select 200378,'Magick',106,'Description of Magick',2005,NULL,NULL,2.50,NULL UNION ALL
 select 200458,'Magnificat',106,'Description of Magnificat',2005,NULL,NULL,2.50,NULL UNION ALL
 select 200471,'Magnificent Desolation',106,'Description of Magnificent Desolation',2005,NULL,NULL,2.50,NULL UNION ALL
@@ -946,7 +941,7 @@ select 203319,'Man of the House',106,'Description of Man of the House',2005,NULL
 select 203368,'Man on Third',106,'Description of Man on Third',2005,NULL,NULL,2.50,NULL UNION ALL
 select 203426,'Man to Man',106,'Description of Man to Man',2005,NULL,NULL,2.50,NULL UNION ALL
 select 203527,'Man Who Kept Secrets, The',106,'Description of Man Who Kept Secrets, The',2006,NULL,NULL,2.50,NULL UNION ALL
-select 203628,'Man with a Movie Camera',106,'Description of Man with a Movie Camera',2005,NULL,NULL,2.50,NULL UNION ALL
+select 203628,'Man with a movie Camera',106,'Description of Man with a movie Camera',2005,NULL,NULL,2.50,NULL UNION ALL
 select 203783,'Man, The',106,'Description of Man, The',2005,NULL,NULL,2.50,NULL UNION ALL
 select 203800,'Man-Thing',106,'Description of Man-Thing',2005,NULL,NULL,2.50,NULL UNION ALL
 select 203935,'Mandantin, Die',106,'Description of Mandantin, Die',2005,NULL,NULL,2.50,NULL UNION ALL
@@ -1095,7 +1090,7 @@ select 243887,'Os der blev tilbage',106,'Description of Os der blev tilbage',200
 select 244010,'Oskar og Josefine',106,'Description of Oskar og Josefine',2005,NULL,NULL,2.50,NULL;
 
 
-insert Genre (`genre_name`,`description`)
+insert genre (`genre_name`,`description`)
 select 'Action','Description of Action' UNION ALL
 select 'Adult','Description of Adult' UNION ALL
 select 'Adventure','Description of Adventure' UNION ALL
@@ -1119,7 +1114,7 @@ select 'War','Description of War' UNION ALL
 select 'Western','Description of Western';
 
 
-insert Movie_Genre (`movie_id`,`genre_name`)
+insert movie_genre (`movie_id`,`genre_name`)
 select 396,'Drama' UNION ALL
 select 545,'Drama' UNION ALL
 select 899,'Crime' UNION ALL
@@ -2754,7 +2749,7 @@ select 242890,'Comedy' UNION ALL
 select 242890,'Drama' UNION ALL
 select 244010,'Family';
 
-insert Person (`person_id`,`lastname`,`firstname`,`gender`)
+insert person (`person_id`,`lastname`,`firstname`,`gender`)
 select 100038,'3000','André','M' UNION ALL
 select 100257,'Abadia','Lysander O.','M' UNION ALL
 select 100508,'Abbott','Roger','M' UNION ALL
@@ -3320,7 +3315,7 @@ select 176736,'Cassel','Seymour','M' UNION ALL
 select 176739,'Cassel','Vincent','M' UNION ALL
 select 176849,'Cassignard','Pierre','M' UNION ALL
 select 176872,'Cassini','John','M' UNION ALL
-select 177245,'Caster','Jeff','M' UNION ALL
+select 177245,'caster','Jeff','M' UNION ALL
 select 177794,'Catalano','Jason','M' UNION ALL
 select 177804,'Catalano','Sal','M' UNION ALL
 select 177896,'Cate','Field','M' UNION ALL
@@ -3382,7 +3377,7 @@ select 185668,'Christensen','Brian','M' UNION ALL
 select 185711,'Christensen','Jesper (I)','M' UNION ALL
 select 185804,'Christian Peters','Robin','M' UNION ALL
 select 185808,'Christian','Ash','M' UNION ALL
-select 186634,'Churchwell','Gary Castro','M' UNION ALL
+select 186634,'Churchwell','Gary castro','M' UNION ALL
 select 186739,'Chávez','Julio (III)','M' UNION ALL
 select 186741,'Chávez','Luis (II)','M' UNION ALL
 select 186888,'Cibrian','Eddie','M' UNION ALL
@@ -6764,10 +6759,10 @@ select 674197,'Casama','Carmelita','F' UNION ALL
 select 674214,'Casanova','Delia','F' UNION ALL
 select 674597,'Cassidy','Elaine','F' UNION ALL
 select 674621,'Cassidy','Orlagh','F' UNION ALL
-select 674664,'Casta','Laetitia','F' UNION ALL
-select 675008,'Castle','Maggie','F' UNION ALL
-select 675138,'Castro','Magi','F' UNION ALL
-select 675167,'Castro','Raquel (I)','F' UNION ALL
+select 674664,'casta','Laetitia','F' UNION ALL
+select 675008,'castle','Maggie','F' UNION ALL
+select 675138,'castro','Magi','F' UNION ALL
+select 675167,'castro','Raquel (I)','F' UNION ALL
 select 675233,'Catalano','Lidia','F' UNION ALL
 select 675244,'Catalfio','Theresa','F' UNION ALL
 select 675427,'Cattrall','Kim','F' UNION ALL
@@ -7756,7 +7751,7 @@ select 824686,'Mixon','Katie','F' UNION ALL
 select 825752,'Momoi','Kaori','F' UNION ALL
 select 825803,'Monaghan','Michelle','F';
 
-insert Person (`person_id`,`lastname`,`firstname`,`gender`)
+insert person (`person_id`,`lastname`,`firstname`,`gender`)
 select 825814,'Monahan','Sarah','F' UNION ALL
 select 826685,'Montgomery','Flora','F' UNION ALL
 select 826721,'Montgomery','Poppy','F' UNION ALL
@@ -9418,7 +9413,7 @@ select 492,'Adler','Duane',NULL UNION ALL
 select 6443,'Berg','Peter (I)',NULL UNION ALL
 select 22132,'Ebersole','P. David',NULL;
 
-insert Movie_Cast (`movie_id`,`person_id`,`role`)
+insert movie_cast (`movie_id`,`person_id`,`role`)
 select 396,109480,'[Jinetero]' UNION ALL
 select 396,112739,'[Chris]' UNION ALL
 select 396,178595,'[Paramédico]' UNION ALL
@@ -9823,7 +9818,7 @@ select 10663,872967,'(Unknown)' UNION ALL
 select 10663,919154,'[Dorothy]' UNION ALL
 select 10835,144293,'[Pvt. Stern]' UNION ALL
 select 10835,191006,'[Pvt. Smalls]' UNION ALL
-select 10835,199653,'[The Director]' UNION ALL
+select 10835,199653,'[The director]' UNION ALL
 select 10835,253864,'[Storage Room Attendant]' UNION ALL
 select 10835,262314,'[Todd]' UNION ALL
 select 10835,271515,'[Thomas]' UNION ALL
@@ -9998,7 +9993,7 @@ select 19980,107357,'[Airport Security Guard #1]' UNION ALL
 select 19980,125836,'[Border Guard]' UNION ALL
 select 19980,148413,'[Kevin Kingston]' UNION ALL
 select 19980,165944,'[Chubby Kid]' UNION ALL
-select 19980,202418,'[Nick Persons]' UNION ALL
+select 19980,202418,'[Nick persons]' UNION ALL
 select 19980,202521,'[Basketball Player #2]' UNION ALL
 select 19980,219946,'[Train Hobo]' UNION ALL
 select 19980,229847,'[Little Kid in Store]' UNION ALL
@@ -10247,7 +10242,7 @@ select 31503,841412,'[Mother]' UNION ALL
 select 31503,909935,'[Roya]' UNION ALL
 select 31573,100038,'(Unknown)' UNION ALL
 select 31573,102764,'[Hy Gordon]' UNION ALL
-select 31573,103133,'[Program Director]' UNION ALL
+select 31573,103133,'[Program director]' UNION ALL
 select 31573,178844,'[Sinclair "Sin" Russell]' UNION ALL
 select 31573,185668,'[Hairy Russian]' UNION ALL
 select 31573,220364,'[Martin Weir]' UNION ALL
@@ -10255,7 +10250,7 @@ select 31573,265255,'[Bear]' UNION ALL
 select 31573,342760,'[Nicki Carr]' UNION ALL
 select 31573,344795,'[Swing Dancer]' UNION ALL
 select 31573,359016,'(Unknown)' UNION ALL
-select 31573,384125,'[Assistant Director]' UNION ALL
+select 31573,384125,'[Assistant director]' UNION ALL
 select 31573,447754,'[Aerosmith Fan #1]' UNION ALL
 select 31573,464471,'[Joe Loop]' UNION ALL
 select 31573,487016,'[Cafe patron]' UNION ALL
@@ -11938,7 +11933,7 @@ select 85021,364651,'[Ray]' UNION ALL
 select 85021,418917,'[Joe]' UNION ALL
 select 85021,459855,'[Bob]' UNION ALL
 select 85021,519844,'[Hector]' UNION ALL
-select 85021,545459,'[Additional Cast]' UNION ALL
+select 85021,545459,'[Additional cast]' UNION ALL
 select 85021,574022,'[Father O''Connell]' UNION ALL
 select 85021,632681,'[Edna]' UNION ALL
 select 85021,632751,'[Linda]' UNION ALL
@@ -13854,7 +13849,7 @@ select 154310,713252,'[Shy]' UNION ALL
 select 154551,543640,'[Kevin]' UNION ALL
 select 154551,703423,'[Angela]' UNION ALL
 select 154806,228549,'[The Warden]' UNION ALL
-select 154806,241790,'[Director]' UNION ALL
+select 154806,241790,'[director]' UNION ALL
 select 154806,251319,'[NYC Cop]' UNION ALL
 select 154806,446521,'[The Viewer]' UNION ALL
 select 154806,475154,'[Bandrowsky]' UNION ALL
@@ -14420,7 +14415,7 @@ select 177128,939559,'(Unknown)' UNION ALL
 select 177328,135256,'[Jimmy]' UNION ALL
 select 177328,144493,'[Carl Denham]';
 
-insert Movie_Cast (`movie_id`,`person_id`,`role`)
+insert movie_cast (`movie_id`,`person_id`,`role`)
 select 177328,158656,'[Jack Driscoll]' UNION ALL
 select 177328,159327,'[Key Venture Crew]' UNION ALL
 select 177328,180728,'[Choy]' UNION ALL
@@ -14616,7 +14611,7 @@ select 185192,476268,'(Unknown)' UNION ALL
 select 185192,575734,'[Detective]' UNION ALL
 select 185192,638283,'(Unknown)' UNION ALL
 select 185192,736402,'(Unknown)' UNION ALL
-select 185192,924686,'[Cast]' UNION ALL
+select 185192,924686,'[cast]' UNION ALL
 select 185317,788921,'[Georgia Byrd]' UNION ALL
 select 185738,119873,'[Capt. Cully/Voice of The Skul' UNION ALL
 select 185738,371543,'[King Haggard]' UNION ALL
@@ -14980,7 +14975,7 @@ select 195021,886026,'(Unknown)' UNION ALL
 select 195021,898276,'[Dinner Guest]' UNION ALL
 select 195021,921124,'(Unknown)' UNION ALL
 select 195021,928199,'(Unknown)' UNION ALL
-select 195021,937742,'[Casting Assistant]' UNION ALL
+select 195021,937742,'[casting Assistant]' UNION ALL
 select 195945,111793,'[Thomas]' UNION ALL
 select 195945,171722,'[Mr. Peterson]' UNION ALL
 select 195945,189473,'[Mr. King]' UNION ALL
@@ -15135,7 +15130,7 @@ select 203287,133589,'(Unknown)' UNION ALL
 select 203287,134497,'[Ben Cohen]' UNION ALL
 select 203287,421799,'[Michael]' UNION ALL
 select 203287,606115,'[Rabbi]' UNION ALL
-select 203287,621960,'[Cast]' UNION ALL
+select 203287,621960,'[cast]' UNION ALL
 select 203287,823645,'[Karen Cohen]' UNION ALL
 select 203287,864949,'[Zane Berg]' UNION ALL
 select 203287,912047,'(Unknown)' UNION ALL
@@ -15326,7 +15321,7 @@ select 208094,189548,'[Detective Journell]' UNION ALL
 select 208094,191846,'[Janitor/Devil]' UNION ALL
 select 208094,197489,'[David]' UNION ALL
 select 208094,216576,'[Father Corso DeCordova]' UNION ALL
-select 208094,231010,'[East European Lab Director]' UNION ALL
+select 208094,231010,'[East European Lab director]' UNION ALL
 select 208094,278836,'[Young David]' UNION ALL
 select 208094,322678,'[Police Officer #1]' UNION ALL
 select 208094,327204,'[East European Lab Assistant]' UNION ALL
@@ -15982,7 +15977,7 @@ select 244010,552794,'[Jesper, Josefines far]' UNION ALL
 select 244010,760440,'[Josefine]' UNION ALL
 select 244010,765577,'[Louise, Josefines mor]';
 
-insert Movie_Director (`movie_id`,`person_id`)
+insert movie_director (`movie_id`,`person_id`)
 select 396,21954 UNION ALL
 select 545,29082 UNION ALL
 select 899,55305 UNION ALL
