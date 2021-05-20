@@ -11,7 +11,6 @@ use app\src\Request;
 
 class AuthController extends Controller
 {
-
     public function index() {
         $params = [
             'name' => "Chris"
@@ -26,7 +25,7 @@ class AuthController extends Controller
 
         if(!empty($request) && $user->exists($request['email'])) {
             if(password_verify($request['password'], $user->fetch()['password'])) {
-                $_SESSION['user'] = $user->fetch();
+                Application::$app->session->set('user',$user->fetch()['user_id']);
                 Application::$app->response->redirect('/');
             }
         }
