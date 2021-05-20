@@ -44,6 +44,21 @@ abstract class Model
         $this->query($this->buildQueryStatement($sql), $values);
     }
 
+
+    public function find()
+    {
+        $sql = [
+            "SELECT * FROM",
+            $this->getTable(),
+        ];
+
+        if (!empty($this->where)) {
+            $sql[] = $this->setWhereClause();
+        }
+
+        return (bool) $this->query($this->buildQueryStatement($sql))->fetchColumn();
+    }
+
     /**
      * @param array $values
      */
