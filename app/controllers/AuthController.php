@@ -12,10 +12,7 @@ use app\src\Request;
 class AuthController extends Controller
 {
     public function index() {
-        $params = [
-            'name' => "Chris"
-        ];
-        return $this->render('login', $params);
+        return $this->render('login');
     }
 
     public function login(Request $request)
