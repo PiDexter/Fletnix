@@ -59,6 +59,36 @@ abstract class Model
         return (bool) $this->query($this->buildQueryStatement($sql))->fetchColumn();
     }
 
+    public function get(string $column): string
+    {
+        $sql = [
+            "SELECT",
+            $column,
+            "FROM",
+            $this->getTable(),
+        ];
+
+        if (!empty($this->where)) {
+            $sql[] = $this->setWhereClause();
+        }
+
+        return $this->query($this->buildQueryStatement($sql))->fetchColumn();
+    }
+
+    public function fetch()
+    {
+        $sql = [
+            "SELECT * FROM",
+            $this->getTable(),
+        ];
+
+        if (!empty($this->where)) {
+            $sql[] = $this->setWhereClause();
+        }
+
+        return $this->query($this->buildQueryStatement($sql))->fetch();
+    }
+
     /**
      * @param array $values
      */
@@ -207,19 +237,19 @@ abstract class Model
     }
 
 
-    /**
-     * @param string $column
-     * @return mixed
-     */
-    public function get(string $column): mixed
-    {
-        $stmt = "SELECT " . $column . " FROM " . $this->getClassName();
-        return $this->query($stmt)->fetchColumn();
-    }
+//    /**
+//     * @param string $column
+//     * @return mixed
+//     */
+//    public function findBy(string $column): mixed
+//    {
+//        $stmt = "SELECT " . $column . " FROM " . $this->getTable();
+//        return $this->query($stmt)->fetchAll();
+//    }
 
     public function getAll(): array
     {
-        $stmt = "SELECT * FROM " . $this->getClassName();
+        $stmt = "SELECT * FROM " . $this->getTable();
         return $this->query($stmt)->fetchAll();
     }
 
