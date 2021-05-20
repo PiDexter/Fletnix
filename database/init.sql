@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS fletnix;
 
 USE fletnix;
 
-CREATE TABLE user
+CREATE TABLE IF NOT EXISTS user
 (
     user_id int auto_increment,
     email varchar(255) NOT NULL,
