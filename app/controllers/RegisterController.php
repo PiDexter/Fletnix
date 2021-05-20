@@ -19,8 +19,6 @@ class RegisterController extends Controller
     {
         $formData = $request->getBody();
 
-        var_dump($formData['email']);
-
         $userData = [
             'email' => $formData['email'],
             'password' => password_hash($formData['password'], PASSWORD_DEFAULT),
