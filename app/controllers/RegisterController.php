@@ -20,9 +20,10 @@ class RegisterController extends Controller
         $formData = $request->getBody();
 
         var_dump($formData['email']);
+
         $userData = [
             'email' => $formData['email'],
-            'password' => $formData['password'],
+            'password' => password_hash($formData['password'], PASSWORD_DEFAULT),
             'first_name' => $formData['name'],
             'last_name' => $formData['lastName'],
             'country' => $formData['country'],
@@ -30,7 +31,6 @@ class RegisterController extends Controller
         ];
 
         (new User())->create($userData);
-        var_dump($formData);
         return $this->render('register');
     }
 
