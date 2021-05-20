@@ -10,8 +10,6 @@ use ReflectionClass;
 abstract class Model
 {
     protected PDO $connection;
-    protected array $attributes = [];
-
     protected array $fillableColumns = [];
 
     protected array $where = [];
@@ -46,7 +44,10 @@ abstract class Model
         $this->query($this->buildQueryStatement($sql), $values);
     }
 
-    public function update(array $values = [])
+    /**
+     * @param array $values
+     */
+    public function update(array $values = []): void
     {
         $sql = [
             "UPDATE",
@@ -59,9 +60,41 @@ abstract class Model
             $sql[] = $this->setWhereClause();
         }
 
-        var_dump($this->buildQueryStatement($sql));
         $this->query($this->buildQueryStatement($sql), $values);
     }
+
+
+    /**
+     * Delete the model specified in where clause.
+     * If no where clause exists do not execute, instead use deleteAll() method.
+     */
+    public function delete(): void
+    {
+        if (!empty($this->where)) {
+            $sql = [
+                "DELETE FROM",
+                $this->getTable(),
+            ];
+            $sql[] = $this->setWhereClause();
+
+            $this->query($this->buildQueryStatement($sql));
+        }
+    }
+
+    /**
+     * Deletes all records from the table.
+     */
+    public function deleteAll(): void
+    {
+        $sql = [
+            "DELETE FROM",
+            $this->getTable(),
+        ];
+
+        $this->query($this->buildQueryStatement($sql));
+    }
+
+
 
     private function setParams(array $values): string
     {
@@ -83,15 +116,15 @@ abstract class Model
 
     private function setWhereClause(): string
     {
-        $whereClauses[] = "WHERE";
+        $whereClause[] = "WHERE";
 
-        if (count($this->where) === 1) {
-            $whereClauses[] = implode(' ', $this->where);
-        } else if (count($this->where) > 1) {
-            $whereClauses[] = implode(' AND ', $this->where);
+        $separator = ' ';
+        if (count($this->where) > 1) {
+            $separator = ' AND ';
         }
 
-        return implode(' ', $whereClauses);
+        $whereClause[] = implode($separator, $this->where);
+        return implode(' ', $whereClause);
     }
 
 
