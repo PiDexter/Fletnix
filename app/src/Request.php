@@ -56,10 +56,10 @@ class Request
 
         if ($this->isPost()) {
             foreach ($_POST as $key => $value) {
-                var_dump($key);
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
+
 
         return $body;
     }
