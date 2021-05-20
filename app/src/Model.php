@@ -211,12 +211,10 @@ abstract class Model
         return (new ReflectionClass($this))->getShortName();
     }
 
-    // Set Model name to lower string, represents table name
+    // Set Model name to lower string to represent table name
     public function getTable(): string
     {
-        // TODO Database tables to lowercase and then use below
-        // $table = strtolower($this->getClassName() . "s");
-        return $this->getClassName() . "s";
+        return strtolower($this->getClassName());
     }
 
 
