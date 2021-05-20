@@ -18,4 +18,9 @@ class User extends Model
         'date_of_birth',
     ];
 
+    public function exists(string $email): bool
+    {
+        return $this->where('email', "=", $email)->find();
+    }
+
 }
