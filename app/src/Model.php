@@ -95,7 +95,11 @@ abstract class Model
     }
 
 
-
+    /**
+     * Specify params after SET in query.
+     * @param array $values
+     * @return string
+     */
     private function setParams(array $values): string
     {
         $columns = implode(', ', array_keys($values));
@@ -103,6 +107,14 @@ abstract class Model
         return $columns . $bindParams;
     }
 
+
+    /**
+     * Allows adding multiple where clauses by method chaining.
+     * @param $column
+     * @param $operator
+     * @param $value
+     * @return $this
+     */
     public function where($column, $operator, $value): static
     {
         $whereClause = [
@@ -174,16 +186,17 @@ abstract class Model
     }
 
 
-
-
-
-    public function get(string $column)
+    /**
+     * @param string $column
+     * @return mixed
+     */
+    public function get(string $column): mixed
     {
         $stmt = "SELECT " . $column . " FROM " . $this->getClassName();
         return $this->query($stmt)->fetchColumn();
     }
 
-    public function getAll()
+    public function getAll(): array
     {
         $stmt = "SELECT * FROM " . $this->getClassName();
         return $this->query($stmt)->fetchAll();
