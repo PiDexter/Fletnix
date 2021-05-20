@@ -2,12 +2,12 @@
 <section id="loginForm">
     <div class="container">
         <h1 class="page-title">Inloggen</h1>
-        <form action="" method="post">
+        <form action="login" method="post">
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="email" class="input-textField" name="textField" placeholder="E-mail" required>
-                        <label for="textField" class="input-label">E-mail</label>
+                        <input type="email" class="input-textField" name="email" placeholder="E-mail" required>
+                        <label for="email" class="input-label">E-mail</label>
                     </div>
                 </div>
             </div>
