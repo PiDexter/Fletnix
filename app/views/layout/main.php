@@ -38,7 +38,7 @@
             </div>
 
             <div class="content-right">
-                <a href="" class="btn btn-primary">Inloggen</a>
+                <a href="/login" class="btn btn-primary">Inloggen</a>
             </div>
 
 
