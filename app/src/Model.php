@@ -45,7 +45,7 @@ abstract class Model
     }
 
 
-    public function find()
+    public function find(): bool
     {
         $sql = [
             "SELECT * FROM",
