@@ -17,6 +17,7 @@ class Application
     public Database $db;
 
     public View $view;
+    public Session $session;
 
 
     public function __construct(string $rootPath, array $config)
@@ -33,6 +34,7 @@ class Application
 
         $this->db = new Database($config['db']);
         $this->view = new View();
+        $this->session = new Session();
     }
 
     // Resolves elke nieuwe request

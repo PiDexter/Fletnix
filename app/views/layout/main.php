@@ -16,23 +16,32 @@
 
     <header id="header">
         <div class="flex-container">
-            <div class="logo">
-                <a href="/">
-                    <strong>NETNIX</strong>
-                </a>
-            </div>
 
-            <div id="burger-button" class="menu-button">
-                <div id="open-sidenav">
-                    <a href="#sidebar">
-                        <svg viewBox="0 0 100 80" width="30" height="20">
-                            <rect width="100" height="20" rx="8"></rect>
-                            <rect y="30" width="100" height="20" rx="8"></rect>
-                            <rect y="60" width="100" height="20" rx="8"></rect>
-                        </svg>
+            <div class="column content-left">
+                <div id="burger-button" class="menu-button">
+                    <div id="open-sidenav">
+                        <a href="#sidebar">
+                            <svg viewBox="0 0 100 80" width="30" height="20">
+                                <rect width="100" height="20" rx="8"></rect>
+                                <rect y="30" width="100" height="20" rx="8"></rect>
+                                <rect y="60" width="100" height="20" rx="8"></rect>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="logo">
+                    <a href="/">
+                        <strong>NETNIX</strong>
                     </a>
                 </div>
             </div>
+
+            <div class="content-right">
+                <a href="" class="btn btn-primary">Inloggen</a>
+            </div>
+
+
 
             <nav class="menu-horizontal">
                 <ul>

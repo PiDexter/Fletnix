@@ -44,6 +44,51 @@ abstract class Model
         $this->query($this->buildQueryStatement($sql), $values);
     }
 
+
+    public function find(): bool
+    {
+        $sql = [
+            "SELECT * FROM",
+            $this->getTable(),
+        ];
+
+        if (!empty($this->where)) {
+            $sql[] = $this->setWhereClause();
+        }
+
+        return (bool) $this->query($this->buildQueryStatement($sql))->fetchColumn();
+    }
+
+    public function get(string $column): string
+    {
+        $sql = [
+            "SELECT",
+            $column,
+            "FROM",
+            $this->getTable(),
+        ];
+
+        if (!empty($this->where)) {
+            $sql[] = $this->setWhereClause();
+        }
+
+        return $this->query($this->buildQueryStatement($sql))->fetchColumn();
+    }
+
+    public function fetch()
+    {
+        $sql = [
+            "SELECT * FROM",
+            $this->getTable(),
+        ];
+
+        if (!empty($this->where)) {
+            $sql[] = $this->setWhereClause();
+        }
+
+        return $this->query($this->buildQueryStatement($sql))->fetch();
+    }
+
     /**
      * @param array $values
      */
@@ -119,9 +164,15 @@ abstract class Model
     {
         $whereClause = [
             $column,
-            $operator,
-            $value
+            $operator
         ];
+
+        if (is_numeric($value)) {
+            $whereClause[] = $value;
+        } else {
+            $whereClause[] = "'" . $value . "'";
+        }
+
         $this->where[] = implode(' ', $whereClause);
         return $this;
     }
@@ -186,19 +237,19 @@ abstract class Model
     }
 
 
-    /**
-     * @param string $column
-     * @return mixed
-     */
-    public function get(string $column): mixed
-    {
-        $stmt = "SELECT " . $column . " FROM " . $this->getClassName();
-        return $this->query($stmt)->fetchColumn();
-    }
+//    /**
+//     * @param string $column
+//     * @return mixed
+//     */
+//    public function findBy(string $column): mixed
+//    {
+//        $stmt = "SELECT " . $column . " FROM " . $this->getTable();
+//        return $this->query($stmt)->fetchAll();
+//    }
 
     public function getAll(): array
     {
-        $stmt = "SELECT * FROM " . $this->getClassName();
+        $stmt = "SELECT * FROM " . $this->getTable();
         return $this->query($stmt)->fetchAll();
     }
 
@@ -211,12 +262,10 @@ abstract class Model
         return (new ReflectionClass($this))->getShortName();
     }
 
-    // Set Model name to lower string, represents table name
+    // Set Model name to lower string to represent table name
     public function getTable(): string
     {
-        // TODO Database tables to lowercase and then use below
-        // $table = strtolower($this->getClassName() . "s");
-        return $this->getClassName() . "s";
+        return strtolower($this->getClassName());
     }
 
 
