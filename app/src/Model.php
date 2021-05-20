@@ -119,9 +119,15 @@ abstract class Model
     {
         $whereClause = [
             $column,
-            $operator,
-            $value
+            $operator
         ];
+
+        if (is_numeric($value)) {
+            $whereClause[] = $value;
+        } else {
+            $whereClause[] = "'" . $value . "'";
+        }
+
         $this->where[] = implode(' ', $whereClause);
         return $this;
     }
