@@ -2,6 +2,21 @@ CREATE DATABASE IF NOT EXISTS fletnix;
 
 USE fletnix;
 
+CREATE TABLE user
+(
+    user_id int auto_increment,
+    email varchar(255) NOT NULL,
+    password CHAR(60) NOT NULL,
+    first_name varchar(255) NULL,
+    last_name varchar(255) NULL,
+    country varchar(255) NULL,
+    date_of_birth date NOT NULL,
+    created_at timestamp default CURRENT_TIMESTAMP NULL,
+    updated_at timestamp default CURRENT_TIMESTAMP NULL,
+
+    CONSTRAINT user_pk PRIMARY KEY (user_id)
+);
+
 CREATE TABLE IF NOT EXISTS Movie
 (
     `movie_id`         int NOT NULL ,
