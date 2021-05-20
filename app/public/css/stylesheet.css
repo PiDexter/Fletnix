@@ -158,6 +158,10 @@ footer {
     justify-content: flex-start;
 }
 
+.content-right {
+    justify-content: flex-end;
+}
+
 .fullwidth {
     flex-grow: 1;
 }
