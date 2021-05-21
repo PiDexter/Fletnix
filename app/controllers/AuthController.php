@@ -28,4 +28,10 @@ class AuthController extends Controller
         }
     }
 
+    public function logout()
+    {
+        Application::$app->session->remove();
+        Application::$app->response->redirect('/');
+    }
+
 }
