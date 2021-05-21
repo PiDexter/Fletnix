@@ -21,4 +21,10 @@ class Session
         return $_SESSION[$key] ?? false;
     }
 
+    public function remove()
+    {
+        session_unset();
+        session_destroy();
+    }
+
 }
