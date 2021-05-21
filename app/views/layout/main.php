@@ -1,6 +1,4 @@
-<?php
-
-?>
+<?php ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,10 +36,12 @@
             </div>
 
             <div class="content-right">
+                <?php if(!isset($_SESSION['user'])) : ?>
                 <a href="/login" class="btn btn-primary">Inloggen</a>
+                    <?php else : ?>
+                    <a href="/logout" class="btn btn-primary">Uitloggen</a>
+                <?php endif; ?>
             </div>
-
-
 
             <nav class="menu-horizontal">
                 <ul>
