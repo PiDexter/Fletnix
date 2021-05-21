@@ -23,6 +23,7 @@ $app->router->get('/', [HomeController::class, 'index']);
 
 $app->router->get('/login', [AuthController::class, 'index']);
 $app->router->post('/login', [AuthController::class, 'login']);
+$app->router->get('/logout', [AuthController::class, 'logout']);
 
 $app->router->get('/register', [RegisterController::class, 'index']);
 $app->router->post('/register', [RegisterController::class, 'create']);
