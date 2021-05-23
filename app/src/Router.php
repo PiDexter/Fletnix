@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace app\src;
 
-use app\controllers\MovieController;
-use ReflectionClass;
+
 use ReflectionMethod;
 
 class Router
@@ -126,9 +125,6 @@ class Router
                 } else {
                     continue;
                 }
-
-                var_dump($param);
-
             }
             return call_user_func_array($callback, $parameters);
         }
