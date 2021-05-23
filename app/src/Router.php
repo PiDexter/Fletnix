@@ -53,7 +53,6 @@ class Router
         foreach (array_keys($this->routes[$method]) as $route) {
             $routes = explode('/', $route);
             array_shift($routes);
-            var_dump($routes);
 
             // Wanneer in de routes array een route matched met de eerst url param
             // EN deze route ook matched met een ":" dan staat er een variabele in de route
