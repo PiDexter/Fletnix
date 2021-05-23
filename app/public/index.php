@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use app\controllers\AuthController;
+use app\controllers\MovieController;
 use app\controllers\RegisterController;
 use app\src\Application;
 use app\controllers\HomeController;
+use app\src\Route;
 
 require_once __DIR__ . '/../autoload.php';
 
@@ -27,5 +29,10 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 
 $app->router->get('/register', [RegisterController::class, 'index']);
 $app->router->post('/register', [RegisterController::class, 'create']);
+
+$app->router->get('/movie', [MovieController::class, 'index']);
+$app->router->get('/movie/:id', [MovieController::class, 'show']);
+
+
 
 $app->run();
