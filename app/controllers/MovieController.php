@@ -15,7 +15,7 @@ class MovieController extends Controller
     {
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         $movie = (new Movie())->where('movie_id', '=', $id)->fetch();
 
@@ -23,7 +23,15 @@ class MovieController extends Controller
         if (!$movie) {
             return $this->render('404');
         }
-        var_dump($movie);
+
+        $viewData = [
+            'title' => $movie['title'],
+            'duration' => $movie['duration'],
+            'description' => $movie['description'],
+            'publicationYear' => $movie['publication_year']
+        ];
+
+        return $this->render('movie', $viewData);
     }
 
 }
