@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace app\src;
 
-use app\controllers\MovieController;
-use ReflectionClass;
+
 use ReflectionMethod;
 
 class Router
@@ -121,10 +120,11 @@ class Router
                     $parameters[] = $this->request;
                 } else if (strpos((string)$param, 'id')) {
                     $parameters[] = (int) $urlFragments[1];
+                } else if (strpos((string)$param, 'name')) {
+                    $parameters[] = $urlFragments[1];
                 } else {
                     continue;
                 }
-
             }
             return call_user_func_array($callback, $parameters);
         }

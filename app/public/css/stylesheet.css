@@ -131,6 +131,7 @@ footer {
     text-align: center;
     padding: 20px;
     text-decoration: none;
+    color: var(--white);
 }
 
 
@@ -589,7 +590,7 @@ h1.page-title {
 
     .menu-horizontal ul > li > a {
         padding: 22px;
-        color: var(--dark-gray);
+        color: var(--white);
     }
 
     .menu-horizontal a:hover {

@@ -55,6 +55,11 @@ class Request
         // Lege body array
         $body = [];
 
+        // Haal data op uit query string
+        foreach ($_GET as $key => $value) {
+            $body[$key] = $value;
+        }
+
         if ($this->isGet()) {
             foreach ($_GET as $key => $value) {
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);

@@ -16,7 +16,7 @@
         <h2 class="row-title">Trending</h2>
         <div class="card-deck">
             <!-- Card 1 -->
-            <a href="login" class="card" id="popuptest">
+            <a href="/movie/396" class="card" id="popuptest">
                 <img src="images/movie1.jpg" alt="">
             </a>
 
