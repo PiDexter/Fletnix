@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\Genre;
 use app\src\Controller;
 
 class GenreController extends Controller
@@ -12,12 +13,25 @@ class GenreController extends Controller
     // Toon alle genres
     public function index()
     {
-        return $this->render('genre');
+        $genre = (new Genre())->getAll();
+        return $this->render('genre', $genre);
     }
 
-    // Toon movies van een genre via genre ID
-    public function show($id)
+    // Toon van een bepaald genre de bijhorende movies
+    public function show($name)
     {
+        $genre = (new Genre())->where('genre_name', '=', $name)->fetch();
+
+        // Als genre niet gevonden kan worden
+        if (!$genre) {
+            return $this->render('404');
+        }
+
+        $viewData = [
+          'genreName' => $genre['genre_name']
+        ];
+
+        return $this->render('genre', $viewData);
 
     }
 
