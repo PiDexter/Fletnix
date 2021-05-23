@@ -47,7 +47,9 @@ CREATE TABLE IF NOT EXISTS person
 CREATE TABLE IF NOT EXISTS genre
 (
     `genre_name`  varchar(50) NOT NULL ,
-    `description` varchar(255) NULL
+    `description` varchar(255) NULL ,
+
+    CONSTRAINT genre_name PRIMARY KEY (genre_name)
 
 );
 
