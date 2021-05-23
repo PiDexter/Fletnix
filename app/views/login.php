@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="password" class="input-textField" name="password" placeholder="Password" required>
+                        <input type="password" class="input-textField" name="password" placeholder="Password" autocomplete="on" required>
                         <label for="password" class="input-label">Password</label>
                     </div>
                 </div>
