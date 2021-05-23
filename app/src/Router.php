@@ -121,9 +121,13 @@ class Router
                     $parameters[] = $this->request;
                 } else if (strpos((string)$param, 'id')) {
                     $parameters[] = (int) $urlFragments[1];
+                } else if (strpos((string)$param, 'name')) {
+                    $parameters[] = $urlFragments[1];
                 } else {
                     continue;
                 }
+
+                var_dump($param);
 
             }
             return call_user_func_array($callback, $parameters);
