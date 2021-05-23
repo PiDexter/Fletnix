@@ -28,7 +28,7 @@ class Request
         return substr($path, 0, $position);
     }
 
-    public function getParams(string $path): array
+    public function getUrlFragments(string $path): array
     {
         $url = explode('/', filter_var(rtrim($path, '/')), FILTER_SANITIZE_URL);
         array_shift($url);
