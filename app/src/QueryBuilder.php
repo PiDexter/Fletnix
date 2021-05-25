@@ -148,7 +148,7 @@ class QueryBuilder
      * @param array $columns
      * @return string
      */
-    public function parseColumns(array $columns): string
+    private function parseColumns(array $columns): string
     {
         return implode(', ', array_values($columns));
     }
@@ -157,7 +157,7 @@ class QueryBuilder
      * @param array $columns
      * @return string
      */
-    public function insertInColumns(array $columns): string
+    private function insertInColumns(array $columns): string
     {
         return "(" . implode(', ', array_keys($columns)) . ")";
     }
@@ -166,7 +166,7 @@ class QueryBuilder
      * @param array $values
      * @return string
      */
-    public function createQueryParams(array $values): string
+    private function createQueryParams(array $values): string
     {
         return "(:" . implode(', :', array_keys($values)) . ")";
     }
@@ -188,7 +188,7 @@ class QueryBuilder
     /**
      * @return string
      */
-    public function getQueryAsString(): string
+    private function getQueryAsString(): string
     {
         if (!empty($this->where)) {
             $this->query[] = $this->setWhereClause();
