@@ -6,7 +6,6 @@ namespace app\controllers;
 
 use app\models\Movie;
 use app\src\Controller;
-use app\src\Request;
 
 class MovieController extends Controller
 {
@@ -17,7 +16,7 @@ class MovieController extends Controller
 
     public function show(int $id)
     {
-        $movie = (new Movie())->where('movie_id', '=', $id)->fetch();
+        $movie = (new Movie())->findByID($id);
 
         // Als movie niet gevonden kan worden
         if (!$movie) {
