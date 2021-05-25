@@ -18,6 +18,7 @@ class Application
 
     public View $view;
     public Session $session;
+    public QueryBuilder $builder;
 
 
     public function __construct(string $rootPath, array $config)
@@ -35,6 +36,7 @@ class Application
         $this->db = new Database($config['db']);
         $this->view = new View();
         $this->session = new Session();
+        $this->builder = new QueryBuilder();
     }
 
     // Resolves elke nieuwe request
