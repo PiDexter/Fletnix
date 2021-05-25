@@ -68,7 +68,19 @@ abstract class Model
     {
         return $this->builder
             ->where($this->getPrimaryKey(), '=', $id)
-            ->select($this->getTable(), (array)'*')
+            ->select((array)'*', $this->getTable())
+            ->query()->fetch();
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function findByString(string $value): mixed
+    {
+        return $this->builder
+            ->where($this->getPrimaryKey(), '=', $value)
+            ->select((array)'*', $this->getTable())
             ->query()->fetch();
     }
 
@@ -78,8 +90,19 @@ abstract class Model
     public function all(): array
     {
         return $this->builder
-            ->select($this->getTable(), (array)'*')
-            ->query()->fetchAll();
+            ->select((array)'*', $this->getTable())
+            ->query()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @return array
+     */
+    public function allWith(string $table): array
+    {
+        return $this->builder
+            ->select((array)'*', $this->getTable())
+            ->join($table, (array)'*')
+            ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 
 

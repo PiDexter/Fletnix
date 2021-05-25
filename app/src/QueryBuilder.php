@@ -13,6 +13,7 @@ class QueryBuilder
 
     protected array $query = [];
     protected array $where = [];
+    protected array $join = [];
 
     public function __construct()
     {
@@ -22,7 +23,7 @@ class QueryBuilder
     /**
      * @return $this
      */
-    public function select(string $table, array $columns): static
+    public function select(array $columns, string $table): static
     {
         $query = [
             "SELECT",
@@ -112,7 +113,6 @@ class QueryBuilder
         ];
 
         $this->query = $query;
-        var_dump($this->query);
         return $this;
     }
 
@@ -133,14 +133,28 @@ class QueryBuilder
      */
     public function join(string $table, array $values): static
     {
-        $query = [
+        $join = [
             "INNER JOIN",
             $table,
             "ON",
-            $this->parseColumns($values)
+            $this->onColumns($values)
         ];
-        $this->query = $query;
+        $this->join = $join;
         return $this;
+    }
+
+    public function onColumns(array $columns): string
+    {
+        $stmt = [];
+        foreach ($columns as $key => $value) {
+            $stmt[] = $key . ' = ' . $value;
+        }
+        return implode(', ', array_values($stmt));
+    }
+
+    private function setJoinColumns(array $joins)
+    {
+        return implode(' ', $joins);
     }
 
     /**
@@ -190,6 +204,10 @@ class QueryBuilder
      */
     private function getQueryAsString(): string
     {
+        if (!empty($this->join)) {
+            $this->query = array_merge($this->query, $this->join);
+        }
+
         if (!empty($this->where)) {
             $this->query[] = $this->setWhereClause();
         }
@@ -209,6 +227,7 @@ class QueryBuilder
         } else {
             $stmt = $this->connection->query($this->getQueryAsString());
         }
+
         return $stmt;
     }
 
