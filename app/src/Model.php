@@ -4,28 +4,23 @@ namespace app\src;
 
 
 use PDO;
-use PDOStatement;
 use ReflectionClass;
 
 abstract class Model
 {
+    protected QueryBuilder $builder;
     protected PDO $connection;
-    protected array $fillableColumns = [];
 
-    protected array $where = [];
+    protected array $fillableColumns = [];
+    protected string $primaryKey = 'id';
+
 
     public function __construct()
     {
+        $this->builder = Application::$app->builder;
         $this->connection = Application::$app->db->pdo;
     }
 
-    /**
-     * @return PDO
-     */
-    public function getConnection(): PDO
-    {
-        return $this->connection;
-    }
 
     /**
      * Create new row in the db table that is equal to the model
@@ -33,79 +28,22 @@ abstract class Model
      */
     public function create(array $values = []): void
     {
-        $sql = [
-            "INSERT INTO",
-            $this->getTable(),
-            $this->columns($values),
-            "VALUES",
-            $this->createQueryParams($values)
-        ];
-
-        $this->query($this->buildQueryStatement($sql), $values);
+        $this->builder
+            ->insert($this->getTable(), $values)
+            ->query($values);
     }
 
-
-    public function find(): bool
-    {
-        $sql = [
-            "SELECT * FROM",
-            $this->getTable(),
-        ];
-
-        if (!empty($this->where)) {
-            $sql[] = $this->setWhereClause();
-        }
-
-        return (bool) $this->query($this->buildQueryStatement($sql))->fetchColumn();
-    }
-
-    public function get(string $column): string
-    {
-        $sql = [
-            "SELECT",
-            $column,
-            "FROM",
-            $this->getTable(),
-        ];
-
-        if (!empty($this->where)) {
-            $sql[] = $this->setWhereClause();
-        }
-
-        return $this->query($this->buildQueryStatement($sql))->fetchColumn();
-    }
-
-    public function fetch()
-    {
-        $sql = [
-            "SELECT * FROM",
-            $this->getTable(),
-        ];
-
-        if (!empty($this->where)) {
-            $sql[] = $this->setWhereClause();
-        }
-
-        return $this->query($this->buildQueryStatement($sql))->fetch();
-    }
 
     /**
+     * @param int $id
      * @param array $values
      */
-    public function update(array $values = []): void
+    public function update(int $id, array $values = []): void
     {
-        $sql = [
-            "UPDATE",
-            $this->getTable(),
-            "SET",
-            $this->setParams($values),
-        ];
-
-        if (!empty($this->where)) {
-            $sql[] = $this->setWhereClause();
-        }
-
-        $this->query($this->buildQueryStatement($sql), $values);
+        $this->builder
+            ->update($this->getTable(), $values)
+            ->where($this->getPrimaryKey(), '=', $id)
+            ->query($values);
     }
 
 
@@ -113,145 +51,54 @@ abstract class Model
      * Delete the model specified in where clause.
      * If no where clause exists do not execute, instead use deleteAll() method.
      */
-    public function delete(): void
+    public function delete(int $id): void
     {
-        if (!empty($this->where)) {
-            $sql = [
-                "DELETE FROM",
-                $this->getTable(),
-            ];
-            $sql[] = $this->setWhereClause();
-
-            $this->query($this->buildQueryStatement($sql));
-        }
+        $this->builder
+            ->delete($this->getTable())
+            ->where($this->getPrimaryKey(), '=', $id)
+            ->query();
     }
 
+
     /**
-     * Deletes all records from the table.
+     * @param int $id
+     * @return mixed
      */
-    public function deleteAll(): void
+    public function findByID(int $id): mixed
     {
-        $sql = [
-            "DELETE FROM",
-            $this->getTable(),
-        ];
+        return $this->builder
+            ->where($this->getPrimaryKey(), '=', $id)
+            ->select($this->getTable(), (array)'*')
+            ->query()->fetch();
+    }
 
-        $this->query($this->buildQueryStatement($sql));
+    /**
+     * @return array
+     */
+    public function all(): array
+    {
+        return $this->builder
+            ->select($this->getTable(), (array)'*')
+            ->query()->fetchAll();
     }
 
 
     /**
-     * Specify params after SET in query.
-     * @param array $values
      * @return string
      */
-    private function setParams(array $values): string
+    public function getPrimaryKey(): string
     {
-        $columns = implode(', ', array_keys($values));
-        $bindParams = "=:" . implode(', ', array_keys($values));
-        return $columns . $bindParams;
-    }
-
-
-    /**
-     * Allows adding multiple where clauses by method chaining.
-     * @param $column
-     * @param $operator
-     * @param $value
-     * @return $this
-     */
-    public function where($column, $operator, $value): static
-    {
-        $whereClause = [
-            $column,
-            $operator
-        ];
-
-        if (is_numeric($value)) {
-            $whereClause[] = $value;
-        } else {
-            $whereClause[] = "'" . $value . "'";
-        }
-
-        $this->where[] = implode(' ', $whereClause);
-        return $this;
-    }
-
-    private function setWhereClause(): string
-    {
-        $whereClause[] = "WHERE";
-
-        $separator = ' ';
-        if (count($this->where) > 1) {
-            $separator = ' AND ';
-        }
-
-        $whereClause[] = implode($separator, $this->where);
-        return implode(' ', $whereClause);
-    }
-
-
-
-    /**
-     * @param array $columns
-     * @return string
-     */
-    public function columns(array $columns): string
-    {
-        return "(" . implode(', ', array_keys($columns)) . ")";
+        return $this->getTable() . "_" . $this->primaryKey;
     }
 
     /**
-     * @param array $values
-     * @return string
+     * @param string $primaryKey
      */
-    public function createQueryParams(array $values): string
+    public function setPrimaryKey(string $primaryKey): void
     {
-        return "(:" . implode(', :', array_keys($values)) . ")";
+        $this->primaryKey = $primaryKey;
     }
 
-
-    /**
-     * @param array $queryData
-     * @return string
-     */
-    public function buildQueryStatement(array $queryData): string
-    {
-        return implode(' ', $queryData);
-    }
-
-    /**
-     * @param string $query
-     * @param array $values
-     * @return bool|PDOStatement
-     */
-    public function query(string $query, array $values = []): bool|PDOStatement
-    {
-        if (!empty($values)) {
-            $stmt = $this->connection->prepare($query);
-            $stmt->execute($values);
-        } else {
-            $stmt = $this->connection->query($query);
-        }
-        return $stmt;
-    }
-
-
-//    /**
-//     * @param string $column
-//     * @return mixed
-//     */
-//    public function findBy(string $column): mixed
-//    {
-//        $stmt = "SELECT " . $column . " FROM " . $this->getTable();
-//        return $this->query($stmt)->fetchAll();
-//    }
-
-    public function getAll(): array
-    {
-        $stmt = "SELECT * FROM " . $this->getTable();
-        return $this->query($stmt)->fetchAll();
-    }
 
     /**
      * Get class name of
