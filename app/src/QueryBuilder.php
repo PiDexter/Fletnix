@@ -203,9 +203,6 @@ class QueryBuilder
      */
     public function query(array $values = []): PDOStatement|bool
     {
-
-        var_dump($this->getQueryAsString());
-        var_dump($values);
         if (!empty($values)) {
             $stmt = $this->connection->prepare($this->getQueryAsString());
             $stmt->execute($values);
