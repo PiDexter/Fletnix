@@ -13,7 +13,7 @@ class GenreController extends Controller
     // Toon alle genres
     public function index()
     {
-        $genre = (new Genre())->getAll();
+        $genre = (new Genre())->all();
         return $this->render('genre', $genre);
     }
 
