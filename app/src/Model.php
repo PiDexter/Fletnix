@@ -73,15 +73,29 @@ abstract class Model
     }
 
     /**
-     * @param int $id
+     * @param string $column
+     * @param string $value
      * @return mixed
      */
-    public function findByString(string $value): mixed
+    public function fetch(string $column, string $value): mixed
     {
         return $this->builder
-            ->where($this->getPrimaryKey(), '=', $value)
+            ->where($column, '=', $value)
             ->select((array)'*', $this->getTable())
             ->query()->fetch();
+    }
+
+    /**
+     * @param string $column
+     * @param string $value
+     * @return mixed
+     */
+    public function exists(string $column, string $value): mixed
+    {
+        return $this->builder
+            ->where($column, '=', $value)
+            ->select((array)'*', $this->getTable())
+            ->query()->fetchColumn();
     }
 
     /**
