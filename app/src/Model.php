@@ -97,11 +97,11 @@ abstract class Model
     /**
      * @return array
      */
-    public function allWith(string $table, array $values): array
+    public function allWith(string $table, array $joinColumns): array
     {
         return $this->builder
             ->select(['*'], $this->getTable())
-            ->join($table, $values)
+            ->join($table, $joinColumns)
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 
