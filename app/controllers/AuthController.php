@@ -26,6 +26,8 @@ class AuthController extends Controller
                 Application::$app->session->set('user',$user->fetch('email', $request['email'])['password']);
                 Application::$app->response->redirect('/');
             }
+        } else {
+            Application::$app->response->redirect('/login');
         }
     }
 
