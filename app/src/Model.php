@@ -73,15 +73,29 @@ abstract class Model
     }
 
     /**
-     * @param int $id
+     * @param string $column
+     * @param string $value
      * @return mixed
      */
-    public function findByString(string $value): mixed
+    public function fetch(string $column, string $value): mixed
     {
         return $this->builder
-            ->where($this->getPrimaryKey(), '=', $value)
+            ->where($column, '=', $value)
             ->select((array)'*', $this->getTable())
             ->query()->fetch();
+    }
+
+    /**
+     * @param string $column
+     * @param string $value
+     * @return mixed
+     */
+    public function exists(string $column, string $value): mixed
+    {
+        return $this->builder
+            ->where($column, '=', $value)
+            ->select((array)'*', $this->getTable())
+            ->query()->fetchColumn();
     }
 
     /**
@@ -97,11 +111,11 @@ abstract class Model
     /**
      * @return array
      */
-    public function allWith(string $table, array $values): array
+    public function allWith(string $table, array $joinColumns): array
     {
         return $this->builder
             ->select(['*'], $this->getTable())
-            ->join($table, $values)
+            ->join($table, $joinColumns)
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 

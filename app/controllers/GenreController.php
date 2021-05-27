@@ -20,12 +20,13 @@ class GenreController extends Controller
     // Toon van een bepaald genre de bijhorende movies
     public function show($name)
     {
-        $genreMovies = (new Genre())->getMovies();
+        $genreMovies = (new Genre())->getMoviesByGenre($name);
 
         // Als genre niet gevonden kan worden
         if (!$genreMovies) {
             return $this->render('404');
         }
+
 
 
         return $this->render('genre_single', $genreMovies);
