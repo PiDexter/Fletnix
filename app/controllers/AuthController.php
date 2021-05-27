@@ -21,10 +21,14 @@ class AuthController extends Controller
 
         $user = new User();
 
-        if(!empty($request) && $user->exists('email', $request['email'])) {
-            if(password_verify($request['password'], $user->fetch('email', $request['email'])['password'])) {
-                Application::$app->session->set('user',$user->fetch('email', $request['email'])['password']);
-                Application::$app->response->redirect('/');
+        if(!empty($request)) {
+            if ($user->exists('email', $request['email'])) {
+                if(password_verify($request['password'], $user->fetch('email', $request['email'])['password'])) {
+                    Application::$app->session->set('user',$user->fetch('email', $request['email'])['password']);
+                    Application::$app->response->redirect('/');
+                }
+            } else {
+                Application::$app->response->redirect('/login');
             }
         } else {
             Application::$app->response->redirect('/login');
