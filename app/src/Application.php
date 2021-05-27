@@ -41,7 +41,13 @@ class Application
 
     // Resolves elke nieuwe request
     public function run() {
-        echo $this->router->resolve();
+
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $exception) {
+            echo $exception;
+        }
+
     }
 
 }
