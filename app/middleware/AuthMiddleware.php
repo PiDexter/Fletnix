@@ -15,11 +15,8 @@ class AuthMiddleware extends Middleware
      */
     public function handle()
     {
-
         if (Application::$app->session->get('user')) {
-            http_response_code(403);
             throw new ForbiddenException();
         }
-
     }
 }
