@@ -19,11 +19,6 @@ class Router
         $this->response = $response;
     }
 
-    public function addRoute(Route $route)
-    {
-        $this->routes[] = $route;
-    }
-
     /**
      * GET
      * @param $path
@@ -104,6 +99,9 @@ class Router
             // Instantieert een specifieke controller instantie
             Application::$app->controller = new $callback[0]();
             $callback[0] = Application::$app->controller;
+            foreach ($callback[0]->getMiddleware() as $middleware) {
+                $middleware->handle();
+            }
         }
 
 
