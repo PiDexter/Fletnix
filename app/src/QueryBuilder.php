@@ -102,9 +102,6 @@ class QueryBuilder
      */
     public function update(string $table, array $values = []): static
     {
-
-        var_dump($table);
-        var_dump($values);
         $query = [
             "UPDATE",
             $table,
