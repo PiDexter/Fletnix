@@ -45,7 +45,7 @@ class Application
         try {
             echo $this->router->resolve();
         } catch (\Exception $exception) {
-            echo $exception;
+            echo $this->router->view('error', [$exception]);
         }
 
     }
