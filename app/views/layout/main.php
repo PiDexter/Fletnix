@@ -34,6 +34,11 @@
                     </a>
                 </div>
             </div>
+            <nav class="menu-horizontal">
+                <ul>
+                    <li><a href="/genre">Genres</a></li>
+                </ul>
+            </nav>
 
             <div class="content-right">
                 <?php if(!isset($_SESSION['user'])) : ?>
@@ -43,21 +48,13 @@
                 <?php endif; ?>
             </div>
 
-            <nav class="menu-horizontal">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
     <aside id="sidebar">
         <nav class="menu-vertical">
             <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="/genre">Genres</a>
         </nav>
     </aside>
 
