@@ -31,7 +31,7 @@
         <div class="row" id="loginSignup">
             <div class="column content-left">
                 <p>Nog geen lid?
-                    <a href="#">Registreer je nu</a>
+                    <a href="/register">Registreer je nu</a>
                 </p>
             </div>
         </div>
