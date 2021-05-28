@@ -33,7 +33,6 @@ $app->router->post('/register', [RegisterController::class, 'create']);
 
 $app->router->get('/profile', [ProfileController::class, 'index']);
 $app->router->post('/profile', [ProfileController::class, 'updateDetails']);
-$app->router->post('/profile', [ProfileController::class, 'updatePassword']);
 
 
 $app->router->get('/movie', [MovieController::class, 'index']);
