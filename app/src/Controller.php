@@ -4,6 +4,8 @@
 namespace app\src;
 
 
+use app\middleware\Middleware;
+
 abstract class Controller
 {
     public array $middleware = [];
@@ -14,11 +16,11 @@ abstract class Controller
     }
 
     /**
-     * @param array $middleware
+     * @param Middleware $middleware
      */
-    public function setMiddleware(array $middleware): void
+    public function setMiddleware(Middleware $middleware): void
     {
-        $this->middleware = $middleware;
+        $this->middleware[] = $middleware;
     }
 
     /**
