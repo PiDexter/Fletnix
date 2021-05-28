@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+use app\controllers\auth\ProfileController;
 use app\controllers\auth\ProfileEditController;
 use app\controllers\auth\PasswordController;
 use app\controllers\AuthController;
 use app\controllers\GenreController;
 use app\controllers\MovieController;
-use app\controllers\ProfileController;
 use app\controllers\RegisterController;
 use app\src\Application;
 use app\controllers\HomeController;
@@ -38,7 +38,6 @@ $app->router->post('/register', [RegisterController::class, 'create']);
  * Protected by AuthMiddleware
  */
 $app->router->get('/profile', [ProfileController::class, 'index']);
-$app->router->post('/profile', [ProfileController::class, 'updateDetails']);
 
 $app->router->get('/profile/change-password', [PasswordController::class, 'index']);
 $app->router->post('/profile/change-password', [PasswordController::class, 'update']);
