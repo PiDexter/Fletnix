@@ -11,11 +11,12 @@
         <label for="tab-1" class="tab-label">Gegevens</label>
         <div class="tab">
 
+
             <form action="" method="post">
                 <div class="row">
                     <div class="column">
                         <div class="input-block fullwidth">
-                            <input type="text" class="input-textField" name="name" placeholder="Voornaam" value="<?php echo $data['first_name'] ?? false ?>" required>
+                            <input type="text" class="input-textField" name="name" placeholder="Voornaam" value="{{first_name}}" required>
                             <label for="name" class="input-label">Voornaam</label>
                         </div>
                     </div>
@@ -24,7 +25,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="input-block fullwidth">
-                            <input type="text" class="input-textField" name="lastName" placeholder="Achternaam" value="<?php echo $data['last_name'] ?? false ?>" required>
+                            <input type="text" class="input-textField" name="lastName" placeholder="Achternaam" value="{{last_name}}" required>
                             <label for="lastName" class="input-label">Achternaam</label>
                         </div>
                     </div>
@@ -40,7 +41,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="input-block fullwidth">
-                            <input type="date" class="input-textField" name="dateOfBirth" placeholder="Geboortedatum" value="<?php echo $data['date_of_birth'] ?? false ?>" required>
+                            <input type="date" class="input-textField" name="dateOfBirth" placeholder="Geboortedatum" value="{{date_of_birth}}" required>
                             <label for="dateOfBirth" class="input-label">Geboortedatum</label>
                         </div>
                     </div>
@@ -49,7 +50,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="input-block fullwidth">
-                            <input type="email" class="input-textField" name="email" placeholder="E-mail" value="<?php echo $data['email'] ?? false ?>" required>
+                            <input type="email" class="input-textField" name="email" placeholder="E-mail" value="{{email}}" required>
                             <label for="email" class="input-label">E-mail</label>
                         </div>
                     </div>
