@@ -28,7 +28,11 @@ class ProfileEditController extends Controller
         $formData = $request->getBody();
 
         $data = [
-            'first_name' => $formData['name']
+            'email' => $formData['email'],
+            'first_name' => $formData['name'],
+            'last_name' => $formData['lastName'],
+            'country' => $formData['country'],
+            'date_of_birth' => $formData['dateOfBirth'],
         ];
         $user = (new User)->findByID(Application::$app->session->get('user'));
         (new User)->update($user['user_id'], $data);
