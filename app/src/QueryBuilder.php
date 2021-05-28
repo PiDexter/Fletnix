@@ -189,10 +189,11 @@ class QueryBuilder
      */
     private function setParams(array $values): string
     {
-        $columns = implode(', ', array_keys($values));
-        $bindParams = "=:" . implode(', ', array_keys($values));
-
-        return $columns . $bindParams;
+        $stmt = [];
+        foreach ($values as $key => $value) {
+            $stmt[] = $key . ' = :' . $key;
+        }
+        return implode(', ', array_values($stmt));
     }
 
 
