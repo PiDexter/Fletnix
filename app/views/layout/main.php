@@ -39,7 +39,7 @@
                 <?php if(!isset($_SESSION['user'])) : ?>
                 <a href="/login" class="btn btn-primary">Inloggen</a>
                     <?php else : ?>
-                    <a href="/logout" class="btn btn-primary">Uitloggen</a>
+                    <a href="/profile" class="btn btn-primary"><?php echo $_SESSION['user_name'] ?></a>
                 <?php endif; ?>
             </div>
 
