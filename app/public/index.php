@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\controllers\auth\PasswordController;
 use app\controllers\AuthController;
 use app\controllers\GenreController;
 use app\controllers\MovieController;
@@ -31,8 +32,16 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 $app->router->get('/register', [RegisterController::class, 'index']);
 $app->router->post('/register', [RegisterController::class, 'create']);
 
+/*
+ * AUTH ROUTES
+ * Protected by AuthMiddleware
+ */
 $app->router->get('/profile', [ProfileController::class, 'index']);
 $app->router->post('/profile', [ProfileController::class, 'updateDetails']);
+
+$app->router->get('/profile/edit-password', [PasswordController::class, 'index']);
+$app->router->post('/profile/edit-password', [PasswordController::class, 'update']);
+
 
 
 $app->router->get('/movie', [MovieController::class, 'index']);
