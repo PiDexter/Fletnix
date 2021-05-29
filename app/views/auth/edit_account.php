@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="number" class="input-textField" name="bankAccount" placeholder="Rekeningnummer" required>
+                        <input type="number" class="input-textField" name="bankAccount" placeholder="Rekeningnummer" value="{{bank_number}}" required>
                         <label for="bankAccount" class="input-label">Rekeningnummer</label>
                     </div>
                 </div>

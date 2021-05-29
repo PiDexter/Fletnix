@@ -26,6 +26,7 @@ class RegisterController extends Controller
             'last_name' => $formData['lastName'],
             'country' => $formData['country'],
             'date_of_birth' => $formData['dateOfBirth'],
+            'bank_number' => $formData['bankAccount'],
         ];
 
         (new User())->create($userData);
