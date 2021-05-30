@@ -19,6 +19,7 @@ class PasswordController extends Controller
 
     public function index(): bool|array|string
     {
+        var_dump($_SESSION);
         return $this->render('auth/edit_password');
     }
 
@@ -47,7 +48,7 @@ class PasswordController extends Controller
         } else {
             FlashMessage::error('Onjuist wachtwoord.');
         }
-        return $this->render('auth/edit_password');
+        Application::$app->response->redirect('/profile/change-password');
     }
 
 }
