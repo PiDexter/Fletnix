@@ -630,6 +630,12 @@ h1.page-title {
     border-radius: 4px;
 }
 
+.alert {
+    background-color: var(--red);
+    padding: 25px;
+    color: white;
+}
+
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
 
