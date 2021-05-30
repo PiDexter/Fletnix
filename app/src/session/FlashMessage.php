@@ -60,14 +60,14 @@ class FlashMessage
         }
 
         $messages = $_SESSION['message'][$type];
-        unset($_SESSION['message'][$type]);
+        unset($_SESSION['message']);
 
         return implode('<br/>', $messages);
     }
 
-    public static function hasFlashMessage($type): bool
+    public static function hasFlashMessage(): bool
     {
-        return isset($_SESSION['message'][$type]);
+        return isset($_SESSION['message']);
     }
 
     public static function isTypeOf($type): bool
