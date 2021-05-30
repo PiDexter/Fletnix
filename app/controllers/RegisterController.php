@@ -19,6 +19,8 @@ class RegisterController extends Controller
     {
         $formData = $request->getBody();
 
+        // TODO: verify confirm password is same as password
+
         $userData = [
             'email' => $formData['email'],
             'password' => password_hash($formData['password'], PASSWORD_DEFAULT),
