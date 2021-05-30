@@ -1,7 +1,12 @@
 <?php
 ?>
+
 <section id="edit-password">
+
     <div class="container">
+
+            @displayFlashMessage
+
         <h1>Wachtwoord wijzigen</h1>
         <form action="" method="post">
             <div class="row">
