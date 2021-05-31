@@ -58,7 +58,7 @@ $app->router->get('/genre/:id', [GenreController::class, 'show']);
 
 $app->router->get('/search', [SearchFilterController::class, 'index']);
 $app->router->get('/results', [SearchFilterController::class, 'result']);
-$app->router->post('/search', [SearchFilterController::class, 'filter']);
+$app->router->post('/results', [SearchFilterController::class, 'filter']);
 
 
 
