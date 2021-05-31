@@ -24,7 +24,8 @@ class AuthController extends Controller
         if(!empty($request)) {
             if ($user->exists('email', $request['email'])) {
                 if(password_verify($request['password'], $user->fetch('email', $request['email'])['password'])) {
-                    Application::$app->session->set('user',$user->fetch('email', $request['email'])['password']);
+                    Application::$app->session->set('user',$user->fetch('email', $request['email'])['user_id']);
+                    Application::$app->session->set('user_name', $user->fetch('email', $request['email'])['first_name']);
                     Application::$app->response->redirect('/');
                 }
             }

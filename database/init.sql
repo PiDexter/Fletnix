@@ -6,11 +6,12 @@ CREATE TABLE IF NOT EXISTS user
 (
     user_id int auto_increment,
     email varchar(255) NOT NULL,
-    password CHAR(60) NOT NULL,
+    password CHAR(255) NOT NULL,
     first_name varchar(255) NULL,
     last_name varchar(255) NULL,
     country varchar(255) NULL,
     date_of_birth date NOT NULL,
+    bank_number varchar(255) NOT NULL,
     created_at timestamp default CURRENT_TIMESTAMP NULL,
     updated_at timestamp default CURRENT_TIMESTAMP NULL,
 

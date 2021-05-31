@@ -6,16 +6,17 @@ namespace app\middleware;
 
 use app\src\Application;
 use app\src\ForbiddenException;
+use Exception;
 
 class AuthMiddleware extends Middleware
 {
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function handle()
+    public function handle(): void
     {
-        if (Application::$app->session->get('user')) {
+        if (!Application::$app->session->get('user')) {
             throw new ForbiddenException();
         }
     }

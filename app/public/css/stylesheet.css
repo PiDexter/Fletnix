@@ -624,6 +624,17 @@ h1.page-title {
     font-weight: bold;
 }
 
+#profile-list .card {
+    font-size: unset;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+.alert {
+    background-color: var(--red);
+    padding: 25px;
+    color: white;
+}
 
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {

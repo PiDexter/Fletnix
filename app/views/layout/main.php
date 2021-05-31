@@ -34,30 +34,27 @@
                     </a>
                 </div>
             </div>
+            <nav class="menu-horizontal">
+                <ul>
+                    <li><a href="/genre">Genres</a></li>
+                </ul>
+            </nav>
 
             <div class="content-right">
                 <?php if(!isset($_SESSION['user'])) : ?>
                 <a href="/login" class="btn btn-primary">Inloggen</a>
                     <?php else : ?>
-                    <a href="/logout" class="btn btn-primary">Uitloggen</a>
+                    <a href="/profile" class="btn btn-primary"><?php echo $_SESSION['user_name'] ?></a>
                 <?php endif; ?>
             </div>
 
-            <nav class="menu-horizontal">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
     <aside id="sidebar">
         <nav class="menu-vertical">
             <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="/genre">Genres</a>
         </nav>
     </aside>
 
