@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\Movie;
 use app\src\Application;
 use app\src\Controller;
 use app\src\QueryBuilder;
@@ -23,9 +24,11 @@ class SearchFilterController extends Controller
         $query = [];
 
         var_dump($searchData);
+        $test = $builder->select(['*'], 'movie')->where('title', 'LIKE', '%film%')->query()->fetchAll();
+
+        var_dump($test);
 
         if (!empty($searchData['title'])) {
-
         }
 
         if (!empty($searchData['genre'])) {
