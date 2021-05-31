@@ -136,7 +136,7 @@ class QueryBuilder
             "ON",
             $this->onColumns($values)
         ];
-        $this->join = $join;
+        $this->join[] = implode(' ', $join);
         return $this;
     }
 
@@ -149,9 +149,13 @@ class QueryBuilder
         return implode(', ', array_values($stmt));
     }
 
-    private function setJoinColumns(array $joins)
+    /**
+     * @return string
+     */
+    private function setJoins(): string
     {
-        return implode(' ', $joins);
+        $joinClause[] = implode(' ', $this->join);
+        return implode(' ', $joinClause);
     }
 
     /**
@@ -203,7 +207,7 @@ class QueryBuilder
     private function getQueryAsString(): string
     {
         if (!empty($this->join)) {
-            $this->query = array_merge($this->query, $this->join);
+            $this->query[] = $this->setJoins();
         }
 
         if (!empty($this->where)) {
