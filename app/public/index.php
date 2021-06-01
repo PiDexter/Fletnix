@@ -49,7 +49,7 @@ $app->router->post('/profile/edit', [ProfileEditController::class, 'update']);
 
 
 
-$app->router->get('/movie', [MovieController::class, 'index']);
+$app->router->get('/movies', [MovieController::class, 'index']);
 $app->router->get('/movie/:id', [MovieController::class, 'show']);
 
 $app->router->get('/genre', [GenreController::class, 'index']);
