@@ -110,6 +110,21 @@ abstract class Model
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    /**
+     * Returns results with pagination
+     * @param $page
+     * @return array
+     */
+    public function findAll($page): array
+    {
+        return $this->builder
+            ->select(['*'], $this->getTable())
+            ->orderBy(['movie_id'], 'ASC')
+            ->limit(($page-1) * $page, $this->perPage)
+            ->query()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * @return array
      */
@@ -152,11 +167,6 @@ abstract class Model
     public function getTable(): string
     {
         return strtolower($this->getClassName());
-    }
-
-    public function getCount()
-    {
-        return count($this->all());
     }
 
 
