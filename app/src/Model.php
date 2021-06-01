@@ -14,6 +14,8 @@ abstract class Model
     protected array $fillableColumns = [];
     protected string $primaryKey = 'id';
 
+    protected int $perPage = 15;
+
 
     public function __construct()
     {
@@ -150,6 +152,11 @@ abstract class Model
     public function getTable(): string
     {
         return strtolower($this->getClassName());
+    }
+
+    public function getCount()
+    {
+        return count($this->all());
     }
 
 
