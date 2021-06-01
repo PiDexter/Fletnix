@@ -10,15 +10,11 @@ use app\src\Controller;
 class MovieController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $page = $_GET['page'] ?? 1;
-
-        $data = (new Movie)->all();
-
-//        $data = (new Movie)->getAll($page);
-
-//        var_dump($movie->getCount());
+        // When $_GET['page'] is not set, show page number 1
+        $page = $request->getBody()['page'] ?? 1;
+        $data = (new Movie)->findAll($page);
 
         return $this->render('movies_overview', $data);
     }
