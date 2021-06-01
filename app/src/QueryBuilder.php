@@ -11,9 +11,11 @@ class QueryBuilder
 {
     protected PDO $connection;
 
-    protected array $query = [];
-    protected array $where = [];
-    protected array $join = [];
+    private array $query = [];
+    private array $where = [];
+    private array $join = [];
+    private array $orderBy = [];
+    private array $limit = [];
 
     public function __construct()
     {
@@ -158,6 +160,48 @@ class QueryBuilder
         return implode(' ', $joinClause);
     }
 
+
+    public function orderBy(array $columns, string $sortOrder): static
+    {
+        $orderBy = [
+            "ORDER BY",
+            $this->parseColumns($columns),
+            $sortOrder
+        ];
+        $this->orderBy[] = implode(' ', $orderBy);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    private function setOrderBy(): string
+    {
+        $orderByClause[] = implode(' ', $this->orderBy);
+        return implode(' ', $orderByClause);
+    }
+
+    /**
+     * @param int $offset
+     * @param int $rowcount
+     * @return $this
+     */
+    public function limit(int $offset, int $rowcount): static
+    {
+        $limit = [
+            "LIMIT",
+            $offset . ",",
+            $rowcount
+        ];
+        $this->limit = $limit;
+        return $this;
+    }
+
+    private function setLimit()
+    {
+        return implode(' ', $this->limit);
+    }
+
     /**
      * Return an string of columns separated with a comma
      * @param array $columns
@@ -200,7 +244,6 @@ class QueryBuilder
         return implode(', ', array_values($stmt));
     }
 
-
     /**
      * @return string
      */
@@ -212,6 +255,14 @@ class QueryBuilder
 
         if (!empty($this->where)) {
             $this->query[] = $this->setWhereClause();
+        }
+
+        if (!empty($this->orderBy)) {
+            $this->query[] = $this->setOrderBy();
+        }
+
+        if (!empty($this->limit)) {
+            $this->query[] = $this->setLimit();
         }
 
         return implode(' ', $this->query);
@@ -229,6 +280,7 @@ class QueryBuilder
         } else {
             $stmt = $this->connection->query($this->getQueryAsString());
         }
+        var_dump($stmt);
 
         return $stmt;
     }
