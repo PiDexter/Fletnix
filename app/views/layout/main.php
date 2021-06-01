@@ -37,6 +37,8 @@
             <nav class="menu-horizontal">
                 <ul>
                     <li><a href="/genre">Genres</a></li>
+                    <li><a href="/movies">Films</a></li>
+                    <li><a href="/search">Zoeken</a></li>
                 </ul>
             </nav>
 
@@ -54,7 +56,9 @@
     <aside id="sidebar">
         <nav class="menu-vertical">
             <a href="#">Home</a>
+            <a href="/movies">Films</a>
             <a href="/genre">Genres</a>
+            <a href="/search">Uitgebreid zoeken</a>
         </nav>
     </aside>
 
