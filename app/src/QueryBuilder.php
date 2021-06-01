@@ -316,4 +316,17 @@ class QueryBuilder
         return $stmt;
     }
 
+    public function count($table)
+    {
+        $query = [
+            "SELECT",
+            "COUNT(*)",
+            "FROM",
+            $table
+        ];
+
+        $this->query = $query;
+        return $this;
+    }
+
 }
