@@ -19,6 +19,7 @@ class View
         // Vervang alle {{var}} & {{key->value}} tags in de view
         $view = $this->replaceViewTags($view, $data);
         $view = $this->renderFlashMessage($view, $data);
+        $view = $this->renderPagination($view, $data);
 
         // Vervang de string "{{content}}" met de inhoud van de view file in de layout
         return str_replace("{{content}}", $view, $layout);
@@ -66,6 +67,13 @@ class View
         }
         return str_replace("@displayFlashMessage", (string) $flashView, $view);
 
+    }
+
+    // In een view kan een flash message getoond worden via "@displayError"
+    protected function renderPagination($view, $data): array|string
+    {
+        $paginationView = $this->renderOnlyView('pagination', $data);
+        return str_replace("@pagination", (string) $paginationView, $view);
     }
 
     protected function layoutContent(): bool|string
