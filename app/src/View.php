@@ -69,7 +69,6 @@ class View
 
     }
 
-    // In een view kan een flash message getoond worden via "@displayError"
     protected function renderPagination($view, $data): array|string
     {
         $paginationView = $this->renderOnlyView('pagination', $data);
