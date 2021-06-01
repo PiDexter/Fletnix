@@ -12,6 +12,15 @@ class MovieController extends Controller
 
     public function index()
     {
+        $page = $_GET['page'] ?? 1;
+
+        $data = (new Movie)->all();
+
+//        $data = (new Movie)->getAll($page);
+
+//        var_dump($movie->getCount());
+
+        return $this->render('movies_overview', $data);
     }
 
     public function show(int $id)
