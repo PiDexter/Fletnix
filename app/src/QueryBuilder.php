@@ -15,6 +15,7 @@ class QueryBuilder
     private array $where = [];
     private array $join = [];
     private array $orderBy = [];
+    private array $groupBy = [];
     private array $limit = [];
 
     public function __construct()
@@ -160,7 +161,35 @@ class QueryBuilder
         return implode(' ', $joinClause);
     }
 
+    /**
+     * @param array $columns
+     * @param string $sortOrder
+     * @return $this
+     */
+    public function groupBy(array $columns): static
+    {
+        $groupBy = [
+            "GROUP BY",
+            $this->parseColumns($columns),
+        ];
+        $this->groupBy[] = implode(' ', $groupBy);
+        return $this;
+    }
 
+    /**
+     * @return string
+     */
+    private function setGroupBy(): string
+    {
+        $groupByClause[] = implode(' ', $this->groupBy);
+        return implode(' ', $groupByClause);
+    }
+
+    /**
+     * @param array $columns
+     * @param string $sortOrder
+     * @return $this
+     */
     public function orderBy(array $columns, string $sortOrder): static
     {
         $orderBy = [
@@ -257,6 +286,10 @@ class QueryBuilder
             $this->query[] = $this->setWhereClause();
         }
 
+        if (!empty($this->groupBy)) {
+            $this->query[] = $this->setGroupBy();
+        }
+
         if (!empty($this->orderBy)) {
             $this->query[] = $this->setOrderBy();
         }
@@ -280,15 +313,7 @@ class QueryBuilder
         } else {
             $stmt = $this->connection->query($this->getQueryAsString());
         }
-        var_dump($stmt);
-
         return $stmt;
     }
-
-
-
-
-
-
 
 }
