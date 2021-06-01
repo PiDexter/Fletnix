@@ -636,6 +636,12 @@ h1.page-title {
     color: white;
 }
 
+.page-count {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+}
+
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
 
