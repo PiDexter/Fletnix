@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use app\models\Movie;
 use app\src\Controller;
+use app\src\Request;
 
 class MovieController extends Controller
 {
