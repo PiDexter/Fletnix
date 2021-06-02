@@ -211,6 +211,11 @@ BUTTON
     border: 1px solid #fff;
 }
 
+.btn-bordered {
+    color: var(--white);
+    border: 1px solid #999;
+}
+
 
 /*
 INPUT
@@ -612,7 +617,7 @@ h1.page-title {
 
 .card-grid {
     display: grid;
-    grid-auto-rows: 75px;
+    grid-auto-rows: auto;
     gap: 10px;
     margin-top: 25px;
     margin-bottom: 25px;
@@ -633,8 +638,23 @@ h1.page-title {
     background-color: #ffffff05;
     justify-content: center;
     text-align: center;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: bold;
+}
+
+.card-grid > .card > .card-body {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#movielist .card-grid > .card {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#profile-list .card-grid {
+    grid-auto-rows: 75px;
 }
 
 #profile-list .card {
@@ -653,6 +673,22 @@ h1.page-title {
     display: flex;
     align-items: center;
     color: var(--white);
+}
+
+
+.username {
+    display: flex;
+    color: var(--white);
+    font-weight: 700;
+    column-gap: 8px;
+}
+
+.pre-text {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+    font-weight: 300;
+    color: gainsboro;
 }
 
 /* Non-mobile styles, 750px breakpoint */
@@ -678,6 +714,11 @@ h1.page-title {
 
     .menu-horizontal a:hover {
         background: var(--light-gray);
+    }
+
+
+    .slider-row {
+        width: unset;
     }
 
 }
