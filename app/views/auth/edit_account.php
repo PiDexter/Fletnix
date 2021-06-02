@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <select name="country" class="">
+                        <select name="country">
                             <option value="Nederland">Nederland</option>
                             <option value="België">België</option>
                         </select>

@@ -42,11 +42,17 @@
                 </ul>
             </nav>
 
-            <div class="content-right">
+            <div class="column content-right">
                 <?php if(!isset($_SESSION['user'])) : ?>
                 <a href="/login" class="btn btn-primary">Inloggen</a>
                     <?php else : ?>
-                    <a href="/profile" class="btn btn-primary"><?php echo $_SESSION['user_name'] ?></a>
+                    <a href="/profile" class="username">
+                        <div class="username-text">
+                            <span class="pre-text">Ingelogd als</span>
+                            <span><?php echo $_SESSION['user_name'] ?></span>
+                        </div>
+                        <img src="https://occ-0-769-2773.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABTzY61ga4kldI3mSW7ub2WDxIrxAT2xwxal1ZkqQgk8huHLvOtsT9KDmkiBSEoLbDTYBGbduzS3O6yGw2iLX5ro.png?r=a58" alt="">
+                    </a>
                 <?php endif; ?>
             </div>
 

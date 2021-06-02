@@ -18,8 +18,12 @@
             <!-- Card 1 -->
             <a href="/movie/396" class="card" id="popuptest">
                 <img src="images/movie1.jpg" alt="">
+                <div class="card-body">
+                    <span class="pre-text">Ecommerce</span>
+                    <h2>FreshlyMind</h2>
+                </div>
             </a>
-
+            
             <!-- Card 2 -->
             <a href="#popup1" class="card" id="popuptest2">
                 <img src="images/movie2.jpg" alt="">

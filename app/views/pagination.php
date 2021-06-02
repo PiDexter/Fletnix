@@ -6,7 +6,7 @@ $page = $_GET['page'] ?? 1;
 <div class="row">
     <div class="column content-left">
         <?php if (!empty($data) && $page > 1) : ?>
-            <a href='<?php echo "?page=" . $page - 1; ?>' class='btn btn-secondary'>VORIGE</a>
+            <a href='<?php echo "?page=" . $page - 1; ?>' class='btn btn-bordered'>VORIGE</a>
         <?php endif; ?>
     </div>
 
