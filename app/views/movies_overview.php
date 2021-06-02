@@ -8,7 +8,10 @@
                 <span class="page-count">Pagina <?php echo $_GET['page'] ?? 1; ?></span>
             </div>
             <div class="column content-right">
-                <a href="/search" class="btn btn-bordered">Zoeken</a>
+                <a href="/search" class="btn btn-bordered">
+                    <img src="images/search-icon.svg" width="16" height="16" alt="search icon" class="icon">
+                    Zoeken
+                </a>
             </div>
         </div>
         <div class="card-grid grid-col-2">
