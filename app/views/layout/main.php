@@ -44,7 +44,7 @@
                 <?php if(!isset($_SESSION['user'])) : ?>
                 <a href="/login" class="btn btn-primary">Inloggen</a>
                     <?php else : ?>
-                    <a href="/profile" class="username">
+                    <a href="/profile" class="username vertical-center">
                         <div class="username-text">
                             <span class="pre-text">Ingelogd als</span>
                             <span><?php echo $_SESSION['user_name'] ?></span>
