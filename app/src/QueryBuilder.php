@@ -63,21 +63,45 @@ class QueryBuilder
         return $this;
     }
 
+    public function orWhere($column, $operator, $value)
+    {
+        $whereClause = [
+            "OR",
+            $column,
+            $operator
+        ];
+
+        if (is_numeric($value)) {
+            $whereClause[] = $value;
+        } else {
+            $whereClause[] = "'" . $value . "'";
+        }
+
+        $this->where[] = implode(' ', $whereClause);
+        return $this;
+    }
+
     /**
      * @return string
      */
     private function setWhereClause(): string
     {
         $whereClause[] = "WHERE";
-
-        $separator = ' ';
         if (count($this->where) > 1) {
-            $separator = ' AND ';
-        }
 
-        $whereClause[] = implode($separator, $this->where);
+            // Loop through all where elements
+            foreach ($this->where as $index => $value) {
+
+                // If index is larger than zero and does not start with "OR", append "AND" before element
+                if ($index > 0 && !str_starts_with($value, 'OR')) {
+                    $this->where[$index] = 'AND ' . $value;
+                }
+            }
+        }
+        $whereClause[] = implode(' ', $this->where);
         return implode(' ', $whereClause);
     }
+
 
     /**
      * @param string $table
