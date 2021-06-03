@@ -92,6 +92,18 @@ abstract class Model
      * @param string $value
      * @return mixed
      */
+    public function fetchColumn(string $column): mixed
+    {
+        return $this->builder
+            ->select([$column], $this->getTable())
+            ->query()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param string $column
+     * @param string $value
+     * @return mixed
+     */
     public function exists(string $column, string $value): mixed
     {
         return $this->builder
