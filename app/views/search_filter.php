@@ -1,5 +1,5 @@
 <?php
-
+/* @var $data array */
 ?>
 
 <section id="searchFilter">
@@ -15,10 +15,21 @@
                 </div>
             </div>
 
-            <select name="genre" class="" >
-                <option value="Action" selected>Opties</option>
-            </select>
-            <label for="genre">Genre</label>
+            <div class="row">
+                <div class="column">
+                    <div class="input-block fullwidth">
+                        <select name="genre" class="input-select" aria-label="Genre selecteren">
+                            <option value="" selected>Alle genres</option>
+                            <?php foreach($data as $genre) : ?>
+                                <option aria-label="<?php echo $genre['genre_name']; ?>" value="<?php echo $genre['genre_name']; ?>"><?php echo $genre['genre_name']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <label for="genre" class="input-label">Genre</label>
+                    </div>
+                </div>
+            </div>
+
+
 
             <div class="row">
                 <div class="column">
@@ -32,8 +43,8 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="text" name="firstName" class="" placeholder="Voornaam">
-                        <label for="firstName" class="input-label">Voornaam</label>
+                        <input type="text" name="director" class="" placeholder="Voornaam">
+                        <label for="director" class="input-label">Regisseur</label>
                     </div>
                 </div>
                 <div class="column">
