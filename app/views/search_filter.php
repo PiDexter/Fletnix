@@ -43,22 +43,11 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="text" name="director" class="" placeholder="Voornaam">
+                        <input type="text" name="director" class="" placeholder="Regisseur">
                         <label for="director" class="input-label">Regisseur</label>
                     </div>
                 </div>
-                <div class="column">
-                    <div class="input-block fullwidth">
-                        <input type="text" name="lastName" class="" placeholder="Achternaam">
-                        <label for="lastName" class="input-label">Achternaam</label>
-                    </div>
-                </div>
             </div>
-
-<!--            <select name="genre" class="">-->
-<!--                <option value="genre">Opties</option>-->
-<!--            </select>-->
-<!--            <label for="genre">Genre</label>-->
 
             <div class="row">
                 <div class="column">
