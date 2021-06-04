@@ -5,7 +5,7 @@ USE fletnix;
 CREATE TABLE IF NOT EXISTS user
 (
     user_id int auto_increment,
-    email varchar(255) NOT NULL,
+    email varchar(255) NOT NULL UNIQUE,
     password CHAR(255) NOT NULL,
     first_name varchar(255) NULL,
     last_name varchar(255) NULL,
