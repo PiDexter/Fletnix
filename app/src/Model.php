@@ -3,6 +3,7 @@
 namespace app\src;
 
 
+use Exception;
 use PDO;
 use ReflectionClass;
 
@@ -19,7 +20,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->builder = Application::$app->builder;
+        $this->builder = new QueryBuilder();
         $this->connection = Application::$app->db->pdo;
     }
 
@@ -30,9 +31,15 @@ abstract class Model
      */
     public function create(array $values = []): void
     {
-        $this->builder
-            ->insert($this->getTable(), $values)
-            ->query($values);
+        try {
+            $this->builder
+                ->insert($this->getTable(), $values)
+                ->query($values);
+        }
+        catch(Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
     }
 
 
@@ -89,10 +96,9 @@ abstract class Model
 
     /**
      * @param string $column
-     * @param string $value
-     * @return mixed
+     * @return array
      */
-    public function fetchColumn(string $column): mixed
+    public function fetchColumn(string $column): array
     {
         return $this->builder
             ->select([$column], $this->getTable())
@@ -104,11 +110,11 @@ abstract class Model
      * @param string $value
      * @return mixed
      */
-    public function exists(string $column, string $value): bool
+    public function exists(string $column, string $value)
     {
         return $this->builder
+            ->select([$column], $this->getTable())
             ->where($column, '=', $value)
-            ->select((array)'*', $this->getTable())
             ->query()->fetchColumn();
     }
 
