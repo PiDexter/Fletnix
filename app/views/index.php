@@ -1,10 +1,10 @@
 <?php ?>
 
 <section class="spotlight-grid">
-    <img src="https://www.vitalthrills.com/wp-content/uploads/2019/09/jokerheader.jpg" alt="" title="" class="spotlight-image">
+    <img src="/images/hero-image.jpg" alt="" title="" class="spotlight-image">
     <div class="spotlight-row">
-        <h2 class="spotlight-title">HELLO WORLD</h2>
-        <p>Said no one ever...</p>
+        <h2 class="spotlight-title">The Martian</h2>
+        <p>NEW SEASON</p>
         <div class="column content-left">
             <button class="btn btn-primary">Afspelen</button>
         </div>
