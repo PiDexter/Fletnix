@@ -21,6 +21,8 @@ class View
         $view = $this->renderFlashMessage($view, $data);
         $view = $this->renderPagination($view, $data);
 
+        $view = $this->removeEmptyTags($view);
+
         // Vervang de string "{{content}}" met de inhoud van de view file in de layout
         return str_replace("{{content}}", $view, $layout);
     }
@@ -36,6 +38,13 @@ class View
             }
         }
         return $view;
+    }
+
+
+    // Remove all {{string}} that have no value
+    private function removeEmptyTags($view): array|string|null
+    {
+        return preg_replace('/{{(\w+)}}/', '', $view);
     }
 
     // Proces een nested tag bijvoorbeeld: {{user->name}}
