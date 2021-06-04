@@ -5,7 +5,7 @@ USE fletnix;
 CREATE TABLE IF NOT EXISTS user
 (
     user_id int auto_increment,
-    email varchar(255) NOT NULL UNIQUE,
+    email varchar(255) NOT NULL,
     password CHAR(255) NOT NULL,
     first_name varchar(255) NULL,
     last_name varchar(255) NULL,
@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS user
     created_at timestamp default CURRENT_TIMESTAMP NULL,
     updated_at timestamp default CURRENT_TIMESTAMP NULL,
 
-    CONSTRAINT user_pk PRIMARY KEY (user_id)
+    CONSTRAINT user_pk PRIMARY KEY (user_id),
+    UNIQUE KEY unique_email (email)
 );
 
 CREATE TABLE IF NOT EXISTS movie
