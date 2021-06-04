@@ -47,7 +47,7 @@
                     <a href="/profile" class="username vertical-center">
                         <div class="username-text">
                             <span class="pre-text">Ingelogd als</span>
-                            <span><?php echo $_SESSION['user_name'] ?></span>
+                            <span><?php echo $_SESSION['name'] ?></span>
                         </div>
                         <img src="/images/user-icon.svg" width="34" height="34" alt="">
                     </a>
