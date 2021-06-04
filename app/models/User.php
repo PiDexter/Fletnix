@@ -18,4 +18,13 @@ class User extends Model
         'date_of_birth',
     ];
 
+
+    public function getByEmail($email)
+    {
+        return $this->builder
+            ->select(['user_id', 'email', 'first_name', 'password'], $this->getTable())
+            ->where('email', '=', $email)
+            ->query()->fetchObject();
+    }
+
 }
