@@ -14,6 +14,8 @@ abstract class Model
     protected array $fillableColumns = [];
     protected string $primaryKey = 'id';
 
+    protected int $perPage = 15;
+
 
     public function __construct()
     {
@@ -90,6 +92,18 @@ abstract class Model
      * @param string $value
      * @return mixed
      */
+    public function fetchColumn(string $column): mixed
+    {
+        return $this->builder
+            ->select([$column], $this->getTable())
+            ->query()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param string $column
+     * @param string $value
+     * @return mixed
+     */
     public function exists(string $column, string $value): mixed
     {
         return $this->builder
@@ -105,6 +119,21 @@ abstract class Model
     {
         return $this->builder
             ->select((array)'*', $this->getTable())
+            ->query()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    /**
+     * Returns results with pagination
+     * @param $page
+     * @return array
+     */
+    public function findAll($page): array
+    {
+        return $this->builder
+            ->select(['*'], $this->getTable())
+            ->orderBy(['movie_id'], 'ASC')
+            ->limit(($page-1) * $page, $this->perPage)
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 

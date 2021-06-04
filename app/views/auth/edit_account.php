@@ -23,12 +23,17 @@
                 </div>
             </div>
 
-            <select name="country" class="">
-                <option value="Nederland">Nederland</option>
-                <option value="België">België</option>
-            </select>
-            <label for="country">Land</label>
-
+            <div class="row">
+                <div class="column">
+                    <div class="input-block fullwidth">
+                        <select name="country">
+                            <option value="Nederland">Nederland</option>
+                            <option value="België">België</option>
+                        </select>
+                        <label for="country" class="input-label">Land</label>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="column">

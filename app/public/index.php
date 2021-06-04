@@ -9,6 +9,7 @@ use app\controllers\AuthController;
 use app\controllers\GenreController;
 use app\controllers\MovieController;
 use app\controllers\RegisterController;
+use app\controllers\SearchFilterController;
 use app\src\Application;
 use app\controllers\HomeController;
 
@@ -48,11 +49,16 @@ $app->router->post('/profile/edit', [ProfileEditController::class, 'update']);
 
 
 
-$app->router->get('/movie', [MovieController::class, 'index']);
+$app->router->get('/movies', [MovieController::class, 'index']);
 $app->router->get('/movie/:id', [MovieController::class, 'show']);
 
 $app->router->get('/genre', [GenreController::class, 'index']);
 $app->router->get('/genre/:id', [GenreController::class, 'show']);
+
+
+$app->router->get('/search', [SearchFilterController::class, 'index']);
+$app->router->get('/results', [SearchFilterController::class, 'result']);
+$app->router->post('/results', [SearchFilterController::class, 'filter']);
 
 
 

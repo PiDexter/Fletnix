@@ -6,12 +6,18 @@ namespace app\controllers;
 
 use app\models\Movie;
 use app\src\Controller;
+use app\src\Request;
 
 class MovieController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        // When $_GET['page'] is not set, show page number 1
+        $page = $request->getBody()['page'] ?? 1;
+        $data = (new Movie)->findAll($page);
+
+        return $this->render('movies_overview', $data);
     }
 
     public function show(int $id)

@@ -11,9 +11,12 @@ class QueryBuilder
 {
     protected PDO $connection;
 
-    protected array $query = [];
-    protected array $where = [];
-    protected array $join = [];
+    private array $query = [];
+    private array $where = [];
+    private array $join = [];
+    private array $orderBy = [];
+    private array $groupBy = [];
+    private array $limit = [];
 
     public function __construct()
     {
@@ -60,21 +63,45 @@ class QueryBuilder
         return $this;
     }
 
+    public function orWhere($column, $operator, $value)
+    {
+        $whereClause = [
+            "OR",
+            $column,
+            $operator
+        ];
+
+        if (is_numeric($value)) {
+            $whereClause[] = $value;
+        } else {
+            $whereClause[] = "'" . $value . "'";
+        }
+
+        $this->where[] = implode(' ', $whereClause);
+        return $this;
+    }
+
     /**
      * @return string
      */
     private function setWhereClause(): string
     {
         $whereClause[] = "WHERE";
-
-        $separator = ' ';
         if (count($this->where) > 1) {
-            $separator = ' AND ';
-        }
 
-        $whereClause[] = implode($separator, $this->where);
+            // Loop through all where elements
+            foreach ($this->where as $index => $value) {
+
+                // If index is larger than zero and does not start with "OR", append "AND" before element
+                if ($index > 0 && !str_starts_with($value, 'OR')) {
+                    $this->where[$index] = 'AND ' . $value;
+                }
+            }
+        }
+        $whereClause[] = implode(' ', $this->where);
         return implode(' ', $whereClause);
     }
+
 
     /**
      * @param string $table
@@ -136,7 +163,7 @@ class QueryBuilder
             "ON",
             $this->onColumns($values)
         ];
-        $this->join = $join;
+        $this->join[] = implode(' ', $join);
         return $this;
     }
 
@@ -149,9 +176,83 @@ class QueryBuilder
         return implode(', ', array_values($stmt));
     }
 
-    private function setJoinColumns(array $joins)
+    /**
+     * @return string
+     */
+    private function setJoins(): string
     {
-        return implode(' ', $joins);
+        $joinClause[] = implode(' ', $this->join);
+        return implode(' ', $joinClause);
+    }
+
+    /**
+     * @param array $columns
+     * @param string $sortOrder
+     * @return $this
+     */
+    public function groupBy(array $columns): static
+    {
+        $groupBy = [
+            "GROUP BY",
+            $this->parseColumns($columns),
+        ];
+        $this->groupBy[] = implode(' ', $groupBy);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    private function setGroupBy(): string
+    {
+        $groupByClause[] = implode(' ', $this->groupBy);
+        return implode(' ', $groupByClause);
+    }
+
+    /**
+     * @param array $columns
+     * @param string $sortOrder
+     * @return $this
+     */
+    public function orderBy(array $columns, string $sortOrder): static
+    {
+        $orderBy = [
+            "ORDER BY",
+            $this->parseColumns($columns),
+            $sortOrder
+        ];
+        $this->orderBy[] = implode(' ', $orderBy);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    private function setOrderBy(): string
+    {
+        $orderByClause[] = implode(' ', $this->orderBy);
+        return implode(' ', $orderByClause);
+    }
+
+    /**
+     * @param int $offset
+     * @param int $rowcount
+     * @return $this
+     */
+    public function limit(int $offset, int $rowcount): static
+    {
+        $limit = [
+            "LIMIT",
+            $offset . ",",
+            $rowcount
+        ];
+        $this->limit = $limit;
+        return $this;
+    }
+
+    private function setLimit()
+    {
+        return implode(' ', $this->limit);
     }
 
     /**
@@ -196,18 +297,29 @@ class QueryBuilder
         return implode(', ', array_values($stmt));
     }
 
-
     /**
      * @return string
      */
     private function getQueryAsString(): string
     {
         if (!empty($this->join)) {
-            $this->query = array_merge($this->query, $this->join);
+            $this->query[] = $this->setJoins();
         }
 
         if (!empty($this->where)) {
             $this->query[] = $this->setWhereClause();
+        }
+
+        if (!empty($this->groupBy)) {
+            $this->query[] = $this->setGroupBy();
+        }
+
+        if (!empty($this->orderBy)) {
+            $this->query[] = $this->setOrderBy();
+        }
+
+        if (!empty($this->limit)) {
+            $this->query[] = $this->setLimit();
         }
 
         return implode(' ', $this->query);
@@ -225,14 +337,20 @@ class QueryBuilder
         } else {
             $stmt = $this->connection->query($this->getQueryAsString());
         }
-
         return $stmt;
     }
 
+    public function count($table)
+    {
+        $query = [
+            "SELECT",
+            "COUNT(*)",
+            "FROM",
+            $table
+        ];
 
-
-
-
-
+        $this->query = $query;
+        return $this;
+    }
 
 }

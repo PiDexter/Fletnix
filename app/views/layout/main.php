@@ -15,7 +15,7 @@
     <header id="header">
         <div class="flex-container">
 
-            <div class="column content-left">
+            <div class="column content-left" id="header-left">
                 <div id="burger-button" class="menu-button">
                     <div id="open-sidenav">
                         <a href="#sidebar">
@@ -28,23 +28,29 @@
                     </div>
                 </div>
 
-                <div class="logo">
-                    <a href="/">
-                        <strong>NETNIX</strong>
+                    <a href="/" class="logo">
+                        <strong>FLETNIX</strong>
                     </a>
-                </div>
             </div>
             <nav class="menu-horizontal">
                 <ul>
                     <li><a href="/genre">Genres</a></li>
+                    <li><a href="/movies">Films</a></li>
+                    <li><a href="/search">Zoeken</a></li>
                 </ul>
             </nav>
 
-            <div class="content-right">
+            <div class="column content-right">
                 <?php if(!isset($_SESSION['user'])) : ?>
                 <a href="/login" class="btn btn-primary">Inloggen</a>
                     <?php else : ?>
-                    <a href="/profile" class="btn btn-primary"><?php echo $_SESSION['user_name'] ?></a>
+                    <a href="/profile" class="username vertical-center">
+                        <div class="username-text">
+                            <span class="pre-text">Ingelogd als</span>
+                            <span><?php echo $_SESSION['user_name'] ?></span>
+                        </div>
+                        <img src="/images/user-icon.svg" width="34" height="34" alt="">
+                    </a>
                 <?php endif; ?>
             </div>
 
@@ -52,10 +58,75 @@
     </header>
 
     <aside id="sidebar">
+        <!--        HEADER NAV          -->
+        <div id="sidebar-header">
+            <a href="#" class="row vertical-center">
+                <div class="column content-right">
+                    <img src="/images/close-icon.svg" width="16" height="16" alt="" class="icon">
+                </div>
+            </a>
+        </div>
+
+        <!--       MAIN NAV ITEMS        -->
         <nav class="menu-vertical">
-            <a href="#">Home</a>
-            <a href="/genre">Genres</a>
+            <a href="/movies" class="row vertical-center">
+                <div class="column content-left vertical-center">
+                    <img src="/images/movies-icon.svg" width="24" height="24" alt="" class="icon">
+                    <span class="menu-label">Films</span>
+                </div>
+                <div class="column content-right">
+                    <img src="/images/right-arrow-icon.svg" width="16" height="16" alt="" class="icon">
+                </div>
+            </a>
+
+            <a href="/genre" class="row vertical-center">
+                <div class="column content-left vertical-center">
+                    <img src="/images/list-icon.svg" width="24" height="24" alt="" class="icon">
+                    <span class="menu-label">Genres</span>
+                </div>
+                <div class="column content-right">
+                    <img src="/images/right-arrow-icon.svg" width="16" height="16" alt="" class="icon">
+                </div>
+            </a>
+
+            <a href="/search" class="row vertical-center">
+                <div class="column content-left vertical-center">
+                    <img src="/images/search-icon.svg" width="24" height="24" alt="" class="icon">
+                    <span class="menu-label">Uitgebreid zoeken</span>
+                </div>
+                <div class="column content-right">
+                    <img src="/images/right-arrow-icon.svg" width="16" height="16" alt="" class="icon">
+                </div>
+            </a>
         </nav>
+
+        <!--        FOOTER NAV      -->
+        <div aria-label="sidebar footer nav" class="menu-vertical">
+            <a href="/about" class="row vertical-center">
+                <div class="column content-left vertical-center">
+                    <img src="/images/info-icon.svg" width="24" height="24" alt="" class="icon">
+                    <span class="menu-label">Over Fletnix</span>
+                </div>
+            </a>
+
+        <?php if(!isset($_SESSION['user'])) : ?>
+            <a href="/about" class="row vertical-center">
+                <div class="column content-left vertical-center">
+                    <img src="/images/sign-up-icon.svg" width="24" height="24" alt="" class="icon">
+                    <span class="menu-label">Account aanmaken</span>
+                </div>
+            </a>
+        <?php else : ?>
+            <a href="/logout" class="row vertical-center">
+                <div class="column content-left vertical-center">
+                    <img src="/images/logout-icon.svg" width="24" height="24" alt="" class="icon">
+                    <span class="menu-label">Uitloggen</span>
+                </div>
+            </a>
+        <?php endif; ?>
+
+
+        </div>
     </aside>
 
     <main>
