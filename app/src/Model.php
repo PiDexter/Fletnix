@@ -104,7 +104,7 @@ abstract class Model
      * @param string $value
      * @return mixed
      */
-    public function exists(string $column, string $value): mixed
+    public function exists(string $column, string $value): bool
     {
         return $this->builder
             ->where($column, '=', $value)
