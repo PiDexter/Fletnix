@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="text" class="input-textField" name="name" placeholder="Voornaam" required>
-                        <label for="name" class="input-label">Voornaam</label>
+                        <input type="text" class="input-textField" name="first_name" placeholder="Voornaam" value="{{first_name}}" required>
+                        <label for="first_name" class="input-label">Voornaam</label>
                     </div>
                 </div>
             </div>
@@ -15,32 +15,38 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="text" class="input-textField" name="lastName" placeholder="Achternaam" required>
-                        <label for="lastName" class="input-label">Achternaam</label>
-                    </div>
-                </div>
-            </div>
-
-            <select name="country" class="">
-                <option value="volvo">Nederland</option>
-                <option value="volvo">België</option>
-            </select>
-            <label for="cars">Land</label>
-
-
-            <div class="row">
-                <div class="column">
-                    <div class="input-block fullwidth">
-                        <input type="date" class="input-textField" name="dateOfBirth" placeholder="Geboortedatum" required>
-                        <label for="dateOfBirth" class="input-label">Geboortedatum</label>
+                        <input type="text" class="input-textField" name="last_name" placeholder="Achternaam" value="{{last_name}}" required>
+                        <label for="last_name" class="input-label">Achternaam</label>
                     </div>
                 </div>
             </div>
 
             <div class="row">
+                <div class="column input-block fullwidth">
+                    <select name="country" class="input-select" aria-label="Land selecteren">
+                        <option value="Nederland">Nederland</option>
+                        <option value="België">België</option>
+                    </select>
+                    <label for="country" class="input-label">Land</label>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="email" class="input-textField" name="email" placeholder="E-mail" required>
+                        <input type="date" class="input-textField" name="date_of_birth" placeholder="Geboortedatum" value="{{date_of_birth}}" required>
+                        <label for="date_of_birth" class="input-label">Geboortedatum</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    <div class="input-block fullwidth">
+                        <input type="email" class="input-textField" name="email" placeholder="E-mail" value="{{email}}" required>
                         <label for="email" class="input-label">E-mail</label>
                     </div>
                 </div>
@@ -49,8 +55,8 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="number" class="input-textField" name="bankAccount" placeholder="Rekeningnummer" required>
-                        <label for="bankAccount" class="input-label">Rekeningnummer</label>
+                        <input type="number" class="input-textField" name="bank_number" placeholder="Rekeningnummer" value="{{bank_number}}" required>
+                        <label for="bank_number" class="input-label">Rekeningnummer</label>
                     </div>
                 </div>
             </div>
@@ -67,8 +73,8 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="password" class="input-textField" name="confirmPassword" placeholder="Confirm Password" required>
-                        <label for="confirmPassword" class="input-label">Confirm Password</label>
+                        <input type="password" class="input-textField" name="confirm_password" placeholder="Confirm Password" required>
+                        <label for="confirm_password" class="input-label">Confirm Password</label>
                     </div>
                 </div>
             </div>
