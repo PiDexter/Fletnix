@@ -51,6 +51,11 @@ class View
     private function nestedViewTag($view, $parentName, $data)
     {
         foreach ($data as $key => $value) {
+
+            // Check if current element is not an array (otherwise Array to string conversion error pops up)
+            if (!is_array($key)) {
+                continue;
+            }
             $view = str_replace("{{" . $parentName . "->" . $key. "}}", (string) $value, $view);
         }
         return $view;
