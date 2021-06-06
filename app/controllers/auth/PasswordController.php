@@ -19,7 +19,6 @@ class PasswordController extends Controller
 
     public function index(): bool|array|string
     {
-        var_dump($_SESSION);
         return $this->render('auth/edit_password');
     }
 
