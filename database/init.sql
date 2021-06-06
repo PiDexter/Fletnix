@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS user
     created_at timestamp default CURRENT_TIMESTAMP NULL,
     updated_at timestamp default CURRENT_TIMESTAMP NULL,
 
-    CONSTRAINT user_pk PRIMARY KEY (user_id)
+    CONSTRAINT user_pk PRIMARY KEY (user_id),
+    UNIQUE KEY unique_email (email)
 );
 
 CREATE TABLE IF NOT EXISTS movie
@@ -1095,7 +1096,6 @@ select 244010,'Oskar og Josefine',106,'Description of Oskar og Josefine',2005,NU
 
 insert genre (`genre_name`,`description`)
 select 'Action','Description of Action' UNION ALL
-select 'Adult','Description of Adult' UNION ALL
 select 'Adventure','Description of Adventure' UNION ALL
 select 'Animation','Description of Animation' UNION ALL
 select 'Comedy','Description of Comedy' UNION ALL
@@ -1104,7 +1104,6 @@ select 'Documentary','Description of Documentary' UNION ALL
 select 'Drama','Description of Drama' UNION ALL
 select 'Family','Description of Family' UNION ALL
 select 'Fantasy','Description of Fantasy' UNION ALL
-select 'Film-Noir','Description of Film-Noir' UNION ALL
 select 'Horror','Description of Horror' UNION ALL
 select 'Music','Description of Music' UNION ALL
 select 'Musical','Description of Musical' UNION ALL

@@ -30,9 +30,6 @@ class Movie extends Model
         $builder->join('movie_genre', ['movie.movie_id' => 'movie_genre.movie_id']);
         $builder->join('movie_director', ['movie.movie_id' => 'movie_director.movie_id']);
         $builder->join('person', ['movie_director.person_id' => 'person.person_id']);
-//        $builder->groupBy(['movie.movie_id']);
-//        $builder->orderBy(['movie.movie_id'], 'ASC');
-
         return $builder->query()->fetchAll();
     }
 

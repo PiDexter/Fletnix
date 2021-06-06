@@ -3,6 +3,7 @@
 namespace app\src;
 
 
+use Exception;
 use PDO;
 use ReflectionClass;
 
@@ -19,7 +20,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->builder = Application::$app->builder;
+        $this->builder = new QueryBuilder();
         $this->connection = Application::$app->db->pdo;
     }
 
@@ -30,9 +31,15 @@ abstract class Model
      */
     public function create(array $values = []): void
     {
-        $this->builder
-            ->insert($this->getTable(), $values)
-            ->query($values);
+        try {
+            $this->builder
+                ->insert($this->getTable(), $values)
+                ->query($values);
+        }
+        catch(Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
     }
 
 
@@ -89,10 +96,9 @@ abstract class Model
 
     /**
      * @param string $column
-     * @param string $value
-     * @return mixed
+     * @return array
      */
-    public function fetchColumn(string $column): mixed
+    public function fetchColumn(string $column): array
     {
         return $this->builder
             ->select([$column], $this->getTable())
@@ -104,11 +110,11 @@ abstract class Model
      * @param string $value
      * @return mixed
      */
-    public function exists(string $column, string $value): mixed
+    public function exists(string $column, string $value)
     {
         return $this->builder
+            ->select([$column], $this->getTable())
             ->where($column, '=', $value)
-            ->select((array)'*', $this->getTable())
             ->query()->fetchColumn();
     }
 
@@ -133,7 +139,7 @@ abstract class Model
         return $this->builder
             ->select(['*'], $this->getTable())
             ->orderBy(['movie_id'], 'ASC')
-            ->limit(($page-1) * $page, $this->perPage)
+            ->limit(($page-1) * $this->perPage, $this->perPage)
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -180,6 +186,23 @@ abstract class Model
     {
         return strtolower($this->getClassName());
     }
+
+    public function getCount(): int
+    {
+        return (int) $this->builder->count($this->getTable())->query()->fetchColumn();
+    }
+
+//    public function formatData(QueryBuilder $builder, array $queryResult)
+//    {
+//        $builder->query()->fetchAll(PDO::FETCH_ASSOC);
+//
+//        $data = [
+//            'count' => '',
+//            $this->getTable() . "s" => $queryResult
+//        ];
+//
+//        return $data;
+//    }
 
 
 }

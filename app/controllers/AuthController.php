@@ -19,19 +19,20 @@ class AuthController extends Controller
     {
         $request = $request->getBody();
 
-        $user = new User();
+        $user = (new User)->getByEmail($request['email']);
 
-        if(!empty($request)) {
-            if ($user->exists('email', $request['email'])) {
-                if(password_verify($request['password'], $user->fetch('email', $request['email'])['password'])) {
-                    Application::$app->session->set('user',$user->fetch('email', $request['email'])['user_id']);
-                    Application::$app->session->set('user_name', $user->fetch('email', $request['email'])['first_name']);
-                    Application::$app->response->redirect('/');
-                }
-            }
-        } else {
-            Application::$app->response->redirect('/login');
+        if (!empty($request) && !empty($user->email) && password_verify($request['password'], $user->password)) {
+            Application::$app->session->set('user', $user->user_id);
+            Application::$app->session->set('name', $user->first_name);
+            // Redirect to home when login is success
+            Application::$app->response->redirect('/');
         }
+
+        $data = [
+            'email' => $request['email']
+        ];
+
+        return $this->render('login', $data);
     }
 
     public function logout()

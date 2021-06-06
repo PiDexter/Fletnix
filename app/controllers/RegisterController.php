@@ -5,7 +5,9 @@ namespace app\controllers;
 
 
 use app\models\User;
+use app\src\Application;
 use app\src\Controller;
+use app\src\Model;
 use app\src\Request;
 
 class RegisterController extends Controller
@@ -17,22 +19,33 @@ class RegisterController extends Controller
 
     public function create(Request $request)
     {
-        $formData = $request->getBody();
+        $request = $request->getBody();
 
-        // TODO: verify confirm password is same as password
+        // TODO: return error messages
 
-        $userData = [
-            'email' => $formData['email'],
-            'password' => password_hash($formData['password'], PASSWORD_DEFAULT),
-            'first_name' => $formData['name'],
-            'last_name' => $formData['lastName'],
-            'country' => $formData['country'],
-            'date_of_birth' => $formData['dateOfBirth'],
-            'bank_number' => $formData['bankAccount'],
+        $user = [
+            'email' => $request['email'],
+            'password' => password_hash($request['password'], PASSWORD_DEFAULT),
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'country' => $request['country'],
+            'date_of_birth' => $request['date_of_birth'],
+            'bank_number' => $request['bank_number'],
         ];
 
-        (new User())->create($userData);
-        return $this->render('register');
+        if ($request['password'] !== $request['confirm_password']) {
+            return $this->render('register', $user);
+        }
+
+        if ((new User)->getByEmail($request['email'])) {
+            return $this->render('register', $user);
+        }
+
+
+        (new User)->create($user);
+        Application::$app->response->redirect('/login');
+
+        return $this->render('register', $user);
     }
 
 }

@@ -21,6 +21,8 @@ class View
         $view = $this->renderFlashMessage($view, $data);
         $view = $this->renderPagination($view, $data);
 
+        $view = $this->removeEmptyTags($view);
+
         // Vervang de string "{{content}}" met de inhoud van de view file in de layout
         return str_replace("{{content}}", $view, $layout);
     }
@@ -38,10 +40,22 @@ class View
         return $view;
     }
 
+
+    // Remove all {{string}} that have no value
+    private function removeEmptyTags($view): array|string|null
+    {
+        return preg_replace('/{{(\w+)}}/', '', $view);
+    }
+
     // Proces een nested tag bijvoorbeeld: {{user->name}}
     private function nestedViewTag($view, $parentName, $data)
     {
         foreach ($data as $key => $value) {
+
+            // Check if current element is not an array (otherwise Array to string conversion error pops up)
+            if (!is_array($key)) {
+                continue;
+            }
             $view = str_replace("{{" . $parentName . "->" . $key. "}}", (string) $value, $view);
         }
         return $view;

@@ -150,7 +150,7 @@ a.logo {
 
 
 .container {
-    width: 100vw;
+    width: 100%;
     padding: 15px 15px;
 }
 
@@ -324,7 +324,7 @@ CARD (DECK)
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     width: 100%;
-    padding: 2px 16px 14px 16px;
+    /*padding: 2px 16px 14px 16px;*/
 }
 
 .card-deck::-webkit-scrollbar {
@@ -359,7 +359,7 @@ CARD (DECK)
     flex-shrink: 0;
     /*height: 352px;*/
     margin-right: 16px;
-    width: 300px;
+    /*width: 300px;*/
     max-width: calc(100% - 56px);
     scroll-snap-align: start;
     transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
@@ -496,15 +496,18 @@ CARD POPUP
     color: white;
 }
 
-.spotlight-image {
+img.spotlight-image {
     grid-area: 1 / 1 / 4 / 2;
-    max-width: 100vw;
     z-index: 1;
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+    object-position: center;
 }
 
 .spotlight-video {
     grid-area: 1 / 1 / 4 / 2;
-    max-width: 100vw;
+    width: 100%;
     z-index: 1;
 }
 
@@ -547,6 +550,8 @@ h2.row-title {
 
 h1.page-title {
     color: var(--white);
+    margin: unset;
+    font-size: 1.5em;
 }
 
 
@@ -631,9 +636,6 @@ h1.page-title {
     text-align: center;
     font-size: 14px;
     font-weight: bold;
-}
-
-.card-grid > .card > .card-body {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -686,9 +688,35 @@ img.icon {
     vertical-align:middle;
 }
 
+/*
+* GENRES
+ */
+#genres .card-grid > .card {
+    font-size: 18px;
+    padding: 25px;
+}
 
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
+
+    .form-container {
+        width: 380px;
+        margin: 0 auto;
+        height: calc(100vh - 110px);
+    }
+
+    #loginForm {
+        width: 380px;
+        margin: 0 auto;
+    }
+
+    #searchFilter {
+        width: 380px;
+        margin: 0 auto;
+        height: calc(100vh - 110px);
+        display: flex;
+        align-items: center;
+    }
 
     .menu-button {
         display: none;

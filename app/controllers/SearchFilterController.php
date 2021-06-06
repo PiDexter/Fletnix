@@ -8,6 +8,7 @@ use app\models\Genre;
 use app\src\Controller;
 use app\src\QueryBuilder;
 use app\src\Request;
+use PDO;
 
 class SearchFilterController extends Controller
 {
@@ -18,12 +19,15 @@ class SearchFilterController extends Controller
         return $this->render('search_filter', $data);
     }
 
-    public function filter(Request $request)
+    public function show(Request $request): bool|array|string
     {
-        $searchData = $request->getBody();
-        $builder = new QueryBuilder();
-        $builder->select(['*'], 'movie');
+        $resultsPerPage = 15;
 
+        $page = $request->getBody()['page'] ?? 1;
+        $searchData = $request->getBody();
+
+        $builder = new QueryBuilder();
+        $builder->distinct()->select(['movie.movie_id', 'movie.title'], 'movie');
 
         if (!empty($searchData['title'])) {
             $value = '%' . htmlspecialchars($searchData['title']) . '%';
@@ -52,13 +56,28 @@ class SearchFilterController extends Controller
             $builder->orWhere('person.lastname', 'LIKE', $value);
         }
 
-        $data = $builder->query()->fetchAll();
-        return $this->render('search_result', $data);
-    }
+        $builder->limit(($page-1) * $resultsPerPage, $resultsPerPage);
+        $results = $builder->query()->fetchAll(PDO::FETCH_ASSOC);
 
-    public function result()
-    {
-        return $this->render('search_result');
+        $count = $builder->queryCount('movie', 'movie_id');
+        $total_pages = ceil($count / 15);
+
+
+        $data = [
+            'search_params' => http_build_query([
+                'title' => $searchData['title'],
+                'genre' => $searchData['genre'],
+                'publicationYear' => $searchData['publicationYear'],
+                'director' => $searchData['director'],
+            ]),
+            'page_title' => 'Results',
+            'count' => (int) $count,
+            'page' => (int) $page,
+            'total_pages' => $total_pages,
+            'movies' => $results
+        ];
+
+        return $this->render('movies_overview', $data);
     }
 
 }
