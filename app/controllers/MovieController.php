@@ -15,12 +15,23 @@ class MovieController extends Controller
     {
         // When $_GET['page'] is not set, show page number 1
         $page = $request->getBody()['page'] ?? 1;
-        $data = (new Movie)->findAll($page);
+        $movies = (new Movie)->findAll($page);
+
+        $count = (new Movie)->getCount();
+        $total_pages = ceil($count / 15);
+
+        $data = [
+            'page_title' => 'Alle films',
+            'count' => $count,
+            'page' => $page,
+            'total_pages' => $total_pages,
+            'movies' => $movies,
+        ];
 
         return $this->render('movies_overview', $data);
     }
 
-    public function show(int $id)
+    public function show(int $id): bool|array|string
     {
         $movie = (new Movie())->findByID($id);
 
