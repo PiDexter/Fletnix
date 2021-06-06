@@ -1,6 +1,6 @@
 <?php
+/* @var $data array */
 ?>
-
 <section id="genres">
     <div class="container">
         <h1>Genres</h1>

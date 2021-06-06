@@ -1,5 +1,3 @@
-<?php ?>
-
 <section class="spotlight-grid">
     <img src="/images/hero-image.jpg" alt="" title="" class="spotlight-image">
     <div class="spotlight-row">

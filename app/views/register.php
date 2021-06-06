@@ -1,4 +1,3 @@
-<?php ?>
 <section id="registerForm" class="form-container">
     <div class="container">
         <h1 class="page-title">Registreren</h1>
@@ -30,9 +29,6 @@
                     <label for="country" class="input-label">Land</label>
                 </div>
             </div>
-
-
-
 
             <div class="row">
                 <div class="column">

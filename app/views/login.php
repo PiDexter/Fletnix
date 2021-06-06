@@ -1,4 +1,3 @@
-<?php ?>
 <section id="loginForm">
     <div class="container">
         <h1 class="page-title">Inloggen</h1>

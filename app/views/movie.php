@@ -1,5 +1,3 @@
-<?php ?>
-
 <section class="spotlight-grid">
     <!--            <img src="images/movie1-1.jpg" alt="" title="" class="img-spotlight">-->
     <video width="100%" height="" class="spotlight-video" autoplay muted loop>

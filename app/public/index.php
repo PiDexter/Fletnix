@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\controllers\AboutController;
 use app\controllers\auth\ProfileController;
 use app\controllers\auth\ProfileEditController;
 use app\controllers\auth\PasswordController;
@@ -30,7 +31,7 @@ $app = new Application(dirname(__DIR__), $config);
  * HOME
  */
 $app->router->get('/', [HomeController::class, 'index']);
-
+$app->router->get('/about', [AboutController::class, 'index']);
 
 /*
  * LOGIN
