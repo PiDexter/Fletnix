@@ -7,7 +7,6 @@
         <div class="row vertical-center">
             <div class="column content-left">
                 <h1 class="page-title">{{page_title}}</h1>
-
             </div>
             <div class="column content-right">
                 <a href="/search" class="btn btn-bordered">

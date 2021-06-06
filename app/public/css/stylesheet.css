@@ -696,6 +696,27 @@ img.icon {
     padding: 25px;
 }
 
+
+/*
+* SINGLE MOVIE
+ */
+
+#movie-cast-list {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+}
+
+#movie-cast-list dt {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--orange);
+}
+
+#movie-cast-list dd {
+    margin-bottom: 15px;
+}
+
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
 

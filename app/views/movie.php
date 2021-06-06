@@ -15,9 +15,7 @@
 <section id="details">
     <div class="container">
         <div class="row">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, exercitationem, mollitia!
-                Ab ad commodi dolorem eius esse.
-            </p>
+            <p>{{description}}</p>
         </div>
     </div>
 </section>
@@ -27,17 +25,31 @@
         <input type="radio" name="tabs" id="tab-1" checked="checked">
         <label for="tab-1" class="tab-label">Details</label>
         <div class="tab">
-            <p>
-                {{description}}
-            </p>
+            <dl id="movie-details">
+                <dt>Director</dt>
+                <dd>{{director}}</dd>
+
+                <dt>Publicatiejaar</dt>
+                <dd>{{publication_year}}</dd>
+
+                <dt>Samenvatting</dt>
+                <dd>{{description}}</dd>
+            </dl>
         </div>
 
         <input type="radio" name="tabs" id="tab-2">
-        <label for="tab-2" class="tab-label">Meer zoals dit</label>
-        <div class="tab">
-            <p>
-                Content 23
-            </p>
+        <label for="tab-2" class="tab-label">Acteurs</label>
+        <div class="tab" aria-label="film cast">
+            <dl id="movie-cast-list">
+                <?php foreach($data as $persons) : ?>
+                    <?php if(is_array($persons)) : ?>
+                        <?php foreach($persons as $person) : ?>
+                        <dt><?php echo $person['role'] ?></dt>
+                        <dd><?php echo $person['firstname'] . " " . $person['lastname']; ?></dd>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </dl>
         </div>
 
     </div>
