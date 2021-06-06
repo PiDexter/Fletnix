@@ -1,11 +1,13 @@
 <?php
 /* @var $data array */
 ?>
+
 <section id="movielist">
     <div class="container">
-        <div class="row">
+        <div class="row vertical-center">
             <div class="column content-left">
-                <span class="page-count">Pagina <?php echo $_GET['page'] ?? 1; ?></span>
+                <h1 class="page-title"><?php echo $data['page_title']; ?></h1>
+<!--                <span class="page-count">Pagina --><?php //echo $data['page'] . "/" . $data['total_pages']; ?><!--</span>-->
             </div>
             <div class="column content-right">
                 <a href="/search" class="btn btn-bordered">
@@ -15,16 +17,19 @@
             </div>
         </div>
         <div class="card-grid grid-col-2">
-            <?php foreach($data as $movie) : ?>
-                <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
-                    <img src="/images/movie2.jpg" alt="">
-                    <div class="card-body">
-                        <span><?php echo $movie['title']; ?></span>
-                    </div>
-                </a>
+            <?php foreach($data as $item) : ?>
+                <?php if (is_array($item)) : ?>
+                    <?php foreach($item as $id => $movie) : ?>
+                    <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
+                        <img src="/images/movie2.jpg" alt="">
+                        <div class="card-body">
+                            <span><?php echo $movie['title']; ?></span>
+                        </div>
+                    </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
         @pagination
     </div>
 </section>
-
