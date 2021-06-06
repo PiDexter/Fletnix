@@ -550,6 +550,8 @@ h2.row-title {
 
 h1.page-title {
     color: var(--white);
+    margin: unset;
+    font-size: 1.5em;
 }
 
 
@@ -634,9 +636,6 @@ h1.page-title {
     text-align: center;
     font-size: 14px;
     font-weight: bold;
-}
-
-.card-grid > .card > .card-body {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -689,9 +688,22 @@ img.icon {
     vertical-align:middle;
 }
 
+/*
+* GENRES
+ */
+#genres .card-grid > .card {
+    font-size: 18px;
+    padding: 25px;
+}
 
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
+
+    .form-container {
+        width: 380px;
+        margin: 0 auto;
+        height: calc(100vh - 110px);
+    }
 
     #loginForm {
         width: 380px;

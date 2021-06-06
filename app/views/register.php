@@ -1,5 +1,5 @@
 <?php ?>
-<section id="registerForm">
+<section id="registerForm" class="form-container">
     <div class="container">
         <h1 class="page-title">Registreren</h1>
         <form action="" method="post">
@@ -89,7 +89,7 @@
         <div class="row" id="loginSignup">
             <div class="column content-left">
                 <p>Ben je al lid?
-                    <a href="#">Inloggen</a>
+                    <a href="/login">Inloggen</a>
                 </p>
             </div>
         </div>
