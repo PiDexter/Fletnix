@@ -5,7 +5,7 @@
 <section id="searchFilter">
     <div class="container">
 
-        <form action="/results" method="post">
+        <form action="/results" method="get">
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
