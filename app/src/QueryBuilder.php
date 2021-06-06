@@ -18,6 +18,8 @@ class QueryBuilder
     private array $groupBy = [];
     private array $limit = [];
 
+    private bool $distinct = false;
+
     public function __construct()
     {
         $this->connection = Application::$app->db->pdo;
@@ -28,14 +30,26 @@ class QueryBuilder
      */
     public function select(array $columns, string $table): static
     {
-        $query = [
-            "SELECT",
-            $this->parseColumns($columns),
-            "FROM",
-            $table
-        ];
+        $query[] = "SELECT";
+
+        if ($this->distinct) {
+            $query[] = "DISTINCT";
+        }
+
+        $query[] = $this->parseColumns($columns);
+        $query[] = "FROM";
+        $query[] = $table;
 
         $this->query = $query;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function distinct(): static
+    {
+        $this->distinct = true;
         return $this;
     }
 
@@ -351,6 +365,35 @@ class QueryBuilder
 
         $this->query = $query;
         return $this;
+    }
+
+    /**
+     * @param $table
+     * @param $column
+     * @return mixed
+     */
+    public function queryCount($table, $column): mixed
+    {
+        // Replace DISTINCT with COUNT(DISTINCT and replace next index (containing columns) with specific table column
+        if (($key = array_search('DISTINCT', $this->query, true)) !== false) {
+            $this->query[$key] = "COUNT(DISTINCT";
+            $this->query[$key + 1] = $table . "." . $column . ")";
+        }
+
+        // Find all query strings with LIMIT and remove those
+        array_filter($this->query, function($key) {
+            if (str_starts_with($this->query[$key], 'LIMIT')) {
+                unset($this->query[$key]);
+            }
+        }, ARRAY_FILTER_USE_KEY);
+
+        $stmt = implode(' ', $this->query);
+        return $this->connection->query($stmt)->fetchColumn();
+    }
+
+    public function getQuery(): array
+    {
+        return $this->query;
     }
 
 }
