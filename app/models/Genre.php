@@ -22,7 +22,17 @@ class Genre extends Model
             ->join('movie_genre', ['movie.movie_id' => 'movie_genre.movie_id'])
             ->where('movie_genre.genre_name', '=', $genre)
             ->orderBy(['movie.movie_id'], 'ASC')
-            ->limit(($page-1) * $page, $this->perPage)
+            ->groupBy(['movie.movie_id'])
+            ->limit(($page-1) * $this->perPage, $this->perPage)
             ->query()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getMovieCountByGenre(string $genre): int
+    {
+        return count($this->builder->select(['*'], 'movie')
+            ->join('movie_genre', ['movie.movie_id' => 'movie_genre.movie_id'])
+            ->where('movie_genre.genre_name', '=', $genre)
+            ->orderBy(['movie.movie_id'], 'ASC')
+            ->query()->fetchAll(PDO::FETCH_ASSOC));
     }
 }
