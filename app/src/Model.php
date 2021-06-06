@@ -139,7 +139,7 @@ abstract class Model
         return $this->builder
             ->select(['*'], $this->getTable())
             ->orderBy(['movie_id'], 'ASC')
-            ->limit(($page-1) * $page, $this->perPage)
+            ->limit(($page-1) * $this->perPage, $this->perPage)
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -186,6 +186,23 @@ abstract class Model
     {
         return strtolower($this->getClassName());
     }
+
+    public function getCount(): int
+    {
+        return (int) $this->builder->count($this->getTable())->query()->fetchColumn();
+    }
+
+//    public function formatData(QueryBuilder $builder, array $queryResult)
+//    {
+//        $builder->query()->fetchAll(PDO::FETCH_ASSOC);
+//
+//        $data = [
+//            'count' => '',
+//            $this->getTable() . "s" => $queryResult
+//        ];
+//
+//        return $data;
+//    }
 
 
 }
