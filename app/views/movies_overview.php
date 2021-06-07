@@ -15,7 +15,7 @@
                 </a>
             </div>
         </div>
-        <div class="card-grid grid-col-2">
+        <div class="card-grid">
             <?php foreach($data as $item) : ?>
                 <?php if (is_array($item)) : ?>
                     <?php foreach($item as $id => $movie) : ?>

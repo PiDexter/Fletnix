@@ -535,15 +535,19 @@ img.spotlight-image {
 
 .spotlight-row {
     grid-area: 3 / 1 / 4 / 2;
-    padding: 0 15px 0px 15px;
-    background: linear-gradient(
-            360deg,
-            rgb(20 20 20) 0%, rgba(255,255,255,0) 100%);
-    z-index: 2;
 }
 
 .spotlight-row > p {
     margin: 5px 0 15px 0;
+}
+
+.spotlight-text-frame {
+    grid-area: 3 / 1 / 4 / 2;
+    padding: 0 15px 0px 15px;
+    background: linear-gradient(
+            360deg
+            , rgb(20 20 20) 0%, rgba(255,255,255,0) 100%);
+    z-index: 2;
 }
 
 .spotlight-title {
@@ -652,13 +656,6 @@ h1.page-title {
     gap: 10px;
     margin-top: 25px;
     margin-bottom: 25px;
-}
-
-.grid-col-1 {
-    grid-template-columns: 1fr;
-}
-
-.grid-col-2 {
     grid-template-columns: 1fr 1fr;
 }
 
@@ -775,7 +772,11 @@ img.icon {
 /*
 * ABOUT
  */
-
+#about {
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 110px);
+}
 #about-grid {
     display: grid;
     grid-template-columns: 1fr fit-content(40%);
@@ -852,6 +853,9 @@ img.icon {
     margin-top: 25px;
 }
 
+
+
+
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
 
@@ -860,10 +864,62 @@ img.icon {
         margin: 0 auto;
     }
 
+    .flex-container {
+        margin: 0 5% 0 5%;
+    }
+
+    #movielist .container {
+        max-width: 100%;
+        margin: 2% 5% 0 5%;
+        width: auto;
+    }
+
+    #overview {
+        max-width: 100%;
+        margin: 2% 5% 0 5%;
+        width: auto;
+    }
+
+
+    /*
+     * SPOTLIGHT
+     */
+
+    #home-spotlight .spotlight-row {
+        margin-bottom: 25px;
+    }
+
+    .spotlight-row {
+        max-width: 100%;
+        margin: 2% 5% 0 5%;
+        width: auto;
+    }
+
+    .spotlight-row > p {
+        font-size: 1.3em;
+        max-width: 700px;
+        line-height: 1.5em;
+    }
+
+    h1.spotlight-title  {
+        font-size: 4.5em;
+    }
+
+
+
     .form-container {
         width: 380px;
         margin: 0 auto;
         height: calc(100vh - 110px);
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 4fr));
+        gap: 50px 15px;
+    }
+
+    .card img {
+        max-width: unset;
     }
 
     #loginForm {
@@ -917,8 +973,29 @@ img.icon {
         height: calc(100vh - 110px);
     }
 
+    #about-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    #about-text-intro {
+        font-size: 3.5em;
+    }
+
+    #about-description {
+        margin: 55px 0 10px 0;
+    }
+
+    #about-description p {
+        font-size: 2em;
+    }
+
     #about .container {
-        max-width: 1200px;
+        max-width: 900px;
+    }
+
+    #about .btn {
+        padding: 25px;
+        font-size: 2em;
     }
 
 }

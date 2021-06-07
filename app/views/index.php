@@ -1,10 +1,12 @@
-<section class="spotlight-grid">
+<section id="home-spotlight" class="spotlight-grid">
     <img src="/images/hero-image.jpg" alt="" title="" class="spotlight-image">
-    <div class="spotlight-row">
-        <h2 class="spotlight-title">The Martian</h2>
-        <p>NEW SEASON</p>
-        <div class="column content-left">
-            <button class="btn btn-primary">Afspelen</button>
+    <div class="spotlight-text-frame">
+        <div class="spotlight-row">
+            <h1 class="spotlight-title">Mind explained</h1>
+            <p>Heb je je ooit afgevraagd wat er in je hoofd gebeurt? Van dromen tot angststoornissen, ontdek in deze verhelderende serie hoe je hersenen werken.</p>
+            <div class="column content-left">
+                <button class="btn btn-primary">Afspelen</button>
+            </div>
         </div>
     </div>
 </section>

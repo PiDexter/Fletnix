@@ -4,11 +4,13 @@
         <source src="/video/movie_example_1.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <div class="spotlight-row">
-        <h2 class="spotlight-title">{{title}}</h2>
-        <div class="column content-left vertical-center">
-            <img src="/images/clock-icon.svg" width="16" height="16" alt="" class="icon">
-            <span>{{duration}} min.</span>
+    <div class="spotlight-text-frame">
+        <div class="spotlight-row">
+            <h2 class="spotlight-title">{{title}}</h2>
+            <div class="column content-left vertical-center">
+                <img src="/images/clock-icon.svg" width="16" height="16" alt="" class="icon">
+                <span>{{duration}} min.</span>
+            </div>
         </div>
     </div>
 </section>

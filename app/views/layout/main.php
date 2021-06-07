@@ -90,7 +90,7 @@
             <a href="/search" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/search-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="menu-label">Uitgebreid zoeken</span>
+                    <span class="menu-label">Zoeken</span>
                 </div>
                 <div class="column content-right">
                     <img src="/images/right-arrow-icon.svg" width="16" height="16" alt="" class="icon">
