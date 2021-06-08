@@ -1,7 +1,7 @@
 <?php
 ?>
 
-<section id="edit-password">
+<section class="form-container" id="edit-password">
 
     <div class="container">
 

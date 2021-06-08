@@ -4,7 +4,7 @@
 
 <section id="search-filter" class="form-container">
     <div class="container">
-
+        <h1>Doorzoek alle films</h1>
         <form action="/results" method="get">
             <div class="row">
                 <div class="column">

@@ -1,7 +1,7 @@
 <?php
 ?>
 
-<section id="edit-account">
+<section class="form-container" id="edit-account">
     <div class="container">
         <h1>Accountgegevens</h1>
         <form action="" method="post">

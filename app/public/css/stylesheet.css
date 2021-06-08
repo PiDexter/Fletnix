@@ -31,6 +31,28 @@ a {
     text-decoration: none;
 }
 
+/* reset for safari */
+button, select {
+    -webkit-appearance: none;
+}
+
+/* Safari fix height */
+input[type="date"]
+{
+    display:block;
+    /* Solution 1 */
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    min-height: 2.25em;
+}
+
+/* Safari fix placeholder */
+input[type='date']:after {
+    color: #000000;
+    content: attr(placeholder);
+}
+
+
 
 /*
 * GRID COMPONENTS
@@ -292,6 +314,7 @@ select {
     font-size: 18px;
     padding: 18px 16px 16px;
     border-radius: 5px;
+    background-color: var(--white);
 }
 
 select:not(:placeholder-shown) + .input-label {
@@ -689,6 +712,7 @@ h1.page-title {
 
 #profile-list .card-grid {
     grid-auto-rows: 75px;
+    grid-template-columns: 1fr;
 }
 
 #profile-list .card {
@@ -1051,6 +1075,13 @@ img.icon {
     #about .btn {
         padding: 25px;
         font-size: 2em;
+    }
+
+    /*
+    * PROFILE
+    */
+    #profile-list .card-grid {
+        gap: 15px;
     }
 
 }
