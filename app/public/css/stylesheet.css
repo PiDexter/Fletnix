@@ -334,12 +334,8 @@ CARD (DECK)
     display: none;
 }
 
-.card {
-    background-color: gainsboro;
-}
-
 .card img {
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
     width: 100%;
     max-width: 300px;
     height: auto;
@@ -373,6 +369,11 @@ CARD (DECK)
 
 .card-deck > .card > .card-body {
     margin-top: -60px;
+    text-shadow: 0 1px 2px #000000;
+    position: relative;
+    background: linear-gradient(
+            360deg
+            , rgb(20 20 20) -50%, rgba(255,255,255,0) 100%);
 }
 
 .card-button {
@@ -721,7 +722,7 @@ h1.page-title {
     font-size: 12px;
     margin-bottom: 3px;
     font-weight: 300;
-    color: gainsboro;
+    color: var(--white);
 }
 
 img.icon {
@@ -867,6 +868,10 @@ img.icon {
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
 
+    h2.row-title {
+        font-size: 2em;
+    }
+
     .container {
         max-width: 100%;
         margin: 0 auto;
@@ -971,6 +976,19 @@ img.icon {
     .card img {
         max-width: unset;
     }
+    .card img:after {
+        background: gray;
+    }
+
+    .card-deck > .card:after {
+        background: gray;
+    }
+
+
+
+    /*
+    * MENU
+     */
 
     .menu-button {
         display: none;
