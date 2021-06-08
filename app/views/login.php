@@ -1,4 +1,4 @@
-<section id="loginForm">
+<section id="loginForm" class="form-container">
     <div class="container">
         <h1 class="page-title">Inloggen</h1>
         <form action="" method="post">

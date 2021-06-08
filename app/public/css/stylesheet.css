@@ -371,6 +371,10 @@ CARD (DECK)
     border-radius: 9px;
 }
 
+.card-deck > .card > .card-body {
+    margin-top: -60px;
+}
+
 .card-button {
     background: gray;
     color: black;
@@ -673,6 +677,10 @@ h1.page-title {
     overflow: hidden;
 }
 
+#genres .card-grid > .card {
+    border: 1px solid #dcdcdc47;
+}
+
 #movielist .card-grid > .card {
     flex-direction: column;
     align-items: flex-start;
@@ -862,6 +870,7 @@ img.icon {
     .container {
         max-width: 100%;
         margin: 0 auto;
+        padding: unset;
     }
 
     .flex-container {
@@ -869,6 +878,12 @@ img.icon {
     }
 
     #movielist .container {
+        max-width: 100%;
+        margin: 2% 5% 0 5%;
+        width: auto;
+    }
+
+    #genres .container {
         max-width: 100%;
         margin: 2% 5% 0 5%;
         width: auto;
@@ -885,8 +900,20 @@ img.icon {
      * SPOTLIGHT
      */
 
+    /*.spotlight-grid {*/
+    /*    display: grid;*/
+    /*    color: white;*/
+    /*    justify-content: center;*/
+    /*    grid-template-columns: 1000px;*/
+    /*}*/
+
     #home-spotlight .spotlight-row {
         margin-bottom: 25px;
+    }
+
+    #home-spotlight .btn {
+        padding: 20px 50px;
+        font-size: 1.3em;
     }
 
     .spotlight-row {
@@ -905,12 +932,35 @@ img.icon {
         font-size: 4.5em;
     }
 
-
-
     .form-container {
         width: 380px;
         margin: 0 auto;
         height: calc(100vh - 110px);
+        display: flex;
+        align-items: center;
+    }
+
+
+    /*
+    * CARD
+     */
+
+    .card-deck {
+        display: grid;
+        /*grid-auto-rows: auto;*/
+        gap: 0px 15px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        /*grid-template-columns: 1fr 1fr;*/
+        grid-template-columns: repeat(auto-fit, minmax(300px, 4fr));
+        grid-template-rows: repeat(1, 1fr);
+        grid-auto-rows: 0;
+    }
+
+    .card-deck > .card {
+        max-width: unset;
+        margin-right: unset;
+        scroll-snap-align: unset;
     }
 
     .card-grid {
@@ -920,19 +970,6 @@ img.icon {
 
     .card img {
         max-width: unset;
-    }
-
-    #loginForm {
-        width: 380px;
-        margin: 0 auto;
-    }
-
-    #searchFilter {
-        width: 380px;
-        margin: 0 auto;
-        height: calc(100vh - 110px);
-        display: flex;
-        align-items: center;
     }
 
     .menu-button {

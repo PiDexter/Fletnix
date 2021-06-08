@@ -2,7 +2,7 @@
 /* @var $data array */
 ?>
 
-<section id="searchFilter">
+<section id="search-filter" class="form-container">
     <div class="container">
 
         <form action="/results" method="get">

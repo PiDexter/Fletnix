@@ -3,7 +3,7 @@
 ?>
 <section id="genres">
     <div class="container">
-        <h1>Genres</h1>
+        <h1 class="page-title">Genres</h1>
         <div class="card-grid">
             <?php foreach($data as $genre) : ?>
                 <a href="/genre/<?php echo $genre['genre_name']; ?>" class="card">
@@ -12,5 +12,4 @@
             <?php endforeach; ?>
         </div>
     </div>
-
 </section>
