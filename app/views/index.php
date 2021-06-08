@@ -34,20 +34,17 @@
     <div class="slider-row" id="Science">
         <h2 class="row-title">Science</h2>
         <div class="card-deck">
-            <!-- Card 1 -->
-            <a href="#popup1" class="card" id="popuptest4">
-                <img src="images/movie4.jpg" alt="">
-            </a>
 
-            <!-- Card 2 -->
-            <a href="#popup1" class="card" id="popuptest5">
-                <img src="images/movie5.jpg" alt="">
-            </a>
-
-            <!-- Card 3 -->
-            <a href="#popup1" class="card" id="popuptest6">
-                <img src="images/movie6.jpg" alt="">
-            </a>
+            <?php foreach($data['documentary'] as $movie) : ?>
+                <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
+                    <img src="images/movie2.jpg" alt="">
+                    <div class="card-body">
+                        <span class="pre-text"><?php echo $movie['genre_name']; ?></span>
+                        <h2><?php echo $movie['title']; ?></h2>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+<!---->
         </div>
     </div>
 </section>
