@@ -1,5 +1,4 @@
 <section class="spotlight-grid">
-    <!--            <img src="images/movie1-1.jpg" alt="" title="" class="img-spotlight">-->
     <video width="100%" height="" class="spotlight-video" autoplay muted loop>
         <source src="/video/movie_example_1.mp4" type="video/mp4">
         Your browser does not support the video tag.

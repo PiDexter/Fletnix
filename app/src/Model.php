@@ -14,16 +14,13 @@ abstract class Model
 
     protected array $fillableColumns = [];
     protected string $primaryKey = 'id';
-
     protected int $perPage = 15;
-
 
     public function __construct()
     {
         $this->builder = new QueryBuilder();
         $this->connection = Application::$app->db->pdo;
     }
-
 
     /**
      * Create new row in the db table that is equal to the model
@@ -42,7 +39,6 @@ abstract class Model
         }
     }
 
-
     /**
      * @param int $id
      * @param array $values
@@ -55,7 +51,6 @@ abstract class Model
             ->query($values);
     }
 
-
     /**
      * Delete the model specified in where clause.
      * If no where clause exists do not execute, instead use deleteAll() method.
@@ -67,7 +62,6 @@ abstract class Model
             ->where($this->getPrimaryKey(), '=', $id)
             ->query();
     }
-
 
     /**
      * @param int $id
@@ -128,7 +122,6 @@ abstract class Model
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     /**
      * Returns results with pagination
      * @param $page
@@ -154,7 +147,6 @@ abstract class Model
             ->query()->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     /**
      * @return string
      */
@@ -171,7 +163,6 @@ abstract class Model
         $this->primaryKey = $primaryKey;
     }
 
-
     /**
      * Get class name of
      * @return string
@@ -181,28 +172,22 @@ abstract class Model
         return (new ReflectionClass($this))->getShortName();
     }
 
-    // Set Model name to lower string to represent table name
+    /**
+     * @return string
+     */
     public function getTable(): string
     {
+        // Set Model name to lower string to represent table name
         return strtolower($this->getClassName());
     }
 
+    /**
+     * @return int
+     */
     public function getCount(): int
     {
         return (int) $this->builder->count($this->getTable())->query()->fetchColumn();
     }
-
-//    public function formatData(QueryBuilder $builder, array $queryResult)
-//    {
-//        $builder->query()->fetchAll(PDO::FETCH_ASSOC);
-//
-//        $data = [
-//            'count' => '',
-//            $this->getTable() . "s" => $queryResult
-//        ];
-//
-//        return $data;
-//    }
 
 
 }

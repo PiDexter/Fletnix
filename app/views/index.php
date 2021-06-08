@@ -21,7 +21,7 @@
         <div class="card-deck">
             <?php foreach($data['trending'] as $movie) : ?>
                 <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
-                    <img src="images/movie2.jpg" alt="">
+                    <img src="images/movie4.jpg" alt="">
                     <div class="card-body">
                         <span class="pre-text"><?php echo $movie['genre_name']; ?></span>
                         <h2><?php echo $movie['title']; ?></h2>

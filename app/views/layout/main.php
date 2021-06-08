@@ -30,7 +30,7 @@
                         <strong>FLETNIX</strong>
                     </a>
             </div>
-            <nav class="menu-horizontal">
+            <nav class="menu-horizontal" aria-label="Sidebar menu">
                 <ul>
                     <li><a href="/genre">Genres</a></li>
                     <li><a href="/movies">Films</a></li>
@@ -66,7 +66,7 @@
         </div>
 
         <!--       MAIN NAV ITEMS        -->
-        <nav class="menu-vertical">
+        <nav class="menu-vertical" aria-label="Site menu">
             <a href="/movies" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/movies-icon.svg" width="24" height="24" alt="" class="icon">
