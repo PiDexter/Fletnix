@@ -2,7 +2,7 @@
 /* @var $data array */
 ?>
 
-<div class="row vertical-center">
+<div id="pagination" class="row vertical-center">
     <div class="column content-left">
         <?php if ($data['page'] > 1) : ?>
             <a href='
