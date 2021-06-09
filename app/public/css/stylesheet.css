@@ -978,6 +978,69 @@ img.icon {
         align-items: center;
     }
 
+    /*
+     * MOVIE DETAILS
+     */
+    #movie-details.spotlight-grid {
+        margin-bottom: 35px
+    }
+
+    #movie-details .spotlight-row {
+        max-width: 65vw;
+        margin: auto;
+        min-width: 720px;
+    }
+
+    #movie-details .tabs-wrapper {
+        max-width: 65vw;
+        margin: auto;
+        min-width: 720px;
+    }
+
+    #movie-details .btn {
+        padding: 20px 50px;
+        font-size: 1.3em;
+        max-width: 350px;
+    }
+
+    #movie-details #play-button {
+        display: none;
+    }
+
+    #details {
+        max-width: 65vw;
+        margin: auto;
+        min-width: 720px;
+        font-size: 1.2em;
+    }
+
+    #details .tabs-wrapper .tab {
+        display: grid;
+        /* grid-auto-rows: auto; */
+        gap: 0 15px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        /* grid-template-columns: 1fr 1fr; */
+        grid-template-columns: repeat(auto-fit, minmax(100px, 4fr));
+        grid-template-rows: repeat(1, 1fr);
+        grid-auto-rows: 0;
+        order: unset;
+    }
+
+    #details .tab-label {
+        /*display: none;*/
+        flex-grow: unset;
+        order: unset;
+        cursor: unset;
+        font-size: 1.5em;
+    }
+
+    #details .tabs-wrapper input[type="radio"]:checked + .tab-label {
+        text-decoration: unset;
+        border-bottom: 2px solid #ffffff;
+    }
+
+
 
     /*
     * CARD
