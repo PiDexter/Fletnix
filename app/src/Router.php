@@ -48,22 +48,30 @@ class Router
 //            // '/movie',
 //            // '/movie/:id'
 //            // ]
+
         foreach (array_keys($this->routes[$method]) as $route) {
             $routes = explode('/', $route);
             array_shift($routes);
+
 
             // Wanneer in de routes array een route matched met de eerst url param
             // EN deze route ook matched met een ":" dan staat er een variabele in de route
             // Zet nu het huidige pad (bijv: movies/5) naar "movies/:id"
             // Omdat movies/5 geen route in de routes array is maar movies/id wel
-            if (strpos($route, $urlFragments[0]) && strpos($route, ':')) {
-                $path = $route;
-            } else {
-                throw new NotFoundException();
+
+            if (strpos($route, $urlFragments[0]) &&
+                strpos($route, ':') &&
+                count($routes) > 1) {
+                if ($routes[0] === $urlFragments[0]) {
+                    $path = $route;
+                } else {
+                    throw new NotFoundException();
+                }
             }
         }
         return $this->routes[$method][$path] ?? false;
     }
+
 
 
     /**
