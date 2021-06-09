@@ -36,6 +36,9 @@ class Router
     }
 
 
+    /**
+     * @throws NotFoundException
+     */
     public function routeMatch($path, $method, $urlFragments) {
 
 //            // Alle keys uit $routes[] als $route
@@ -55,8 +58,9 @@ class Router
             // Omdat movies/5 geen route in de routes array is maar movies/id wel
             if (strpos($route, $urlFragments[0]) && strpos($route, ':')) {
                 $path = $route;
+            } else {
+                throw new NotFoundException();
             }
-
         }
         return $this->routes[$method][$path] ?? false;
     }
