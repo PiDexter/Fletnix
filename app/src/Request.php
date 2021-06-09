@@ -15,6 +15,10 @@ class Request
     {
         // Verkrijg het pad van de request url (als niet bestaat, ga uit dat het de index pagina is)
         $path = $_SERVER['REQUEST_URI'] ?? '/';
+
+        // Verwijder een eventuele slash van het eind
+        $path = rtrim($path, '/');
+
         // Bekijk of er een '?' (parameter) in het pad staat
         $position = strpos($path, '?');
 

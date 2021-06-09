@@ -30,7 +30,7 @@ $app = new Application(dirname(__DIR__), $config);
 /*
  * HOME
  */
-$app->router->get('/', [HomeController::class, 'index']);
+$app->router->get('', [HomeController::class, 'index']);
 $app->router->get('/about', [AboutController::class, 'index']);
 
 /*
