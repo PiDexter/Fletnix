@@ -7,6 +7,7 @@ namespace app\controllers;
 use app\middleware\AuthMiddleware;
 use app\models\Movie;
 use app\src\Controller;
+use app\src\NotFoundException;
 
 class PlayMovieController extends Controller
 {
@@ -15,15 +16,16 @@ class PlayMovieController extends Controller
         $this->setMiddleware(new AuthMiddleware());
     }
 
-    public function show(int $id)
+    /**
+     * @throws NotFoundException
+     */
+    public function show(int $id): bool|array|string
     {
         $movie = new Movie();
-
         $movieDetails = $movie->findByID($id);
 
-        // Als movie niet gevonden kan worden
         if (!$movieDetails) {
-            return $this->render('404');
+            throw new NotFoundException();
         }
 
         $viewData = [
