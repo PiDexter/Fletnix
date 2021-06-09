@@ -8,6 +8,6 @@ use Exception;
 
 class ForbiddenException extends Exception
 {
-    protected $message = 'You don\'t have permission to access this page';
+    protected $message = 'Je dient ingelogd te zijn om deze pagina te bekijken.';
     protected $code = 403;
 }

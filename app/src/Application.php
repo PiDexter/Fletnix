@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace app\src;
 
+use Exception;
+
 class Application
 {
 
@@ -42,8 +44,13 @@ class Application
 
         try {
             echo $this->router->resolve();
-        } catch (\Exception $exception) {
-            echo $this->router->view('error', [$exception]);
+        } catch (Exception $exception) {
+
+            $this->response->setStatusCode($exception->getCode());
+
+            echo $this->router->view('error', [
+                'error' => $exception
+            ]);
         }
 
     }

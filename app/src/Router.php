@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace app\src;
 
 
+use ReflectionException;
 use ReflectionMethod;
 
 class Router
@@ -61,9 +62,9 @@ class Router
     }
 
 
-
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
+     * @throws NotFoundException
      */
     public function resolve()
     {
@@ -85,8 +86,7 @@ class Router
 
             // Als er geen dynamische route bestaat
             if (!$callback) {
-                $this->response->setStatusCode(404);
-                return "Not found";
+                throw new NotFoundException();
             }
         }
 
