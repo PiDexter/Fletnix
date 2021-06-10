@@ -14,6 +14,10 @@ class Validator
      */
     public function getErrors(): array
     {
+        $this->errors = array_map(static function($value) {
+            return '<label class="input-block fullwidth validation-error">' . $value . '</label>';
+            }, $this->errors);
+
         return $this->errors;
     }
 
@@ -57,11 +61,17 @@ class Validator
                                 }
                                 break;
 
+                            case 'password':
+                                if ($value !== $request['confirm_password']) {
+                                    $this->errors[$key] = 'Confirm password does not match password';
+                                }
+                                break;
+
                             default:
                                 break;
                         }
                     } else {
-                        $this->handleRuleArray($value, $rule);
+                        $this->handleRuleArray($key, $value, $rule);
                     }
                 }
 
@@ -72,21 +82,18 @@ class Validator
             return true;
         }
 
-        $this->errors = array_map(static function($value) { return '<label class="validation-error">' . $value . '</label>'; }, $this->errors);
-
-        var_dump($this->errors);
-        return $this->errors;
+        var_dump($this->getErrors());
+        return $this->getErrors();
     }
 
-    public function handleRuleArray($inputValue, array $rules): void
+    public function handleRuleArray($field, $inputValue, array $rules): void
     {
 
         foreach ($rules as $rule => $value) {
-
             switch ($rule) {
                 case 'min':
                     if (strlen($inputValue) < $value) {
-                        $this->errors[$rule] = 'To short, use a minimum of ' . $value . ' characters';
+                        $this->errors[$field] = 'To short, use a minimum of ' . $value . ' characters';
                     }
                     break;
 
