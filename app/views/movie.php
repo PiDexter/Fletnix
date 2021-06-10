@@ -3,13 +3,9 @@
     <div class="spotlight-text-frame">
         <div class="spotlight-row">
             <h1 class="spotlight-title">{{title}}</h1>
-<!--            <img src="/images/clock-icon.svg" width="16" height="16" alt="" class="icon">-->
-<!--            -->
             <p>{{description}}</p>
-
-
                 <div class="column content-left">
-                    <a href="#popup2" class="btn btn-primary fullwidth">
+                    <a href="#popup" class="btn btn-primary fullwidth">
                         <img src="/images/play-button-white-icon.svg" width="24" height="24" alt="" class="icon">
                         Afspelen
                     </a>
@@ -82,10 +78,10 @@
         </div>
 
     </div>
-    <div id="popup2" class="overlay">
+    <div id="popup" class="overlay">
         <a class="cancel" href="#!"></a>
         <div class="video">
-            <a href="#projects" class="popup-close">
+            <a href="#!" class="popup-close">
                 <img src="/images/close-icon.svg" width="24" height="24" alt="" class="icon">
                 close
             </a>

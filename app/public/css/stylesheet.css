@@ -741,7 +741,8 @@ img.icon {
 
 #movie-details .row {
     margin-bottom: 15px;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
 }
 
 #movie-details .column {
@@ -749,8 +750,8 @@ img.icon {
     margin-bottom: 5px;
 }
 
-#movie-details .column:first-child {
-    margin-bottom: 15px;
+#movie-description {
+    margin-top: 35px;
 }
 
 .column-title {
@@ -776,8 +777,6 @@ img.icon {
     "text picture"
     "abouttext abouttext"
     "hero-buttons hero-buttons";
-    /*margin-bottom: 75px;*/
-    /*margin: 20px 0 0 0;*/
 }
 
 #about-grid .column:first-child {
@@ -789,9 +788,7 @@ img.icon {
 }
 
 #about-description p {
-    /*font-weight: 400;*/
     font-size: calc(16px + .25vw);
-    /*line-height: 1.35;*/
 }
 
 #about .container {
@@ -810,14 +807,6 @@ img.icon {
 #about-text-intro h1 {
     font-weight: 700;
     margin: 0 0 10px 0;
-}
-
-#about-text-intro p {
-    /*margin-bottom: 25px;*/
-}
-
-#founder-name {
-    /*font-size: 18px;*/
 }
 
 .profile-picture {
@@ -947,6 +936,12 @@ img.icon {
         min-width: 720px;
     }
 
+    #movie-details .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
     #movie-details .btn {
         padding: 20px 50px;
         font-size: 1.3em;
@@ -968,6 +963,7 @@ img.icon {
     }
 
     #movie-description {
+        margin-top: unset;
         grid-column: 1/-1;
     }
 
@@ -980,11 +976,9 @@ img.icon {
 
     #details .tabs-wrapper .tab {
         display: grid;
-        /* grid-auto-rows: auto; */
         gap: 50px 15px;
         margin-top: 25px;
         margin-bottom: 25px;
-        /* grid-template-columns: 1fr 1fr; */
         grid-template-columns: repeat(auto-fit, minmax(250px, 4fr));
         grid-template-rows: repeat(1, 1fr);
         grid-auto-rows: 1fr;
@@ -992,7 +986,6 @@ img.icon {
     }
 
     #details .tab-label {
-        /*display: none;*/
         flex-grow: unset;
         order: unset;
         cursor: unset;
@@ -1018,11 +1011,9 @@ img.icon {
 
     .card-deck {
         display: grid;
-        /*grid-auto-rows: auto;*/
         gap: 0 15px;
         margin-top: 25px;
         margin-bottom: 25px;
-        /*grid-template-columns: 1fr 1fr;*/
         grid-template-columns: repeat(auto-fit, minmax(300px, 4fr));
         grid-template-rows: repeat(1, 1fr);
         grid-auto-rows: 0;
