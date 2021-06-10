@@ -936,9 +936,13 @@ img.icon {
         min-width: 720px;
     }
 
-    #movie-banner .row {
+    #movie-details .row {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    #movie-details .column {
+        margin-bottom: 15px;
     }
 
 
