@@ -30,30 +30,38 @@ class Validator
 
                 foreach ($rules[$key] as $rule) {
 
-                    switch ($rule) {
-                        case 'required':
-                            if (empty($value)) {
-                                $this->errors[$key] = 'Required field cannot be empty';
-                            }
-                            break;
+                    if (!is_array($rule)) {
 
-                        case 'type:email':
-                            if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                                $this->errors[$key] = 'Email address is not valid';
-                            }
-                            break;
+                        switch ($rule) {
+                            case 'required':
+                                if (empty($value)) {
+                                    $this->errors[$key] = 'Required field cannot be empty';
+                                }
+                                break;
 
-                        case 'numeric':
-                            if (!is_numeric($value)) {
-                                $this->errors[$key] = 'Only numbers are accepted';
-                            }
-                            break;
+                            case 'type:email':
+                                if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                                    $this->errors[$key] = 'Email address is not valid';
+                                }
+                                break;
 
-                        case 'string':
-                            if (!is_string($value)) {
-                                $this->errors[$key] = 'Only letters are accepted';
-                            }
-                            break;
+                            case 'numeric':
+                                if (!is_numeric($value)) {
+                                    $this->errors[$key] = 'Only numbers are accepted';
+                                }
+                                break;
+
+                            case 'string':
+                                if (!is_string($value)) {
+                                    $this->errors[$key] = 'Only letters are accepted';
+                                }
+                                break;
+
+                            default:
+                                break;
+                        }
+                    } else {
+                        $this->handleRuleArray($value, $rule);
                     }
                 }
 
@@ -64,7 +72,35 @@ class Validator
             return true;
         }
 
+        $this->errors = array_map(static function($value) { return '<label class="validation-error">' . $value . '</label>'; }, $this->errors);
+
+        var_dump($this->errors);
         return $this->errors;
+    }
+
+    public function handleRuleArray($inputValue, array $rules): void
+    {
+
+        foreach ($rules as $rule => $value) {
+
+            switch ($rule) {
+                case 'min':
+                    if (strlen($inputValue) < $value) {
+                        $this->errors[$rule] = 'To short, use a minimum of ' . $value . ' characters';
+                    }
+                    break;
+
+                case 'max':
+                    if (strlen($inputValue) > $value) {
+                        $this->errors[$rule] = 'To long, use a maximum of ' . $value . ' characters';
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
     }
 
 }

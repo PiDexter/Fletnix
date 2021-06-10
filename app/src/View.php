@@ -34,7 +34,7 @@ class View
             if (is_array($value)) {
                 $view = $this->nestedViewTag($view, $key, $value);
             } else {
-                $view = str_replace("{{" . $key . "}}", htmlspecialchars($value), $view);
+                $view = str_replace("{{" . $key . "}}", $value, $view);
             }
         }
         return $view;
@@ -44,19 +44,18 @@ class View
     // Remove all {{string}} that have no value
     private function removeEmptyTags($view): array|string|null
     {
-        return preg_replace('/{{(\w+)}}/', '', $view);
+        return preg_replace('/{{(.*?)}}/', '', $view);
     }
 
     // Proces een nested tag bijvoorbeeld: {{user->name}}
     private function nestedViewTag($view, $parentName, $data)
     {
-        foreach ($data as $key => $value) {
-
-            // Check if current element is not an array (otherwise Array to string conversion error pops up)
-            if (!is_array($key)) {
-                continue;
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                if (!is_array($value)) {
+                    $view = str_replace("{{" . $parentName . "->" . $key. "}}", $value, $view);
+                }
             }
-            $view = str_replace("{{" . $parentName . "->" . $key. "}}", htmlspecialchars($value), $view);
         }
         return $view;
     }

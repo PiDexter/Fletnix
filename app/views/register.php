@@ -7,11 +7,13 @@
             <div class="input-block fullwidth">
                 <input type="text" name="first_name" id="firstname-input" placeholder="First name" value="{{first_name}}" minlength="1" maxlength="40" required>
                 <label for="firstname-input" class="input-label">First name</label>
+                {{error->first_name}}
             </div>
 
             <div class="input-block fullwidth">
                 <input type="text" name="last_name" id="lastname-input" placeholder="Last name" value="{{last_name}}" minlength="1" maxlength="40" required>
                 <label for="lastname-input" class="input-label">Last name</label>
+                {{error->last_name}}
             </div>
 
             <div class="input-block fullwidth">
@@ -20,31 +22,37 @@
                     <option value="Belgium">Belgium</option>
                 </select>
                 <label for="country-input" class="input-label">Country</label>
+                {{error->country}}
             </div>
 
             <div class="input-block fullwidth">
                 <input type="date" name="date_of_birth" id="dateofbirth-input" value="{{date_of_birth}}" required>
                 <label for="dateofbirth-input" class="input-label">Date of birth</label>
+                {{error->date_of_birth}}
             </div>
 
             <div class="input-block fullwidth">
                 <input type="email" name="email" id="email-input" placeholder="E-mail" value="{{email}}" required>
                 <label for="email-input" class="input-label">E-mail</label>
+                {{error->email}}
             </div>
 
             <div class="input-block fullwidth">
                 <input type="number" name="bank_number" id="banknumber-input" placeholder="Bank account number" value="{{bank_number}}" required>
                 <label for="banknumber-input" class="input-label">Bank account number</label>
+                {{error->bank_number}}
             </div>
 
             <div class="input-block fullwidth">
                 <input type="password" name="password" id="password-input" placeholder="Password" minlength="8" required>
                 <label for="password-input" class="input-label">Password</label>
+                {{error->password}}
             </div>
 
             <div class="input-block fullwidth">
                 <input type="password" name="confirm_password" id="confirmpassword-input" placeholder="Confirm Password" required>
                 <label for="confirmpassword-input" class="input-label">Confirm Password</label>
+                {{error->confirm_password}}
             </div>
 
             <div class="input-block fullwidth">

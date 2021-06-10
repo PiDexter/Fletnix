@@ -843,6 +843,12 @@ img.icon {
     margin-top: 25px;
 }
 
+label.validation-error {
+    color: var(--red);
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
 #error .column:first-child {
     margin-right: 15px;
 }
