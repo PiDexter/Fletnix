@@ -1,6 +1,6 @@
 <section id="loginForm" class="form-container">
     <div class="container">
-        <h1 class="form-title">Inloggen</h1>
+        <h1 class="form-title">Login</h1>
         <form method="post">
             <div class="input-block fullwidth">
                 <input type="email" id="email-input" name="email" placeholder="E-mail" value="{{email}}" required>
@@ -17,8 +17,8 @@
 
         <div class="row" id="loginSignup">
             <div class="column content-left">
-                <p>Nog geen lid?
-                    <a href="/register">Registreer je nu</a>
+                <p>Not registered?
+                    <a href="/register"><u>Create account</u></a>
                 </p>
             </div>
         </div>

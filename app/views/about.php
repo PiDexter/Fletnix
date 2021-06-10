@@ -13,7 +13,7 @@
 
             <div id="about-description">
                 <p>
-                    Fletnix is een video content platform gericht op wetenschap, educatie en zelfontwikkeling.
+                    Fletnix is a video content platform focused on science, education and self-development content.
                 </p>
             </div>
 
@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="column">
                         <a href="/register" class="btn btn-primary fullwidth">
-                            Lid worden
+                            Join Fletnix
                         </a>
                     </div>
                     <div class="column">

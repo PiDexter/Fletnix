@@ -366,6 +366,9 @@ CARD (DECK)
 
 .card-body h2 {
     font-size: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .card-title {

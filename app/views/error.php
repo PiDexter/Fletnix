@@ -12,10 +12,10 @@
         <div class="hero-buttons">
             <div class="row">
                 <div class="column">
-                    <a href="/register" class="btn btn-primary fullwidth">Lid worden!</a>
+                    <a href="/register" class="btn btn-primary fullwidth">Register now!</a>
                 </div>
                 <div class="column">
-                    <a href="/login" class="btn btn-secondary fullwidth">Inloggen</a>
+                    <a href="/login" class="btn btn-secondary fullwidth">Login</a>
                 </div>
             </div>
         </div>

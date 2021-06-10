@@ -11,7 +11,7 @@
             <div class="column content-right">
                 <a href="/search" class="btn btn-bordered">
                     <img src="/images/search-icon.svg" width="16" height="16" alt="search icon" class="icon">
-                    Zoeken
+                    Search
                 </a>
             </div>
         </div>

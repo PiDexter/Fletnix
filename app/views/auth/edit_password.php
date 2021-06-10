@@ -7,27 +7,27 @@
 
             @displayFlashMessage
 
-        <h1 class="form-title">Wachtwoord wijzigen</h1>
+        <h1 class="form-title">Change password</h1>
 
         <form method="post">
 
             <div class="input-block fullwidth">
-                <input type="password" name="currentPassword" id="currentpassword-input" placeholder="Huidig wachtwoord" required>
-                <label for="currentpassword-input" class="input-label">Huidig wachtwoord</label>
+                <input type="password" name="currentPassword" id="currentpassword-input" placeholder="Current password" required>
+                <label for="currentpassword-input" class="input-label">Current password</label>
             </div>
 
             <div class="input-block fullwidth">
-                <input type="password" name="newPassword" id="newpassword-input" placeholder="Nieuw wachtwoord" required>
-                <label for="newpassword-input" class="input-label">Nieuw wachtwoord</label>
+                <input type="password" name="newPassword" id="newpassword-input" placeholder="New password" required>
+                <label for="newpassword-input" class="input-label">New password</label>
             </div>
 
             <div class="input-block fullwidth">
-                <input type="password" name="confirmPassword" id="confirmpassword-input" placeholder="Confirm Password" required>
-                <label for="confirmpassword-input" class="input-label">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmpassword-input" placeholder="Confirm password" required>
+                <label for="confirmpassword-input" class="input-label">Confirm password</label>
             </div>
 
             <div class="input-block fullwidth">
-                <button type="submit" class="btn btn-primary">Wijziging opslaan</button>
+                <button type="submit" class="btn btn-primary">Save password</button>
             </div>
 
         </form>

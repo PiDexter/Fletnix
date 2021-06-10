@@ -21,11 +21,10 @@
         <label for="tab-1" class="tab-label">Details</label>
         <div class="tab" id="movie-details">
 
-
             <div class="row">
                 <div class="column content-left vertical-center">
                     <img src="/images/director-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="column-title">Regisseur</span>
+                    <span class="column-title">Director</span>
                 </div>
                 <div class="column">
                     <span>{{director}}</span>
@@ -34,7 +33,7 @@
             <div class="row">
                 <div class="column content-left vertical-center">
                     <img src="/images/calendar-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="column-title">Publicatiejaar</span>
+                    <span class="column-title">Publication year</span>
                 </div>
                 <div class="column">
                     <span>{{publication_year}}</span>
@@ -44,16 +43,16 @@
             <div class="row">
                 <div class="column content-left vertical-center">
                     <img src="/images/clock-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="column-title">Tijdsduur</span>
+                    <span class="column-title">Duration</span>
                 </div>
                 <div class="column">
-                    <span>{{duration}} minuten</span>
+                    <span>{{duration}} minutes</span>
                 </div>
             </div>
             <div id="movie-description" class="row">
                 <div class="column content-left vertical-center">
                     <img src="/images/director-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="column-title">Samenvatting</span>
+                    <span class="column-title">Summary</span>
                 </div>
                 <div class="column">
                     <span>{{description}}</span>
@@ -63,7 +62,7 @@
         </div>
 
         <input type="radio" name="tabs" id="tab-2">
-        <label for="tab-2" class="tab-label">Acteurs</label>
+        <label for="tab-2" class="tab-label">Cast</label>
         <div class="tab">
             <dl id="movie-cast-list">
                 <?php foreach($data as $persons) : ?>
@@ -76,7 +75,6 @@
                 <?php endforeach; ?>
             </dl>
         </div>
-
     </div>
     <div id="popup" class="overlay">
         <a class="cancel" href="#!"></a>

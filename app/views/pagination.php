@@ -11,7 +11,7 @@
                     <?php else: ?>
                         <?php echo "?page=" . $data['page'] - 1; ?>
                     <?php endif; ?>
-                    '  class='btn btn-bordered'>Vorige</a>
+                    '  class='btn btn-bordered'>Previous</a>
         <?php endif; ?>
     </div>
 
@@ -27,7 +27,7 @@
                     <?php else: ?>
                         <?php echo "?page=" . $data['page'] + 1; ?>
                     <?php endif; ?>
-                    ' class='btn btn-primary'>Volgende</a>
+                    ' class='btn btn-primary'>Next</a>
         <?php endif; ?>
     </div>
 </div>

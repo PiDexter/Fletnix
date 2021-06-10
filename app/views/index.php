@@ -3,12 +3,12 @@
     <div class="spotlight-text-frame">
         <div class="spotlight-row">
             <h1 class="spotlight-title">Mind explained</h1>
-            <p>Heb je je ooit afgevraagd wat er in je hoofd gebeurt? Van dromen tot angststoornissen, ontdek in deze verhelderende serie hoe je hersenen werken.</p>
+            <p>Have you ever wondered what's going on in your head? From dreams to anxiety disorders, discover how your brain works in this enlightening movie.</p>
             <div class="column content-left">
                 <?php if(!isset($_SESSION['user'])) : ?>
-                    <a href="/register" class="btn btn-primary">Kijken? Word lid!</a>
+                    <a href="/register" class="btn btn-primary">Register to watch!</a>
                 <?php else : ?>
-                    <a href="/movie/968" class="btn btn-primary">Bekijken</a>
+                    <a href="/movie/968" class="btn btn-primary">Watch</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -34,7 +34,6 @@
     <div class="slider-row" id="Science">
         <h2 class="row-title">Science</h2>
         <div class="card-deck">
-
             <?php foreach($data['documentary'] as $movie) : ?>
                 <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
                     <img src="images/movie2.jpg" width="300" height="180" alt="<?php echo $movie['title']; ?>">

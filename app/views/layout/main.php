@@ -32,20 +32,20 @@
             </div>
             <nav class="menu-horizontal" aria-label="Sidebar menu">
                 <ul>
-                    <li><a href="/about">Over Fletnix</a></li>
+                    <li><a href="/about">About</a></li>
                     <li><a href="/genre">Genres</a></li>
-                    <li><a href="/movies">Films</a></li>
-                    <li><a href="/search">Zoeken</a></li>
+                    <li><a href="/movies">Movies</a></li>
+                    <li><a href="/search">Search</a></li>
                 </ul>
             </nav>
 
             <div class="column content-right">
                 <?php if(!isset($_SESSION['user'])) : ?>
-                <a href="/login" class="btn btn-primary">Inloggen</a>
+                <a href="/login" class="btn btn-primary">Login</a>
                     <?php else : ?>
                     <a href="/profile" class="username vertical-center">
                         <div class="username-text">
-                            <span class="pre-text">Ingelogd als</span>
+                            <span class="pre-text">Your account</span>
                             <span><?php echo $_SESSION['name'] ?></span>
                         </div>
                         <img src="/images/user-icon.svg" width="34" height="34" alt="">
@@ -71,7 +71,7 @@
             <a href="/movies" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/movies-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="menu-label">Films</span>
+                    <span class="menu-label">Movies</span>
                 </div>
                 <div class="column content-right">
                     <img src="/images/right-arrow-icon.svg" width="16" height="16" alt="" class="icon">
@@ -91,7 +91,7 @@
             <a href="/search" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/search-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="menu-label">Zoeken</span>
+                    <span class="menu-label">Search</span>
                 </div>
                 <div class="column content-right">
                     <img src="/images/right-arrow-icon.svg" width="16" height="16" alt="" class="icon">
@@ -104,7 +104,7 @@
             <a href="/about" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/info-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="menu-label">Over Fletnix</span>
+                    <span class="menu-label">About Fletnix</span>
                 </div>
             </a>
 
@@ -112,14 +112,14 @@
             <a href="/about" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/sign-up-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="menu-label">Account aanmaken</span>
+                    <span class="menu-label">Create account</span>
                 </div>
             </a>
         <?php else : ?>
             <a href="/logout" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/logout-icon.svg" width="24" height="24" alt="" class="icon">
-                    <span class="menu-label">Uitloggen</span>
+                    <span class="menu-label">Logout</span>
                 </div>
             </a>
         <?php endif; ?>
