@@ -22,16 +22,15 @@ class RegisterController extends Controller
         $request = $request->getBody();
 
         $rules = [
-            'first_name' => ['required', ['min' => 5], ],
-            'email' => ['required', 'type:email'],
-            'password' => ['password']
+            'first_name' => ['required', ['min' => 1], ['max' => 30], 'string'],
+            'last_name' => ['required', ['min' => 1], ['max' => 30], 'string'],
+            'email' => ['required', 'type:email', 'unique:email'],
+            'password' => ['password'],
         ];
 
 
         $validator = new Validator();
-        $validate = $validator->validate($request, $rules);
-
-
+        $errors = $validator->validate($request, $rules);
 
         $user = [
             'email' => $request['email'],
@@ -41,21 +40,11 @@ class RegisterController extends Controller
             'country' => $request['country'],
             'date_of_birth' => $request['date_of_birth'],
             'bank_number' => $request['bank_number'],
-            'er' => ['first_name' => 'test']
         ];
 
 
         if ($validator->hasErrors()) {
-            $user['error'] = $validate;
-            var_dump($user);
-            return $this->render('register', $user);
-        }
-
-        if ($request['password'] !== $request['confirm_password']) {
-            return $this->render('register', $user);
-        }
-
-        if ((new User)->getByEmail($request['email'])) {
+            $user['error'] = $errors;
             return $this->render('register', $user);
         }
 

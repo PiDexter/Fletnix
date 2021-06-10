@@ -4,6 +4,8 @@
 namespace app\src;
 
 
+use app\models\User;
+
 class Validator
 {
 
@@ -67,6 +69,12 @@ class Validator
                                 }
                                 break;
 
+                            case 'unique:email':
+                                if ((new User)->getByEmail($request['email'])) {
+                                    $this->errors[$key] = 'This email is already registered';
+                                }
+                                break;
+
                             default:
                                 break;
                         }
@@ -82,7 +90,6 @@ class Validator
             return true;
         }
 
-        var_dump($this->getErrors());
         return $this->getErrors();
     }
 
