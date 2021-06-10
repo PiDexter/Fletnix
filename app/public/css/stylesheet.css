@@ -262,6 +262,7 @@ INPUT
     display: flex;
     flex-flow: column wrap;
     position: relative;
+    margin-bottom: 20px;
 }
 
 input {
@@ -579,6 +580,11 @@ h1.page-title {
     font-size: 1.5em;
 }
 
+.form-title {
+    color: var(--white);
+    font-size: 1.9em;
+}
+
 
 /*
 * LOGIN PAGE
@@ -665,6 +671,8 @@ h1.page-title {
 #movielist .card-grid > .card {
     flex-direction: column;
     align-items: flex-start;
+    max-width: 300px;
+    height: auto;
 }
 
 #profile-list .card-grid {
@@ -832,6 +840,13 @@ img.icon {
     margin-top: 25px;
 }
 
+#error .column:first-child {
+    margin-right: 15px;
+}
+
+#overview {
+    margin-top: 30px;
+}
 
 
 
@@ -1126,10 +1141,6 @@ img.icon {
     */
     #error {
         text-align: center;
-    }
-
-    #error .column:first-child {
-        margin-right: 15px;
     }
 
     #error.form-container {

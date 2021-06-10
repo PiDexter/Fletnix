@@ -14,8 +14,13 @@ class SearchFilterController extends Controller
 {
     public function index()
     {
-        $data = (new Genre)->fetchColumn('genre_name');
-//        var_dump($data);
+        $genres = (new Genre)->fetchColumn('genre_name');
+
+        $data = [
+            'genre' => $genres,
+            'years' => range(strftime("%Y", time()), 1970)
+        ];
+
         return $this->render('search_filter', $data);
     }
 
