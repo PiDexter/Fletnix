@@ -1,12 +1,12 @@
 <section id="loginForm" class="form-container">
     <div class="container">
         <h1 class="page-title">Inloggen</h1>
-        <form action="" method="post">
+        <form method="post">
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="email" class="input-textField" name="email" placeholder="E-mail" value="{{email}}" required>
-                        <label for="email" class="input-label">E-mail</label>
+                        <input type="email" id="email-input" name="email" placeholder="E-mail" value="{{email}}" required>
+                        <label for="email-input" class="input-label">E-mail</label>
                     </div>
                 </div>
             </div>
@@ -14,8 +14,8 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="password" class="input-textField" name="password" placeholder="Password" autocomplete="on" required>
-                        <label for="password" class="input-label">Password</label>
+                        <input type="password" id="password-input" name="password" placeholder="Password" autocomplete="on" required>
+                        <label for="password-input" class="input-label">Password</label>
                     </div>
                 </div>
             </div>

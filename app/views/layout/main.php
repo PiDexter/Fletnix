@@ -32,6 +32,7 @@
             </div>
             <nav class="menu-horizontal" aria-label="Sidebar menu">
                 <ul>
+                    <li><a href="/about">Over Fletnix</a></li>
                     <li><a href="/genre">Genres</a></li>
                     <li><a href="/movies">Films</a></li>
                     <li><a href="/search">Zoeken</a></li>
@@ -99,7 +100,7 @@
         </nav>
 
         <!--        FOOTER NAV      -->
-        <div aria-label="sidebar footer nav" class="menu-vertical">
+        <div class="menu-vertical">
             <a href="/about" class="row vertical-center">
                 <div class="column content-left vertical-center">
                     <img src="/images/info-icon.svg" width="24" height="24" alt="" class="icon">
@@ -133,7 +134,7 @@
 
     <footer>
         <div class="flex-container">
-            <p>© Footer</p>
+            <p>© Christiaan Wiggers</p>
         </div>
     </footer>
 

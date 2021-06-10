@@ -1,4 +1,4 @@
-<section id="movie-details" class="spotlight-grid">
+<section id="movie-banner" class="spotlight-grid">
     <img src="/images/hero-image.jpg" alt="" title="" class="spotlight-image">
     <div class="spotlight-text-frame">
         <div class="spotlight-row">
@@ -64,7 +64,7 @@
 
         <input type="radio" name="tabs" id="tab-2">
         <label for="tab-2" class="tab-label">Acteurs</label>
-        <div class="tab" aria-label="film cast">
+        <div class="tab">
             <dl id="movie-cast-list">
                 <?php foreach($data as $persons) : ?>
                     <?php if(is_array($persons)) : ?>
@@ -85,7 +85,7 @@
                 <img src="/images/close-icon.svg" width="24" height="24" alt="" class="icon">
                 close
             </a>
-            <video width="100%" height="" class="spotlight-video" controls>
+            <video class="spotlight-video" controls>
                 <source src="/video/movie_example_1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>

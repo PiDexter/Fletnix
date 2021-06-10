@@ -8,20 +8,20 @@
             @displayFlashMessage
 
         <h1>Wachtwoord wijzigen</h1>
-        <form action="" method="post">
+        <form method="post">
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="password" class="input-textField" name="currentPassword" placeholder="Huidig wachtwoord" required>
-                        <label for="currentPassword" class="input-label">Huidig wachtwoord</label>
+                        <input type="password" name="currentPassword" id="currentpassword-input" placeholder="Huidig wachtwoord" required>
+                        <label for="currentpassword-input" class="input-label">Huidig wachtwoord</label>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="password" class="input-textField" name="newPassword" placeholder="Nieuw wachtwoord" required>
-                        <label for="newPassword" class="input-label">Nieuw wachtwoord</label>
+                        <input type="password" name="newPassword" id="newpassword-input" placeholder="Nieuw wachtwoord" required>
+                        <label for="newpassword-input" class="input-label">Nieuw wachtwoord</label>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@
             <div class="row">
                 <div class="column">
                     <div class="input-block fullwidth">
-                        <input type="password" class="input-textField" name="confirmPassword" placeholder="Confirm Password" required>
-                        <label for="confirmPassword" class="input-label">Confirm Password</label>
+                        <input type="password" name="confirmPassword" id="confirmpassword-input" placeholder="Confirm Password" required>
+                        <label for="confirmpassword-input" class="input-label">Confirm Password</label>
                     </div>
                 </div>
             </div>

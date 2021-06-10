@@ -920,39 +920,39 @@ img.icon {
     /*
      * MOVIE DETAILS
      */
-    #movie-details.spotlight-grid {
+    #movie-banner.spotlight-grid {
         margin-bottom: 35px
     }
 
-    #movie-details .spotlight-row {
+    #movie-banner .spotlight-row {
         max-width: 65vw;
         margin: auto;
         min-width: 720px;
     }
 
-    #movie-details .tabs-wrapper {
+    #movie-banner .tabs-wrapper {
         max-width: 65vw;
         margin: auto;
         min-width: 720px;
     }
 
-    #movie-details .row {
+    #movie-banner .row {
         flex-direction: column;
         align-items: flex-start;
     }
 
 
-    #movie-details .btn {
+    #movie-banner .btn {
         padding: 20px 50px;
         font-size: 1.3em;
         max-width: 350px;
     }
 
-    #movie-details #play-button {
+    #movie-banner #play-button {
         display: none;
     }
 
-    #movie-details .column-title {
+    #movie-banner .column-title {
         font-size: 1.1em;
     }
 

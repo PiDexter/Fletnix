@@ -7,7 +7,7 @@
             </div>
 
             <div id="about-text-intro">
-                <h1>Fletnix </br> Founder</h1>
+                <h1>Fletnix <br> Founder</h1>
                 <span id="founder-name">Christiaan Wiggers</span>
             </div>
 
