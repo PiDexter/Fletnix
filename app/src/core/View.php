@@ -59,7 +59,7 @@ class View
 
     protected function renderPagination($view, $data): array|string
     {
-        $paginationView = $this->renderOnlyView('pagination', $data);
+        $paginationView = $this->renderOnlyView('layout/components/pagination', $data);
         return str_replace("@pagination", (string) $paginationView, $view);
     }
 
