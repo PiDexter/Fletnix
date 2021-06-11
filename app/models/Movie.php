@@ -22,7 +22,7 @@ class Movie extends Model
         return $builder->query()->fetch();
     }
 
-    public function getMovieDirectorByID($id)
+    public function getMovieDirectorByID($id): string
     {
         $this->builder->select(['*'], 'person');
         $this->builder->join('movie_director', ['person.person_id' => 'movie_director.person_id']);
@@ -53,6 +53,25 @@ class Movie extends Model
         }
 
         return $castList;
+    }
+
+    public function trending(): array
+    {
+        return $this->builder
+            ->select(['movie.movie_id', 'movie.title', 'movie_genre.genre_name'], 'movie')
+            ->join('movie_genre', ['movie.movie_id' => 'movie_genre.movie_id'])
+            ->limit(10, 6)
+            ->query()->fetchAll();
+    }
+
+    public function getByGenre(string $genre): array
+    {
+        return $this->builder
+            ->select(['movie.movie_id', 'movie.title', 'movie_genre.genre_name'], 'movie')
+            ->join('movie_genre', ['movie.movie_id' => 'movie_genre.movie_id'])
+            ->where('movie_genre.genre_name', '=', $genre)
+            ->limit(0, 6)
+            ->query()->fetchAll();
     }
 
 
