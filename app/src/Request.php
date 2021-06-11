@@ -7,9 +7,10 @@ namespace app\src;
 
 class Request
 {
+
     /**
      * Returns the url path
-     * @return false|mixed|string
+     * @return string
      */
     public function getPath(): string
     {
