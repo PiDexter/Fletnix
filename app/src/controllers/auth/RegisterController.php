@@ -28,7 +28,8 @@ class RegisterController extends Controller
             'last_name' => ['required', ['min' => 1], ['max' => 40], 'string'],
             'email' => ['required', 'email', 'unique:email'],
             'country' => ['required', 'string'],
-            'password' => ['password'],
+            'password' => ['required', ['min' => 8], ['max' => 64], 'password:confirm'],
+            'confirm_password' => ['required', ['min' => 8], ['max' => 64]],
             'bank_number' => ['required', 'numeric', ['min' => 8], ['max' => 20]]
         ];
 
