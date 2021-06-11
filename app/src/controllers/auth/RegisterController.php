@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\src\controllers;
+namespace app\src\controllers\auth;
 
 
 

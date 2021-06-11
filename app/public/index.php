@@ -9,11 +9,11 @@ use app\src\controllers\auth\LogoutController;
 use app\src\controllers\auth\PasswordController;
 use app\src\controllers\auth\ProfileController;
 use app\src\controllers\auth\ProfileEditController;
+use app\src\controllers\auth\RegisterController;
 use app\src\controllers\GenreController;
 use app\src\controllers\HomeController;
 use app\src\controllers\MovieController;
 use app\src\controllers\PlayMovieController;
-use app\src\controllers\RegisterController;
 use app\src\controllers\SearchFilterController;
 use app\src\core\Application;
 
