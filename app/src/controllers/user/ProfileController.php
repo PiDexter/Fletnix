@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\src\controllers\auth;
+namespace app\src\controllers\user;
 
 
 use app\src\core\Application;
@@ -19,6 +19,6 @@ class ProfileController extends Controller
     public function index(): bool|array|string
     {
         $user = (new User)->findByID(Application::$app->session->get('user'));
-        return $this->render('auth/profile', $user);
+        return $this->render('user/profile', $user);
     }
 }

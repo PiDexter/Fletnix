@@ -1,6 +1,3 @@
-<?php
-?>
-
 <section class="form-container" id="edit-account">
     <div class="container">
 

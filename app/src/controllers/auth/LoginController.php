@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     public function index(): bool|array|string
     {
-        return $this->render('login');
+        return $this->render('auth/login');
     }
 
     public function login(Request $request): bool|array|string
@@ -33,6 +33,6 @@ class LoginController extends Controller
             'email' => $request['email']
         ];
 
-        return $this->render('login', $data);
+        return $this->render('auth/login', $data);
     }
 }

@@ -1,7 +1,3 @@
-<?php
-/** @var $data array*/
-?>
-
 <section class="form-container" id="profile-list">
     <div class="container">
         <h1>Profile</h1>

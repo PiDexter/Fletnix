@@ -19,7 +19,7 @@ class HomeController extends Controller
             'documentary' => $documentary
         ];
 
-        return $this->render('index', $data);
+        return $this->render('home', $data);
     }
 
 }

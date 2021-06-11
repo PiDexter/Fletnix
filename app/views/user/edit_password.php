@@ -1,12 +1,6 @@
-<?php
-?>
-
 <section class="form-container" id="edit-password">
 
     <div class="container">
-
-            @displayFlashMessage
-
         <h1 class="form-title">Change password</h1>
 
         <form method="post">

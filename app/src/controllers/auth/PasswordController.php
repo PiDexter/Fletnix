@@ -7,7 +7,6 @@ use app\src\core\Controller;
 use app\src\core\Request;
 use app\src\middleware\AuthMiddleware;
 use app\src\models\User;
-use app\src\session\FlashMessage;
 
 class PasswordController extends Controller
 {
@@ -18,7 +17,7 @@ class PasswordController extends Controller
 
     public function index(): bool|array|string
     {
-        return $this->render('auth/edit_password');
+        return $this->render('user/edit_password');
     }
 
     public function update(Request $request)
@@ -41,10 +40,10 @@ class PasswordController extends Controller
                 // Bewaar nieuw wachtwoord
                 (new User)->update($user['user_id'], $data);
             } else {
-                FlashMessage::error('Nieuw wachtwoord komt niet overeen.');
+//                FlashMessage::error('Nieuw wachtwoord komt niet overeen.');
             }
         } else {
-            FlashMessage::error('Onjuist wachtwoord.');
+//            FlashMessage::error('Onjuist wachtwoord.');
         }
         Application::$app->response->redirect('/profile/change-password');
     }

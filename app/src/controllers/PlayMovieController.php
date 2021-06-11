@@ -38,6 +38,6 @@ class PlayMovieController extends Controller
             'movie_cast' => $movie->getCastByID($id)
         ];
 
-        return $this->render('movie', $viewData);
+        return $this->render('movie_details', $viewData);
     }
 }

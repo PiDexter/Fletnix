@@ -16,7 +16,7 @@ class RegisterController extends Controller
 {
     public function index(): bool|array|string
     {
-        return $this->render('register');
+        return $this->render('auth/register');
     }
 
     public function create(Request $request): bool|array|string
@@ -52,7 +52,7 @@ class RegisterController extends Controller
             Application::$app->response->redirect('/login');
         }
 
-        return $this->render('register', $user);
+        return $this->render('auth/register', $user);
     }
 
 }
