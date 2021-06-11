@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-use app\controllers\AboutController;
-use app\controllers\auth\ProfileController;
-use app\controllers\auth\ProfileEditController;
-use app\controllers\auth\PasswordController;
-use app\controllers\AuthController;
-use app\controllers\GenreController;
-use app\controllers\MovieController;
-use app\controllers\PlayMovieController;
-use app\controllers\RegisterController;
-use app\controllers\SearchFilterController;
-use app\src\Application;
-use app\controllers\HomeController;
+
+use app\src\controllers\AboutController;
+use app\src\controllers\auth\AuthController;
+use app\src\controllers\auth\PasswordController;
+use app\src\controllers\auth\ProfileController;
+use app\src\controllers\auth\ProfileEditController;
+use app\src\controllers\GenreController;
+use app\src\controllers\HomeController;
+use app\src\controllers\MovieController;
+use app\src\controllers\PlayMovieController;
+use app\src\controllers\RegisterController;
+use app\src\controllers\SearchFilterController;
+use app\src\core\Application;
 
 require_once __DIR__ . '/../autoload.php';
 
