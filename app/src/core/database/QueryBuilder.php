@@ -78,7 +78,7 @@ class QueryBuilder
         return $this;
     }
 
-    public function orWhere($column, $operator, $value)
+    public function orWhere($column, $operator, $value): static
     {
         $whereClause = [
             "OR",
@@ -125,7 +125,7 @@ class QueryBuilder
      */
     public function insert(string $table, array $values): static
     {
-        $query = [
+        $stmt = [
             "INSERT INTO",
             $table,
             $this->insertInColumns($values),
@@ -133,7 +133,7 @@ class QueryBuilder
             $this->createQueryParams($values)
         ];
 
-        $this->query = $query;
+        $this->query = $stmt;
         return $this;
     }
 
@@ -144,24 +144,24 @@ class QueryBuilder
      */
     public function update(string $table, array $values = []): static
     {
-        $query = [
+        $stmt = [
             "UPDATE",
             $table,
             "SET",
             $this->setParams($values),
         ];
 
-        $this->query = $query;
+        $this->query = $stmt;
         return $this;
     }
 
     public function delete(string $table): static
     {
-        $query = [
+        $stmt = [
             "DELETE FROM",
             $table,
         ];
-        $this->query = $query;
+        $this->query = $stmt;
         return $this;
     }
 
@@ -172,13 +172,13 @@ class QueryBuilder
      */
     public function join(string $table, array $values): static
     {
-        $join = [
+        $stmt = [
             "INNER JOIN",
             $table,
             "ON",
             $this->onColumns($values)
         ];
-        $this->join[] = implode(' ', $join);
+        $this->join[] = implode(' ', $stmt);
         return $this;
     }
 
@@ -207,11 +207,11 @@ class QueryBuilder
      */
     public function groupBy(array $columns): static
     {
-        $groupBy = [
+        $stmt = [
             "GROUP BY",
             $this->parseColumns($columns),
         ];
-        $this->groupBy[] = implode(' ', $groupBy);
+        $this->groupBy[] = implode(' ', $stmt);
         return $this;
     }
 
@@ -231,12 +231,12 @@ class QueryBuilder
      */
     public function orderBy(array $columns, string $sortOrder): static
     {
-        $orderBy = [
+        $stmt = [
             "ORDER BY",
             $this->parseColumns($columns),
             $sortOrder
         ];
-        $this->orderBy[] = implode(' ', $orderBy);
+        $this->orderBy[] = implode(' ', $stmt);
         return $this;
     }
 
@@ -256,16 +256,16 @@ class QueryBuilder
      */
     public function limit(int $offset, int $rowcount): static
     {
-        $limit = [
+        $stmt = [
             "LIMIT",
             $offset . ",",
             $rowcount
         ];
-        $this->limit = $limit;
+        $this->limit = $stmt;
         return $this;
     }
 
-    private function setLimit()
+    private function setLimit(): string
     {
         return implode(' ', $this->limit);
     }
@@ -355,16 +355,16 @@ class QueryBuilder
         return $stmt;
     }
 
-    public function count($table)
+    public function count($table): static
     {
-        $query = [
+        $stmt = [
             "SELECT",
             "COUNT(*)",
             "FROM",
             $table
         ];
 
-        $this->query = $query;
+        $this->query = $stmt;
         return $this;
     }
 
