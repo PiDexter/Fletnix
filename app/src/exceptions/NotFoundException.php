@@ -8,6 +8,6 @@ use Exception;
 
 class NotFoundException extends Exception
 {
-    protected $message = 'Deze pagina bestaat niet.';
+    protected $message = 'This page does not exists';
     protected $code = 404;
 }
