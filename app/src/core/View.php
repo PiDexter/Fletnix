@@ -4,8 +4,6 @@
 namespace app\src\core;
 
 
-use app\src\session\FlashMessage;
-
 class View
 {
 
@@ -18,7 +16,6 @@ class View
 
         // Vervang alle {{var}} & {{key->value}} tags in de view
         $view = $this->replaceViewTags($view, $data);
-        $view = $this->renderFlashMessage($view, $data);
         $view = $this->renderPagination($view, $data);
 
         $view = $this->removeEmptyTags($view);
@@ -60,28 +57,6 @@ class View
         return $view;
     }
 
-    // In een view kan een flash message getoond worden via "@displayError"
-    protected function renderFlashMessage($view, $data): array|string
-    {
-        // TODO: MULTIPLE DISPLAY METHODS TO DISPLAY OTHER MESSAGE TYPES
-        $flashView = $this->renderOnlyView('layout/flash_message', $data);
-
-        foreach (FlashMessage::TYPES as $messageType) {
-            $flashView = str_replace(
-                array(
-                    "{{errorMessage}}",
-                    "{{messageType}}"
-                ),
-                array(
-                    (string)FlashMessage::display($messageType),
-                    $messageType
-                ),
-                $flashView);
-        }
-        return str_replace("@displayFlashMessage", (string) $flashView, $view);
-
-    }
-
     protected function renderPagination($view, $data): array|string
     {
         $paginationView = $this->renderOnlyView('pagination', $data);
@@ -103,7 +78,7 @@ class View
     public function renderOnlyView($view, $data): bool|string
     {
         // Zet parameter key als variable naam met als waarde de value
-        extract($data);
+        extract($data, EXTR_OVERWRITE);
 
         // Bewaar alles in een string - ook wel: output buffer - voorkomt directe weergave
         ob_start();
