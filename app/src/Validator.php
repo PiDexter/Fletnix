@@ -9,18 +9,39 @@ use app\models\User;
 class Validator
 {
 
+    public array $rules;
+    public array $request;
     public array $errors = [];
 
-    /**
-     * @return array
-     */
+    private array $errorMessages = [
+        'required' => 'Required field cannot be empty',
+        'email' => 'Email address is not valid',
+        'numeric' => 'Only numbers are accepted',
+        'string' => 'Only letters are accepted',
+        'password' => 'Password does not match',
+        'unique:email' => 'This email is already registered',
+        'min' => 'To short, use a minimum of %s characters',
+        'max' => 'To long, use a maximum of %s characters'
+    ];
+
+    public function __construct(array $request, array $rules)
+    {
+        $this->rules = $rules;
+        $this->request = $request;
+        $this->validate();
+    }
+
+
     public function getErrors(): array
     {
-        $this->errors = array_map(static function($value) {
-            return '<label class="input-block fullwidth validation-error">' . $value . '</label>';
-            }, $this->errors);
+        return $this->formatError();
+    }
 
-        return $this->errors;
+    private function formatError(): array
+    {
+        return array_map(static function($value) {
+            return '<label class="input-block fullwidth validation-error">' . $value . '</label>';
+        }, $this->errors);
     }
 
     public function hasErrors(): bool
@@ -28,92 +49,137 @@ class Validator
         return !empty($this->errors);
     }
 
-    public function validate(array $request, array $rules): bool|array
+
+    public function validate(): void
     {
-        foreach ($request as $key => $value) {
-
-            if (array_key_exists($key, $rules)) {
-
-                foreach ($rules[$key] as $rule) {
-
+        foreach ($this->request as $inputField => $inputValue) {
+            if ($this->inputFieldHasRule($inputField)) {
+                foreach ($this->rules[$inputField] as $rule) {
                     if (!is_array($rule)) {
-
-                        switch ($rule) {
-                            case 'required':
-                                if (empty($value)) {
-                                    $this->errors[$key] = 'Required field cannot be empty';
-                                }
-                                break;
-
-                            case 'type:email':
-                                if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                                    $this->errors[$key] = 'Email address is not valid';
-                                }
-                                break;
-
-                            case 'numeric':
-                                if (!is_numeric($value)) {
-                                    $this->errors[$key] = 'Only numbers are accepted';
-                                }
-                                break;
-
-                            case 'string':
-                                if (!is_string($value)) {
-                                    $this->errors[$key] = 'Only letters are accepted';
-                                }
-                                break;
-
-                            case 'password':
-                                if ($value !== $request['confirm_password']) {
-                                    $this->errors[$key] = 'Confirm password does not match password';
-                                }
-                                break;
-
-                            case 'unique:email':
-                                if ((new User)->getByEmail($request['email'])) {
-                                    $this->errors[$key] = 'This email is already registered';
-                                }
-                                break;
-
-                            default:
-                                break;
-                        }
+                        $this->parseRule($rule, $inputValue, $inputField);
                     } else {
-                        $this->handleRuleArray($key, $value, $rule);
+                        $this->parseRuleArray($rule, $inputValue, $inputField);
                     }
                 }
-
             }
         }
-
-        if (empty($this->errors)) {
-            return true;
-        }
-
-        return $this->getErrors();
     }
 
-    public function handleRuleArray($field, $inputValue, array $rules): void
+    private function inputFieldHasRule($inputField): bool
     {
+        return array_key_exists($inputField, $this->rules);
+    }
 
-        foreach ($rules as $rule => $value) {
+    private function parseRule(string $rule, string $inputValue, string $inputField): void
+    {
+        switch ($rule) {
+            case 'required':
+                $this->checkRequired($inputValue, $inputField);
+                break;
+
+            case 'email':
+                $this->isEmail($inputValue, $inputField);
+                break;
+
+            case 'numeric':
+                $this->isNumeric($inputValue, $inputField);
+                break;
+
+            case 'string':
+                $this->isString($inputValue, $inputField);
+                break;
+
+            case 'password':
+                $this->checkPasswordMatch($inputValue, $inputField);
+                break;
+
+            case 'unique:email':
+                $this->checkUniqueEmail($inputValue, $inputField);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+
+    private function checkRequired(string $inputValue, string $inputField): void
+    {
+        if (empty($inputValue)) {
+            $this->errors[$inputField] = 'Required field cannot be empty';
+        }
+    }
+
+    private function isEmail(string $inputValue, string $inputField): void
+    {
+        if (!filter_var($inputValue, FILTER_VALIDATE_EMAIL)) {
+            $this->errors[$inputField] = 'Email address is not valid';
+        }
+    }
+
+    private function isNumeric(string $inputValue, string $inputField): void
+    {
+        if (!is_numeric($inputValue)) {
+            $this->errors[$inputField] = 'Only numbers are accepted';
+        }
+    }
+
+    private function isString(string $inputValue, string $inputField): void
+    {
+        if (!is_string($inputValue)) {
+            $this->errors[$inputField] = 'Only letters are accepted';
+        }
+    }
+
+    private function checkPasswordMatch(string $password, string $inputField): void
+    {
+        if ($password !== $this->getConfirmPassword()) {
+            $this->errors[$inputField] = 'Confirm password does not match password';
+        }
+    }
+
+    private function getConfirmPassword()
+    {
+        return $this->request['confirm_password'];
+    }
+
+    private function checkUniqueEmail(string $email, string $inputField): void
+    {
+        if ((new User)->getByEmail($email)) {
+            $this->errors[$inputField] = 'This email is already registered';
+        }
+    }
+
+
+    public function parseRuleArray(array $nestedRules, string $inputValue, string $inputField): void
+    {
+        foreach ($nestedRules as $rule => $value) {
             switch ($rule) {
                 case 'min':
-                    if (strlen($inputValue) < $value) {
-                        $this->errors[$field] = 'To short, use a minimum of ' . $value . ' characters';
-                    }
+                    $this->checkMinLength($inputValue, $inputField, $value);
                     break;
 
                 case 'max':
-                    if (strlen($inputValue) > $value) {
-                        $this->errors[$rule] = 'To long, use a maximum of ' . $value . ' characters';
-                    }
+                    $this->checkMaxLength($inputValue, $inputField, $value);
                     break;
 
                 default:
                     break;
             }
+        }
+    }
 
+    private function checkMinLength(string $inputValue, string $inputField, int $minLength): void
+    {
+        if (strlen($inputValue) < $minLength) {
+            $this->errors[$inputField] = sprintf($this->errorMessages['min'], $minLength);
+        }
+    }
+
+    private function checkMaxLength(string $inputValue, string $inputField, int $maxLength): void
+    {
+        if (strlen($inputValue) > $maxLength) {
+            $this->errors[$inputField] = sprintf($this->errorMessages['max'], $maxLength);
         }
     }
 
