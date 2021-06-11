@@ -19,7 +19,7 @@ class Validator
         'email' => 'Email address is not valid',
         'numeric' => 'Only numbers are accepted',
         'string' => 'Only letters are accepted',
-        'password' => 'Password does not match',
+        'password:confirm' => 'Password does not match',
         'unique:email' => 'This email is already registered',
         'min' => 'To short, use a minimum of %s characters',
         'max' => 'To long, use a maximum of %s characters'
@@ -90,7 +90,7 @@ class Validator
                 $this->isString($inputValue, $inputField);
                 break;
 
-            case 'password':
+            case 'password:confirm':
                 $this->checkPasswordMatch($inputValue, $inputField);
                 break;
 
