@@ -4,20 +4,20 @@
 namespace app\src\controllers\auth;
 
 
-
-
 use app\src\core\Application;
 use app\src\core\Controller;
+use app\src\core\Model;
 use app\src\core\Request;
 use app\src\models\User;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
-    public function index() {
+    public function index(): bool|array|string
+    {
         return $this->render('login');
     }
 
-    public function login(Request $request)
+    public function login(Request $request): bool|array|string
     {
         $request = $request->getBody();
 
@@ -36,11 +36,4 @@ class AuthController extends Controller
 
         return $this->render('login', $data);
     }
-
-    public function logout()
-    {
-        Application::$app->session->remove();
-        Application::$app->response->redirect('/');
-    }
-
 }

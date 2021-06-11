@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 
 use app\src\controllers\AboutController;
-use app\src\controllers\auth\AuthController;
+use app\src\controllers\auth\LoginController;
+use app\src\controllers\auth\LogoutController;
 use app\src\controllers\auth\PasswordController;
 use app\src\controllers\auth\ProfileController;
 use app\src\controllers\auth\ProfileEditController;
@@ -37,9 +38,9 @@ $app->router->get('/about', [AboutController::class, 'index']);
 /*
  * LOGIN
  */
-$app->router->get('/login', [AuthController::class, 'index']);
-$app->router->post('/login', [AuthController::class, 'login']);
-$app->router->get('/logout', [AuthController::class, 'logout']);
+$app->router->get('/login', [LoginController::class, 'index']);
+$app->router->post('/login', [LoginController::class, 'login']);
+$app->router->get('/logout', [LogoutController::class, 'logout']);
 
 
 /*
