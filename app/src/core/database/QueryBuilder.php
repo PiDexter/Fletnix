@@ -8,6 +8,10 @@ use app\src\core\Application;
 use PDO;
 use PDOStatement;
 
+/**
+ * Class QueryBuilder
+ * @package app\src\core\database
+ */
 class QueryBuilder
 {
     protected PDO $connection;
@@ -56,12 +60,12 @@ class QueryBuilder
 
     /**
      * Allows adding multiple where clauses by method chaining.
-     * @param $column
-     * @param $operator
-     * @param $value
+     * @param string $column
+     * @param string $operator
+     * @param string|int $value
      * @return $this
      */
-    public function where($column, $operator, $value): static
+    public function where(string $column, string $operator, string|int $value): static
     {
         $whereClause = [
             $column,
@@ -78,7 +82,13 @@ class QueryBuilder
         return $this;
     }
 
-    public function orWhere($column, $operator, $value): static
+    /**
+     * @param string $column
+     * @param string $operator
+     * @param string|int $value
+     * @return $this
+     */
+    public function orWhere(string $column, string $operator, string|int $value): static
     {
         $whereClause = [
             "OR",
@@ -155,6 +165,10 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * @param string $table
+     * @return $this
+     */
     public function delete(string $table): static
     {
         $stmt = [
@@ -182,6 +196,10 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * @param array $columns
+     * @return string
+     */
     public function onColumns(array $columns): string
     {
         $stmt = [];
@@ -202,7 +220,6 @@ class QueryBuilder
 
     /**
      * @param array $columns
-     * @param string $sortOrder
      * @return $this
      */
     public function groupBy(array $columns): static
@@ -251,15 +268,15 @@ class QueryBuilder
 
     /**
      * @param int $offset
-     * @param int $rowcount
+     * @param int $rowCount
      * @return $this
      */
-    public function limit(int $offset, int $rowcount): static
+    public function limit(int $offset, int $rowCount): static
     {
         $stmt = [
             "LIMIT",
             $offset . ",",
-            $rowcount
+            $rowCount
         ];
         $this->limit = $stmt;
         return $this;
@@ -271,7 +288,7 @@ class QueryBuilder
     }
 
     /**
-     * Return an string of columns separated with a comma
+     * Return a string of columns separated with a comma
      * @param array $columns
      * @return string
      */
@@ -355,7 +372,11 @@ class QueryBuilder
         return $stmt;
     }
 
-    public function count($table): static
+    /**
+     * @param string $table
+     * @return $this
+     */
+    public function count(string $table): static
     {
         $stmt = [
             "SELECT",
@@ -369,11 +390,11 @@ class QueryBuilder
     }
 
     /**
-     * @param $table
-     * @param $column
+     * @param string $table
+     * @param string $column
      * @return mixed
      */
-    public function queryCount($table, $column): mixed
+    public function queryCount(string $table, string $column): mixed
     {
         // Replace DISTINCT with COUNT(DISTINCT and replace next index (containing columns) with specific table column
         if (($key = array_search('DISTINCT', $this->query, true)) !== false) {
