@@ -3,7 +3,7 @@
 
         <h1 class="form-title">Account details</h1>
 
-        <form method="post">
+        <form method="POST">
 
             <div class="input-block fullwidth">
                 <input type="text" name="name" id="firstname-input" placeholder="First name" value="{{first_name}}" required>

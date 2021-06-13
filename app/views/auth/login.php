@@ -1,7 +1,7 @@
 <section id="loginForm" class="form-container">
     <div class="container">
         <h1 class="form-title">Login</h1>
-        <form method="post">
+        <form method="POST">
             <div class="input-block fullwidth">
                 <input type="email" id="email-input" name="email" placeholder="E-mail" value="{{email}}" required>
                 <label for="email-input" class="input-label">E-mail</label>

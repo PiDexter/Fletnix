@@ -3,7 +3,7 @@
     <div class="container">
         <h1 class="form-title">Change password</h1>
 
-        <form method="post">
+        <form method="POST">
 
             <div class="input-block fullwidth">
                 <input type="password" name="currentPassword" id="currentpassword-input" placeholder="Current password" required>

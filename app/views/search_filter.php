@@ -7,7 +7,7 @@
 
         <h1 class="form-title">Find your movie</h1>
 
-        <form action="/results" method="get">
+        <form action="/results" method="GET">
 
             <div class="input-block fullwidth">
                 <input type="text" name="title" id="title-input" placeholder="Search in title">

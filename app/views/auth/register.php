@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="form-title">Register</h1>
 
-        <form method="post">
+        <form method="POST">
 
             {{error->first_name}}
             <div class="input-block fullwidth">
