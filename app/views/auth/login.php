@@ -2,6 +2,9 @@
     <div class="container">
         <h1 class="form-title">Login</h1>
         <form method="POST">
+
+            <label class="input-block fullwidth validation-error">{{error}}</label>
+
             <div class="input-block fullwidth">
                 <input type="email" id="email-input" name="email" placeholder="E-mail" value="{{email}}" required>
                 <label for="email-input" class="input-label">E-mail</label>
