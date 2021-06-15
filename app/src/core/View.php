@@ -36,7 +36,7 @@ class View
             if (is_array($value)) {
                 $view = $this->nestedViewTag($view, $key, $value);
             } else {
-                $view = str_replace("{{" . $key . "}}", htmlspecialchars($value), $view);
+                $view = str_replace("{{" . $key . "}}", $value, $view);
             }
         }
         return $view;
