@@ -31,7 +31,7 @@ class LoginController extends Controller
 
         $data = [
             'email' => $request['email'],
-            'error' => 'Login failed, please try again or create an account.'
+            'error' => 'Login failed, try again or create an account.'
         ];
 
         return $this->render('auth/login', $data);
