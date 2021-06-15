@@ -1,5 +1,5 @@
 <section id="movie-banner" class="spotlight-grid">
-    <img src="/images/hero-image.jpg" alt="" title="" class="spotlight-image">
+    <img src="/images/movie-detail-placeholder.jpg" width="1600" height="900" alt="video banner" class="spotlight-image">
     <div class="spotlight-text-frame">
         <div class="spotlight-row">
             <h1 class="spotlight-title">{{title}}</h1>
@@ -51,7 +51,7 @@
             </div>
             <div id="movie-description" class="row">
                 <div class="column content-left vertical-center">
-                    <img src="/images/director-icon.svg" width="24" height="24" alt="" class="icon">
+                    <img src="/images/info-icon.svg" width="24" height="24" alt="" class="icon">
                     <span class="column-title">Summary</span>
                 </div>
                 <div class="column">

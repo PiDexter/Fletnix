@@ -2,8 +2,8 @@
     <img src="/images/hero-image.jpg" width="1600" height="900" alt="Mind explained banner" title="" class="spotlight-image">
     <div class="spotlight-text-frame">
         <div class="spotlight-row">
-            <h1 class="spotlight-title">Mind explained</h1>
-            <p>Have you ever wondered what's going on in your head? From dreams to anxiety disorders, discover how your brain works in this enlightening movie.</p>
+            <h1 class="spotlight-title">MarsX explained</h1>
+            <p>Have you ever wondered what's going on in MarsX? From dreams to reality, discover how MarsX works in this enlightening movie.</p>
             <div class="column content-left">
                 <?php if(!isset($_SESSION['user'])) : ?>
                     <a href="/register" class="btn btn-primary">Register to watch!</a>
