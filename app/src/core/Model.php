@@ -11,16 +11,13 @@ use ReflectionClass;
 abstract class Model
 {
     protected QueryBuilder $builder;
-    protected PDO $connection;
 
-    protected array $fillableColumns = [];
     protected string $primaryKey = 'id';
     protected int $perPage = 15;
 
     public function __construct()
     {
         $this->builder = new QueryBuilder();
-        $this->connection = Application::$app->db->pdo;
     }
 
     /**
@@ -78,19 +75,6 @@ abstract class Model
 
     /**
      * @param string $column
-     * @param string $value
-     * @return mixed
-     */
-    public function fetch(string $column, string $value): mixed
-    {
-        return $this->builder
-            ->where($column, '=', $value)
-            ->select((array)'*', $this->getTable())
-            ->query()->fetch();
-    }
-
-    /**
-     * @param string $column
      * @return array
      */
     public function fetchColumn(string $column): array
@@ -98,19 +82,6 @@ abstract class Model
         return $this->builder
             ->select([$column], $this->getTable())
             ->query()->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * @param string $column
-     * @param string $value
-     * @return mixed
-     */
-    public function exists(string $column, string $value)
-    {
-        return $this->builder
-            ->select([$column], $this->getTable())
-            ->where($column, '=', $value)
-            ->query()->fetchColumn();
     }
 
     /**
@@ -125,10 +96,10 @@ abstract class Model
 
     /**
      * Returns results with pagination
-     * @param $page
+     * @param int $page
      * @return array
      */
-    public function findAll($page): array
+    public function findAll(int $page): array
     {
         return $this->builder
             ->select(['*'], $this->getTable())
@@ -138,6 +109,8 @@ abstract class Model
     }
 
     /**
+     * @param string $table
+     * @param array $joinColumns
      * @return array
      */
     public function allWith(string $table, array $joinColumns): array

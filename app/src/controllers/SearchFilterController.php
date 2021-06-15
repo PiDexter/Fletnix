@@ -4,7 +4,6 @@
 namespace app\src\controllers;
 
 
-
 use app\src\core\Controller;
 use app\src\core\database\QueryBuilder;
 use app\src\core\Request;

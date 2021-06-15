@@ -4,26 +4,17 @@
 namespace app\src\models;
 
 
-
 use app\src\core\database\QueryBuilder;
 use app\src\core\Model;
 use PDO;
 
 class Movie extends Model
 {
-
-    public function getMovieDetails($id): array
-    {
-        $builder = new QueryBuilder();
-        $builder->select(['*'], $this->getTable());
-        $builder->join('movie_genre', ['movie.movie_id' => 'movie_genre.movie_id']);
-        $builder->join('movie_director', ['movie.movie_id' => 'movie_director.movie_id']);
-        $builder->join('person', ['movie_director.person_id' => 'person.person_id']);
-        $builder->where("movie." . $this->getPrimaryKey(), '=', $id);
-        return $builder->query()->fetch();
-    }
-
-    public function getMovieDirectorByID($id): string
+    /**
+     * @param int $id
+     * @return string
+     */
+    public function getMovieDirectorByID(int $id): string
     {
         $this->builder->select(['*'], 'person');
         $this->builder->join('movie_director', ['person.person_id' => 'movie_director.person_id']);
@@ -31,7 +22,7 @@ class Movie extends Model
         $director = $this->builder->query()->fetch();
 
         if (!$director) {
-            $director = 'Onbekend';
+            $director = 'Unknown';
         } else {
             $director = $director['firstname'] . " " . $director['lastname'];
         }
@@ -40,7 +31,11 @@ class Movie extends Model
     }
 
 
-    public function getCastByID($id): array
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getCastByID(int $id): array
     {
         $builder = new QueryBuilder();
         $builder->select(['*'], 'movie_cast');
@@ -65,6 +60,10 @@ class Movie extends Model
             ->query()->fetchAll();
     }
 
+    /**
+     * @param string $genre
+     * @return array
+     */
     public function getByGenre(string $genre): array
     {
         return $this->builder

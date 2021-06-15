@@ -15,7 +15,7 @@ class Session
      * @param $key
      * @param $value
      */
-    public function set($key, $value)
+    public function set($key, $value): void
     {
         $_SESSION[$key] = $value;
     }
@@ -26,10 +26,10 @@ class Session
      */
     public function get($key): mixed
     {
-        return $_SESSION[$key] ?? false;
+        return $_SESSION[$key];
     }
 
-    public function remove()
+    public function remove(): void
     {
         session_unset();
         session_destroy();

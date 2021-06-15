@@ -6,8 +6,6 @@ namespace app\src\core;
 
 class View
 {
-
-
     /**
      * Render a view by replacing the view file content with {{content}} in main layout
      * @param string $view
@@ -16,21 +14,21 @@ class View
      */
     public function renderView(string $view, array $data = []): array|bool|string
     {
-        // Haal de main layout op
         $layout = $this->layoutContent();
         $view = $this->renderOnlyView($view, $data);
-
-        // Vervang alle {{var}} & {{key->value}} tags in de view
         $view = $this->replaceViewTags($view, $data);
         $view = $this->renderPagination($view, $data);
         $view = $this->removeEmptyTags($view);
 
-        // Vervang de string "{{content}}" met de inhoud van de view file in de layout
         return str_replace("{{content}}", $view, $layout);
     }
 
-    // Proces een tag bijvoorbeeld: {{name}}
-    private function replaceViewTags($view, $data)
+    /**
+     * @param string $view
+     * @param array $data
+     * @return string
+     */
+    private function replaceViewTags(string $view, array $data): string
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {
@@ -42,15 +40,22 @@ class View
         return $view;
     }
 
-
-    // Remove all {{string}} that have no value
-    private function removeEmptyTags($view): array|string|null
+    /**
+     * @param string $view
+     * @return string
+     */
+    private function removeEmptyTags(string $view): string
     {
         return preg_replace('/{{(.*?)}}/', '', $view);
     }
 
-    // Proces een nested tag bijvoorbeeld: {{user->name}}
-    private function nestedViewTag($view, $parentName, $data)
+    /**
+     * @param string $view
+     * @param string $parentName
+     * @param array $data
+     * @return string
+     */
+    private function nestedViewTag(string $view, string $parentName, array $data): string
     {
         if (is_array($data)) {
             foreach ($data as $key => $value) {
@@ -62,13 +67,21 @@ class View
         return $view;
     }
 
-    private function renderPagination($view, $data): array|string
+    /**
+     * @param string $view
+     * @param array $data
+     * @return string
+     */
+    private function renderPagination(string $view, array $data): string
     {
         $paginationView = $this->renderOnlyView('layout/components/pagination', $data);
         return str_replace("@pagination", (string) $paginationView, $view);
     }
 
-    private function layoutContent(): bool|string
+    /**
+     * @return string
+     */
+    private function layoutContent(): string
     {
         // Bewaard alles in een string - ook wel: output buffer - voorkomt directe weergave
         ob_start();
@@ -80,7 +93,12 @@ class View
         return ob_get_clean();
     }
 
-    private function renderOnlyView($view, $data): bool|string
+    /**
+     * @param string $view
+     * @param array $data
+     * @return string
+     */
+    private function renderOnlyView(string $view, array $data): string
     {
         // Zet parameter key als variable naam met als waarde de value
         extract($data, EXTR_OVERWRITE);

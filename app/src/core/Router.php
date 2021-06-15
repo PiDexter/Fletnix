@@ -10,9 +10,9 @@ use ReflectionMethod;
 
 class Router
 {
-    public Request $request;
-    public Response $response;
-    protected array $routes = [];
+    private Request $request;
+    private Response $response;
+    private array $routes = [];
 
     /**
      * Router constructor.
@@ -27,15 +27,19 @@ class Router
 
     /**
      * GET
-     * @param $path
-     * @param $callback
+     * @param string $path
+     * @param array|string $callback
      */
-    public function get($path, $callback): void
+    public function get(string $path, array|string $callback): void
     {
         $this->routes['get'][$path] = $callback;
     }
 
-    public function post($path, $callback): void
+    /**
+     * @param string $path
+     * @param array|string $callback
+     */
+    public function post(string $path, array|string $callback): void
     {
         $this->routes['post'][$path] = $callback;
     }
@@ -45,7 +49,7 @@ class Router
      * Check if a route matches with ':' which indicates it is dynamic
      * @throws NotFoundException
      */
-    public function routeMatch($path, $method, $urlFragments)
+    public function routeMatch(string $path, string $method, array $urlFragments)
     {
         foreach (array_keys($this->routes[$method]) as $route) {
             $routeList = explode('/', $route);
@@ -55,7 +59,7 @@ class Router
                 strpos($route, ':') &&
                 count($routeList) > 1) {
                 if ($routeList[0] === $urlFragments[0]) {
-                    $path = $route;
+                    $path = (string) $route;
                 } else {
                     throw new NotFoundException();
                 }
