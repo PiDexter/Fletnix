@@ -26,15 +26,9 @@ abstract class Model
      */
     public function create(array $values = []): void
     {
-        try {
-            $this->builder
-                ->insert($this->getTable(), $values)
-                ->query($values);
-        }
-        catch(Exception $e) {
-            echo 'Exception -> ';
-            var_dump($e->getMessage());
-        }
+        $this->builder
+            ->insert($this->getTable(), $values)
+            ->query($values);
     }
 
     /**
