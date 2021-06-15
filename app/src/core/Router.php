@@ -85,23 +85,22 @@ class Router
      */
     public function resolve()
     {
-        // Ontvang het pad (string) van de request (voorbeeld pad: /contact)
         $path = $this->request->getPath();
-        // Welke methode is gebruikt? (get, post etc)
         $method = $this->request->method();
 
-        // Verkrijg de url fragments in array
+        // Array of url fragments
         $urlFragments = $this->request->getUrlFragments($path);
 
-        // Check of de route bestaat
+        // Check if url path and method type exists in routes array
         $callback = $this->routes[$method][$path] ?? false;
 
-        // Als route niet bestaat bekijk of er een route is die dynamisch is
+
+        // If route not exists, check if route is dynamic
         if (!$callback) {
 
             $callback = $this->routeMatch($path, $method, $urlFragments);
 
-            // Als er geen dynamische route bestaat
+            // If the route is not dynamic
             if (!$callback) {
                 throw new NotFoundException();
             }
@@ -113,39 +112,66 @@ class Router
         }
 
         if (is_array($callback)) {
-            // Instantieert een specifieke controller instantie
-            Application::$app->controller = new $callback[0]();
-            $callback[0] = Application::$app->controller;
-            foreach ($callback[0]->getMiddleware() as $middleware) {
-                $middleware->handle();
-            }
-        }
 
+            $controller = $this->newControllerInstance($callback[0]);
+            $controllerMethod = $callback[1];
+            $this->runMiddleware($controller);
 
-        $reflection = new ReflectionMethod($callback[0], $callback[1]);
-        // Kijk welke parameters de controller methode vraagt
-        $params = $reflection->getParameters();
+            // Set controller object at callback[0]
+            $callback[0] = $controller;
 
-        if (!empty($params)) {
-            $parameters = [];
-            foreach ($params as $param) {
-                // Als een parameters gelijk is aan 'request', geef het request object dan terug
-                // TODO dit is een tijdelijke workaround voor het matchen en resolve van method parameters
-                if (strpos((string)$param, 'request')) {
-                    $parameters[] = $this->request;
-                } else if (strpos((string)$param, 'id')) {
-                    $parameters[] = (int) $urlFragments[1];
-                } else if (strpos((string)$param, 'name')) {
-                    $parameters[] = $urlFragments[1];
-                } else {
-                    continue;
+            // Check method parameters of the controller class by reflection
+            $reflection = new ReflectionMethod($controller, $controllerMethod);
+            // Kijk welke parameters de controller methode vraagt
+            $params = $reflection->getParameters();
+
+            if (!empty($params)) {
+                $parameters = [];
+                foreach ($params as $index => $param) {
+                    var_dump($urlFragments);
+                    // Als een parameters gelijk is aan 'request', geef het request object dan terug
+                    // TODO: create method for reflection instances instead of temporary hardcoded match- and resolving method parameters.
+                    if (strpos((string)$param, 'request')) {
+                        $parameters[] = $this->request;
+                    } else if (strpos((string)$param, 'id')) {
+                        $parameters[] = (int) $urlFragments[1];
+                    } else if (strpos((string)$param, 'name')) {
+                        $parameters[] = $urlFragments[1];
+                    }
                 }
+                var_dump($callback);
+                var_dump($parameters);
+                return call_user_func_array($callback, $parameters);
             }
-            return call_user_func_array($callback, $parameters);
         }
 
         return $callback($this->request, $this->response);
     }
+
+
+    private function newControllerInstance(string $className)
+    {
+        return Application::$app->controller = new $className();
+    }
+
+
+    private function runMiddleware(Controller $controller)
+    {
+        foreach ($controller->getMiddleware() as $middleware) {
+            $middleware->handle();
+        }
+    }
+
+
+//    private function newCallbackInstance($callback)
+//    {
+//        // Instantieert een specifieke controller instantie
+//        Application::$app->controller = new $callback[0]();
+//        $callback[0] = Application::$app->controller;
+//        foreach ($callback[0]->getMiddleware() as $middleware) {
+//            $middleware->handle();
+//        }
+//    }
 
     /**
      * @param string $view
