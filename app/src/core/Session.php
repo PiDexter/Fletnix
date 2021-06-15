@@ -26,7 +26,7 @@ class Session
      */
     public function get($key): mixed
     {
-        return $_SESSION[$key];
+        return $_SESSION[$key] ?? false;
     }
 
     public function remove(): void
