@@ -9,30 +9,34 @@ class Request
 {
 
     /**
-     * Returns the url path
+     * Return url path without query parameters
      * @return string
      */
     public function getPath(): string
     {
-        // Verkrijg het pad van de request url (als niet bestaat, ga uit dat het de index pagina is)
+        // If $_SERVER['REQUEST_URI'] is empty, set path to home '/'
         $path = $_SERVER['REQUEST_URI'] ?? '/';
 
-        // Verwijder een eventuele slash van het eind
+        // Remove slashes at the end of the url
         $path = rtrim($path, '/');
 
-        // Bekijk of er een '?' (parameter) in het pad staat
+        // Check if there is a '?' for query parameters
         $position = strpos($path, '?');
 
-        // Geen '?' in de url, return het pad als string
+        // No query params? return path as string
         if ($position === false) {
             return $path;
         }
 
-        // Zit er wel een '?' (parameter) in de url.
-        // Return het pad als string maar enkel het gedeelte wat voor '?' staat.
+        // If there are query parameters
+        // Return only the part before '?' as url path
         return substr($path, 0, $position);
     }
 
+    /**
+     * @param string $path
+     * @return array
+     */
     public function getUrlFragments(string $path): array
     {
         $url = explode('/', filter_var(rtrim($path, '/')), FILTER_SANITIZE_URL);
@@ -40,6 +44,12 @@ class Request
         return $url;
     }
 
+
+    /**
+     * Return request methods to lowercase
+     * To be able to strictly compare with method type in routes array
+     * @return string
+     */
     public function method(): string
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
@@ -55,9 +65,14 @@ class Request
         return $this->method() === 'post';
     }
 
+
+    /**
+     * Filters applied to escape "<>& and characters with ASCII value below 32
+     * @return array
+     */
     public function getBody(): array
     {
-        // Lege body array
+
         $body = [];
 
         if ($this->isGet()) {

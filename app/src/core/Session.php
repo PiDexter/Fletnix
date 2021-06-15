@@ -11,12 +11,20 @@ class Session
         session_start();
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function set($key, $value)
     {
         $_SESSION[$key] = $value;
     }
 
-    public function get($key)
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public function get($key): mixed
     {
         return $_SESSION[$key] ?? false;
     }

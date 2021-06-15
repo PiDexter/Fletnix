@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 
 namespace app\src\core;
 
@@ -15,6 +14,11 @@ class Router
     public Response $response;
     protected array $routes = [];
 
+    /**
+     * Router constructor.
+     * @param Request $request
+     * @param Response $response
+     */
     public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
@@ -143,7 +147,12 @@ class Router
         return $callback($this->request, $this->response);
     }
 
-    public function view($view, $data = [])
+    /**
+     * @param string $view
+     * @param array $data
+     * @return bool|array|string
+     */
+    public function view(string $view, array $data = []): bool|array|string
     {
         return Application::$app->view->renderView($view, $data);
     }

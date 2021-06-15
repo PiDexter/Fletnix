@@ -7,8 +7,14 @@ namespace app\src\core;
 class View
 {
 
-    // Render view content in een layout file via {{content}}
-    public function renderView($view, $data = []): array|bool|string
+
+    /**
+     * Render a view by replacing the view file content with {{content}} in main layout
+     * @param string $view
+     * @param array $data
+     * @return array|bool|string
+     */
+    public function renderView(string $view, array $data = []): array|bool|string
     {
         // Haal de main layout op
         $layout = $this->layoutContent();

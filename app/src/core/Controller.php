@@ -8,7 +8,12 @@ abstract class Controller
 {
     public array $middleware = [];
 
-    public function render($view, $data = [])
+    /**
+     * @param string $view
+     * @param array $data
+     * @return bool|array|string
+     */
+    public function render(string $view, array $data = []): bool|array|string
     {
         return Application::$app->router->view($view, $data);
     }

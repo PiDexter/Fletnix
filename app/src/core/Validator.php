@@ -4,7 +4,6 @@
 namespace app\src\core;
 
 
-
 use app\src\models\User;
 
 class Validator
@@ -25,6 +24,11 @@ class Validator
         'max' => 'To long, use a maximum of %s characters'
     ];
 
+    /**
+     * Validator constructor.
+     * @param array $request
+     * @param array $rules
+     */
     public function __construct(array $request, array $rules)
     {
         $this->rules = $rules;
@@ -33,10 +37,14 @@ class Validator
     }
 
 
+    /**
+     * @return array
+     */
     public function getErrors(): array
     {
         return $this->formatError();
     }
+
 
     private function formatError(): array
     {
@@ -45,6 +53,10 @@ class Validator
         }, $this->errors);
     }
 
+
+    /**
+     * @return bool
+     */
     public function hasErrors(): bool
     {
         return !empty($this->errors);
@@ -66,10 +78,12 @@ class Validator
         }
     }
 
+
     private function inputFieldHasRule($inputField): bool
     {
         return array_key_exists($inputField, $this->rules);
     }
+
 
     private function parseRule(string $rule, string $inputValue, string $inputField): void
     {
@@ -107,47 +121,53 @@ class Validator
     private function checkRequired(string $inputValue, string $inputField): void
     {
         if (empty($inputValue)) {
-            $this->errors[$inputField] = 'Required field cannot be empty';
+            $this->errors[$inputField] = $this->errorMessages['required'];
         }
     }
+
 
     private function isEmail(string $inputValue, string $inputField): void
     {
         if (!filter_var($inputValue, FILTER_VALIDATE_EMAIL)) {
-            $this->errors[$inputField] = 'Email address is not valid';
+            $this->errors[$inputField] = $this->errorMessages['email'];
         }
     }
+
 
     private function isNumeric(string $inputValue, string $inputField): void
     {
         if (!is_numeric($inputValue)) {
-            $this->errors[$inputField] = 'Only numbers are accepted';
+            $this->errors[$inputField] = $this->errorMessages['numeric'];
         }
     }
+
 
     private function isString(string $inputValue, string $inputField): void
     {
         if (!is_string($inputValue)) {
-            $this->errors[$inputField] = 'Only letters are accepted';
+            $this->errors[$inputField] = $this->errorMessages['string'];
         }
     }
+
 
     private function checkPasswordMatch(string $password, string $inputField): void
     {
         if ($password !== $this->getConfirmPassword()) {
-            $this->errors[$inputField] = 'Confirm password does not match password';
+            $this->errors[$inputField] = $this->errorMessages['password:confirm'];
         }
     }
+
 
     private function getConfirmPassword()
     {
         return $this->request['confirm_password'];
     }
 
+
     private function checkUniqueEmail(string $email, string $inputField): void
     {
         if ((new User)->getByEmail($email)) {
-            $this->errors[$inputField] = 'This email is already registered';
+            $this->errors[$inputField] = $this->errorMessages['unique:email'];
         }
     }
 
@@ -170,12 +190,14 @@ class Validator
         }
     }
 
+
     private function checkMinLength(string $inputValue, string $inputField, int $minLength): void
     {
         if (strlen($inputValue) < $minLength) {
             $this->errors[$inputField] = sprintf($this->errorMessages['min'], $minLength);
         }
     }
+
 
     private function checkMaxLength(string $inputValue, string $inputField, int $maxLength): void
     {

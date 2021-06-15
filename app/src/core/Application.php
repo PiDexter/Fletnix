@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace app\src\core;
 
 use app\src\core\database\Database;
@@ -23,13 +21,16 @@ class Application
     public Session $session;
 
 
+    /**
+     * Application constructor.
+     * @param string $rootPath
+     * @param array $config
+     */
     public function __construct(string $rootPath, array $config)
     {
-        // Zet de applicatie root pad
-        self::$ROOT_DIR = $rootPath;
-
-        // Er mag maar één instantie van deze class bestaan (Singleton)
+        // Only one instance may exists, creates a singleton of Application
         self::$app = $this;
+        self::$ROOT_DIR = $rootPath;
 
         $this->request = new Request();
         $this->response = new Response();
@@ -40,7 +41,12 @@ class Application
         $this->session = new Session();
     }
 
-    // Resolves elke nieuwe request
+
+    /**
+     * Echo the final view
+     * If route could not be resolved
+     * Show error page with error message
+     */
     public function run() {
 
         try {
