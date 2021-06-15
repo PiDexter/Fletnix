@@ -6,9 +6,7 @@
     --white: #ffffff;
     --red: #e50914;
     --orange: #ffa500;
-    --light-blue: #f1f5f9;
     --light-gray: #141414;
-
     --dark-gray: #0b0b0b;
 }
 
@@ -22,7 +20,7 @@
 body,
 html {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
-    /*color: var(--white);*/
+    color: var(--white);
 }
 
 
@@ -40,7 +38,6 @@ button, select {
 input[type="date"]
 {
     display:block;
-    /* Solution 1 */
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     min-height: 2.25em;
@@ -55,8 +52,8 @@ input[type='date']:after {
 
 
 /*
-* GRID COMPONENTS
-*/
+ * GRID COMPONENTS
+ */
 #grid-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -142,7 +139,6 @@ a.logo {
 .menu-vertical {
     display: flex;
     flex-direction: column;
-    /*padding: 0 16px 0 16px;*/
 }
 
 .nav-sidebar {
@@ -204,7 +200,7 @@ a.logo {
 
 
 /*
-BUTTON
+ * BUTTON
  */
 .btn {
     cursor: pointer;
@@ -256,7 +252,7 @@ BUTTON
 
 
 /*
-INPUT
+ * INPUT
  */
 .input-block {
     display: flex;
@@ -321,7 +317,7 @@ select:not(:placeholder-shown) + .input-label {
 }
 
 /*
-* FORM
+ * FORM
  */
 
 form .row {
@@ -334,7 +330,7 @@ form .btn {
 
 
 /*
-CARD (DECK)
+ * CARD (DECK)
  */
 .card-deck {
     align-items: flex-start;
@@ -346,7 +342,6 @@ CARD (DECK)
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     width: 100%;
-    /*padding: 2px 16px 14px 16px;*/
 }
 
 .card-deck::-webkit-scrollbar {
@@ -377,9 +372,7 @@ CARD (DECK)
 
 .card-deck > .card {
     flex-shrink: 0;
-    /*height: 352px;*/
     margin-right: 16px;
-    /*width: 300px;*/
     max-width: calc(100% - 56px);
     scroll-snap-align: start;
     transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
@@ -393,8 +386,8 @@ CARD (DECK)
     text-shadow: 0 1px 2px #000000;
     position: relative;
     background: linear-gradient(
-            360deg
-            , rgb(20 20 20) -50%, rgba(255,255,255,0) 100%);
+            360deg,rgb(20 20 20) -50%, rgba(255,255,255,0) 100%
+    );
 }
 
 .card-button {
@@ -407,7 +400,7 @@ CARD (DECK)
 }
 
 /*
-CARD POPUP
+ * CARD POPUP
  */
 .overlay {
     position: fixed;
@@ -453,8 +446,6 @@ CARD POPUP
 .popup {
     display: grid;
     grid-template-rows: auto;
-    /*grid-gap: 25px;*/
-    /*background: white;*/
     position: fixed;
     left: 0;
     bottom: 0;
@@ -574,7 +565,7 @@ h2.row-title {
 
 
 /*
-* PAGES GLOBAL
+ * PAGES GLOBAL
  */
 
 h1.page-title {
@@ -590,7 +581,7 @@ h1.page-title {
 
 
 /*
-* LOGIN PAGE
+ * LOGIN PAGE
  */
 
 #loginForm {
@@ -606,8 +597,8 @@ h1.page-title {
 
 
 /*
-* TABS
-*/
+ * TABS
+ */
 
 .tabs-wrapper {
     display: flex;
@@ -722,7 +713,7 @@ img.icon {
 }
 
 /*
-* GENRES
+ * GENRES
  */
 #genres .card-grid > .card {
     font-size: 18px;
@@ -731,7 +722,7 @@ img.icon {
 
 
 /*
-* SINGLE MOVIE
+ * SINGLE MOVIE
  */
 
 #movie-cast-list {
@@ -772,7 +763,7 @@ img.icon {
 
 
 /*
-* ABOUT
+ * ABOUT
  */
 #about {
     display: flex;
@@ -889,8 +880,6 @@ label.validation-error {
     #pagination {
         padding-top: 25px;
     }
-
-
 
     #genres .container {
         max-width: 100%;
@@ -1032,7 +1021,6 @@ label.validation-error {
     }
 
 
-
     /*
     * CARD
      */
@@ -1070,7 +1058,6 @@ label.validation-error {
     }
 
 
-
     /*
     * MENU
      */
@@ -1102,10 +1089,10 @@ label.validation-error {
         width: unset;
     }
 
-    /*
-    * ABOUT
-     */
 
+    /*
+     * ABOUT
+     */
     #about {
         margin: 0 auto;
         display: flex;
@@ -1138,16 +1125,18 @@ label.validation-error {
         font-size: 2em;
     }
 
+
     /*
-    * PROFILE
-    */
+     * PROFILE
+     */
     #profile-list .card-grid {
         gap: 15px;
     }
 
+
     /*
-    * ERROR
-    */
+     * ERROR
+     */
     #error {
         text-align: center;
     }
