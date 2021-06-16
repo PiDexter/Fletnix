@@ -68,13 +68,17 @@ class SearchFilterController extends Controller
         $total_pages = ceil($count / 15);
 
 
+        $queryParam = [
+        'title' => $searchData['title'],
+        'genre' => $searchData['genre'],
+        'publicationYear' => $searchData['publicationYear'],
+        'director' => $searchData['director'],
+        ];
+
+        $searchParam = htmlentities(http_build_query($queryParam));
+
         $data = [
-            'search_params' => http_build_query([
-                'title' => $searchData['title'],
-                'genre' => $searchData['genre'],
-                'publicationYear' => $searchData['publicationYear'],
-                'director' => $searchData['director'],
-            ]),
+            'search_params' => $searchParam,
             'page_title' => 'Results',
             'count' => (int) $count,
             'page' => (int) $page,
