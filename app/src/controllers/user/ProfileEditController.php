@@ -50,7 +50,6 @@ class ProfileEditController extends Controller
 
         if ($validatedData->hasErrors()) {
             $data['error'] = $validatedData->getErrors();
-            var_dump($data);
         } else {
             $user = (new User)->findByID(Application::$app->session->get('user'));
             (new User)->update($user['user_id'], $data);

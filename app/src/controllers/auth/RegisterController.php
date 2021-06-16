@@ -4,8 +4,6 @@
 namespace app\src\controllers\auth;
 
 
-
-
 use app\src\core\Application;
 use app\src\core\Controller;
 use app\src\core\Request;
