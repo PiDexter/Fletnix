@@ -20,7 +20,7 @@
                 <?php if (is_array($item)) : ?>
                     <?php foreach($item as $id => $movie) : ?>
                         <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
-                        <img src="/images/movie2.jpg" alt="">
+                        <img src="/images/movie<?php echo random_int(1, 6); ?>.jpg" alt="">
                         <div class="card-body">
                             <span><?php echo $movie['title']; ?></span>
                         </div>

@@ -20,12 +20,12 @@
 </section>
 
 <section id="overview">
-    <div class="slider-row" id="trending">
+    <div class="slider-row">
         <h2 class="row-title">Trending</h2>
         <div class="card-deck">
             <?php foreach($data['trending'] as $movie) : ?>
                 <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
-                    <img src="images/movie4.jpg" width="300" height="180" alt="<?php echo $movie['title']; ?>">
+                    <img src="images/movie<?php echo random_int(1, 6); ?>.jpg" width="300" height="180" alt="<?php echo $movie['title']; ?>">
                     <div class="card-body">
                         <span class="pre-text"><?php echo $movie['genre_name']; ?></span>
                         <h2><?php echo $movie['title']; ?></h2>
@@ -35,12 +35,27 @@
         </div>
     </div>
 
-    <div class="slider-row" id="Science">
+    <div class="slider-row">
+        <h2 class="row-title">Documentaries</h2>
+        <div class="card-deck">
+            <?php foreach($data['documentary'] as $movie) : ?>
+                <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
+                    <img src="images/movie<?php echo random_int(1, 6); ?>.jpg" width="300" height="180" alt="<?php echo $movie['title']; ?>">
+                    <div class="card-body">
+                        <span class="pre-text"><?php echo $movie['genre_name']; ?></span>
+                        <h2><?php echo $movie['title']; ?></h2>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="slider-row">
         <h2 class="row-title">Science</h2>
         <div class="card-deck">
             <?php foreach($data['documentary'] as $movie) : ?>
                 <a href="/movie/<?php echo $movie['movie_id']; ?>" class="card">
-                    <img src="images/movie2.jpg" width="300" height="180" alt="<?php echo $movie['title']; ?>">
+                    <img src="images/movie<?php echo random_int(1, 6); ?>.jpg" width="300" height="180" alt="<?php echo $movie['title']; ?>">
                     <div class="card-body">
                         <span class="pre-text"><?php echo $movie['genre_name']; ?></span>
                         <h2><?php echo $movie['title']; ?></h2>
