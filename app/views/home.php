@@ -2,15 +2,19 @@
     <img src="/images/hero-image.jpg" width="1600" height="900" alt="Mind explained banner" title="" class="spotlight-image">
     <div class="spotlight-text-frame">
         <div class="spotlight-row">
+            <?php if(!isset($_SESSION['user'])) : ?>
+            <h1 class="spotlight-title">Smarter everyday</h1>
+            <p>Watch science and educational movies and series, or follow self-development video courses.</p>
+            <div class="column content-left">
+                <a href="/register" class="btn btn-primary">Register to watch!</a>
+            </div>
+                <?php else : ?>
             <h1 class="spotlight-title">MarsX explained</h1>
             <p>Have you ever wondered what's going on in MarsX? From dreams to reality, discover how MarsX works in this enlightening movie.</p>
             <div class="column content-left">
-                <?php if(!isset($_SESSION['user'])) : ?>
-                    <a href="/register" class="btn btn-primary">Register to watch!</a>
-                <?php else : ?>
-                    <a href="/movie/968" class="btn btn-primary">Watch</a>
-                <?php endif; ?>
+                <a href="/movie/968" class="btn btn-primary">Watch</a>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </section>
