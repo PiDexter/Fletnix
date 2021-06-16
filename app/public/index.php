@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 
 use app\src\controllers\AboutController;
 use app\src\controllers\auth\LoginController;
@@ -19,6 +17,9 @@ use app\src\core\Application;
 
 require_once __DIR__ . '/../autoload.php';
 
+/*
+ * Demo purpose only, credentials should move to an env file.
+ */
 $config = [
     'db' => [
         'dsn' => 'mysql:dbname=fletnix;host=mysql',
