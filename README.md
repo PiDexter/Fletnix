@@ -1,5 +1,5 @@
 <section>
-<h2> About this project</h2>
+<h2>About Fletnix</h2>
 
 This project is made as a study assignment where we needed to use PHP, HTML and CSS only for building a web application that interacts with a database.
 The MVC framework is inspired by [thecodeholic](https://github.com/thecodeholic/tc-php-mvc-core).
